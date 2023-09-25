@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('../layouts/header'); -%>
+    <%- include('../layouts/scripts'); -%>
+
+        <body>
+            <%- include('../layouts/menu'); -%>
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-10 col-md-10 mx-auto">
+
+                            <div class="page-heading text-center">
+                                &nbsp;
+                                <h1>
+                                    Bajas</h1>
+                                &nbsp;&nbsp;
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container">
+
+                    <div class="row">
+
+
+                        <div class="col-lg-12 col-md-12 mx-auto">
+
+                            <table id="table" data-search="true" data-pagination="true"
+                                data-page-list="[10, 25, 50, 100, all]" data-show-export="true" data-toolbar="#toolbar"
+                                data-detail-view="true" data-id-field="_id" data-show-export="true"
+                                data-click-to-select="true">
+                                <thead>
+                                    <tr>
+                                        <th data-field="_id" data-sortable=true data-formatter="iconformatter">Hierro
+                                        </th>
+                                        <th data-field="firstName" data-sortable=true>Nombre</th>
+                                        <th data-field="lastName" data-sortable=true>Apellidos</th>
+                                        <th data-field="farm" data-sortable=true>Ganadería</th>
+                                        <th data-field="country" data-sortable=true>País</th>
+                                        <th data-field="state" data-sortable=true>Estado</th>
+                                    </tr>
+                                </thead>
+
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+                <script>
+
+                    let data = <%- data %>;
+                    console.log(data)
+                    var $table = $('#table')
+
+                    function buildTable($el)
+                    {
+
+                        $el.bootstrapTable({
+
+                            data: data,
+                            detailView: "cells > 1",
+                            onExpandRow: function (index, row, $detail)
+                            {
+                                /* eslint no-use-before-define: ["error", { "functions": false }]*/
+                                console.log(index, row, row.horses, $detail)
+                                expandTable($detail, row)
+                            }
+                        })
+                    }
+
+                    function expandTable($detail, row)
+                    {
+
+                        console.log($detail, row)
+
+                        $detail.html('<div style="background-color: #EBEBEB" class="col-lg-11 col-md-11 pull-right"><H2>Bajas</H2> <div class="d-grid gap-2 d-md-flex justify-content-md-end"><button type="submit" class="btn btn-primary text-center" id="sendNuevo" style="width:95px" onclick="nuevaBaja(\'0\')">Nuevo</button> </div><table id="detalle"></table></div>').find('table').bootstrapTable({
+                            onClickRow: function (row, $element) {
+        // row: the record corresponding to the clicked row, 
+        // $element: the tr element.
+        alert(row._id)
+    },
+                            columns: [ {
+                                title: 'Emisión',
+                                field: 'fechaEmision',
+                                formatter: 'dateFormatter',
+                                sortable: true,
+                            }, {
+                                title: 'Descripción',
+                                field: 'desc',
+                            } ],
+                            data: row.bajas,
+                            sortable: true,
+                            
+                        })
+
+                    }
+
+
+                    function iconformatter(value)
+                    {
+                        console.log(value)
+                        let img = `<img src="https://lusitanos.s3.us-east-1.amazonaws.com/hierros/${ value }.bmp" alt="" width="60" height="40" onerror=src="/assets/img/icono.png">'`
+                        console.log(img)
+                        return img
+                    }
+
+                    function dateFormatter(value)
+                    {
+                        return value.slice(0, 10)
+                    }
+
+                    $(function ()
+                    {
+                        buildTable($table)
+                    })
+                </script>
+
+                <!-- Modal -->
+                <div class="modal fade" id="owModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+                    role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-xl" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalLabel">Modal title</h5>
+                                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <%- include('../layouts/footer'); -%>
+
+
+
+        </body>
+
+</html>

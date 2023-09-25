@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('../layouts/header'); -%>
+    <%- include('../layouts/scripts'); -%>
+
+        <body>
+            <%- include('../layouts/menu'); -%>
+
+            
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-10 col-md-10 mx-auto">
+                
+                            <div class="page-heading text-center">
+                                &nbsp;
+                                <h1>Reporte  de Caballos</h1>
+                                &nbsp;&nbsp;
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id= "toolbar" class="toolbar container">
+                    <div class="row">
+                
+
+                
+                        <div class="row">
+ 
+                            <div class="col-lg-3 form-group floating-label-form-group controls">
+                                <label>Pais de Nacimiento:</label>
+                                <select class="form-select" aria-label="Nacido Pais" id="imported" name="imported">
+                                    <option value="none" selected>Seleccionar...</option>
+                                    <option value="México">México</option>
+                                    <option value="Bélgica">Bélgica</option>
+                                    <option value="Brasil">Brasil</option>
+                                    <option value="Canada">Canada</option>
+                                    <option value="Colombia">Colombia</option>
+                                    <option value="España">España</option>
+                                    <option value="Estados Unidos">Estados Unidos</option>
+                                    <option value="Francia">Francia</option>
+                                    <option value="Guatemala">Guatemala</option>
+                                    <option value="Nicaragua">Nicaragua</option>
+                                    <option value="Portugal">Portugal</option>
+                
+                
+                                </select>
+                                <!-- <script defer>
+                                    jQuery('#imported').val("<%=// data.imported %>")
+                                </script> -->
+                            </div>
+                            <label>Año de Nacimiento: (Rango)</label>
+                            <div  class="row">
+                            
+                                <div class="col-lg-3 form-group floating-label-form-group controls">
+                                    <label for="aNacI">Inico:</label>
+                                    <input type="date" id="aNacI" name="aNacI">
+                                </div>
+                                <div class="col-lg-3 form-group floating-label-form-group controls">
+                                    <label> </label>
+                                    <label for="aNacF">Final:</label>
+                                    <input type="date" id="aNacF" name="aNacF">
+                                </div>
+                            </div>
+                                          
+                        </div>
+                
+                        <div class="row">
+                            <div class="col-lg-3 form-group floating-label-form-group controls">
+                                <label>Criador:</label>
+                                <select class="form-select" aria-label="Default select example" id="criador" name="criador">
+                            
+                                    <option value="none" selected>Seleccione...</option>
+                                    <% for ( let i=0;i <=owners.length-1;i++){ %>
+                                        <option value="<%=owners[i]._id %>">
+                                            <%= (owners[i]._id + ' ' + (owners[i].farm===null ? (owners[i].firstName===null ? '' :
+                                                owners[i].firstName ) + ' ' + (owners[i].lastName===null ? '' : owners[i].lastName) : owners[i].farm
+                                                )).toUpperCase() %>
+                            
+                                        </option>
+                                        <%}%>
+                            
+                                </select>
+                            </div>
+                            <div class="col-lg-3 form-group floating-label-form-group controls">
+                                <label>Dueño:</label>
+                                <select class="form-select" aria-label="Default select example" id="dueno" name="dueno">
+                            
+                                    <option value="none"  selected>Seleccione...</option>
+                                    <% for ( let i=0;i <=owners.length-1;i++){ %>
+                                        <option value="<%=owners[i]._id %>">
+                                            <%= (owners[i]._id + ' ' + (owners[i].farm===null ? (owners[i].firstName===null ? '' :
+                                                owners[i].firstName ) + ' ' + (owners[i].lastName===null ? '' : owners[i].lastName) : owners[i].farm
+                                                )).toUpperCase() %>
+                            
+                                        </option>
+                                        <%}%>
+                            
+                                </select>
+                            </div>
+
+                            <div class="col-lg-3 form-group floating-label-form-group controls">
+                                <label>Sexo:</label>
+                                <select class="form-select" aria-label="Sexo" id="sex" name="sex" required>
+                                    <option value="none" selected>Seleccionar...</option>
+                                    <option value="Hembra">HEMBRA</option>
+                                    <option value="Macho">MACHO</option>
+                                </select>
+                                <!-- <script defer>
+                                    jQuery('#sex').val("<%=// data.sex %>")
+                                </script> -->
+                            </div>
+                
+                
+                            <div class="col-lg-3 form-group floating-label-form-group controls">
+                                <label>Capa:</label>
+                                <select class="form-select" aria-label="Capa" id="color" name="color" required>
+                                    <option value="none" selected>Seleccionar...</option>
+                                    
+                                    <option value="Alazana">ALAZANA</option>
+                                    <option value="Baya">BAYA</option>
+                                    <option value="Bayo">BAYO</option>
+                                    <option value="Castaña">CASTAÑA</option>
+                                    <option value="Isabelina">ISABELINA</option>
+                                    <option value="Palomina">PALOMINA</option>
+                                    <option value="Prieta">PRIETA</option>
+                                    <option value="Tordilla">TORDILLA</option>
+                
+                                </select>
+                                <!-- <script defer>
+                                    jQuery('#color').val("<%= //data.color %>")
+                                </script> -->
+                            </div>
+                <br>
+                        <hr class="mt-3">
+                        </div>
+                            <div>Tipo de Reporte:</div>
+                            <div class="row">
+                                
+                                <div class="col-lg-3 form-group floating-label-form-group controls">
+                                    <input type="radio" id="criadorRad" name="tipoReportr" value="criador">
+                                    <label for="criadorRad"> Por criador</label><br><br>
+                                </div>
+                                <div class="col-lg-3 form-group floating-label-form-group controls">
+                                    <input type="radio" id="duenoRad" name="tipoReportr" value="owner">
+                                    <label for="duenoRad"> Por dueño</label><br><br>
+                                </div>
+
+                                <div class="col-lg-3 form-group floating-label-form-group controls">
+                                    <input type="radio" id="sexoRad" name="tipoReportr" value="sexo">
+                                    <label for="sexoRad"> Por sexo</label><br><br>
+                                </div>
+
+                                <div class="col-lg-3 form-group floating-label-form-group controls">
+                                    <input type="radio" id="capaRad" name="tipoReportr" value="capa">
+                                    <label for="capaRad"> Por capa</label><br><br>
+                                </div>
+                                <br>
+                                <hr>
+                            </div>
+                        
+
+                    </div>
+                    <div class="float-right,d-flex justify-content-end mt-3 mb-3">
+
+                        <button class="btn btn-primary text-center " id="load"
+                            style="width:95px">Buscar</button>
+                        <button class="btn btn-primary text-center " id="clean"
+                            style="width:95px">Limpiar</button>
+                        <button class="btn btn-primary text-center " id="print"
+                            style="width:95px">Imprimir</button>
+                    </div>
+
+                
+                </div>
+
+                <div class="container">
+                    <div class="col-lg-12 col-md-12 mx-auto">
+                
+                        <table id="table" 
+                        data-search="true" 
+                        data-page-list="[10, 25, 50, 100, all]" 
+                        data-toolbar="#toolbar" 
+                        data-id-field="_id"
+                        data-pagination="true"
+                        data-show-pagination-switch="true"
+                        data-show-refresh="true"
+                        data-show-toggle="true"
+                        data-show-columns="true"
+                        data-show-columns-toggle-all="true"
+                            >
+                            <thead>
+                                <tr class="header-color">
+                                    <th data-field="state"
+                                    data-sortable=true
+                                    data-checkbox=true></th>
+                                    <th data-field="_id" 
+                                    data-sortable=true>Registro</th>
+                                    <th data-field="horseName" 
+                                    data-sortable=true>Horse Name</th>
+                                    <th data-field="sex" 
+                                    data-sortable=true>Sexo</th>
+                                    <th data-field="color" 
+                                    data-sortable=true>Capa</th>
+                                    <th data-field="foalingDate" 
+                                    data-formatter="dateFormatter"
+                                    data-sortable=true>Fec Nac.</th>
+                                    <th data-field="imported" 
+                                    data-sortable=true>Pais</th>
+                                    <th data-field="area" 
+                                    data-sortable=true>Estado</th>
+                                    <th data-field="breederId" 
+                                    data-visible=false
+                                    data-sortable=true>Breeder</th>
+                                    <th data-field="ownerId" 
+                                    data-visible=false
+                                    data-sortable=true>Owner</th>
+                                    <th data-field="farm" 
+                                    data-visible=false
+                                    data-sortable=true>farm</th>                                   
+
+                                </tr>
+                            </thead>
+                
+                        </table>
+                    </div>
+                </div>
+                
+
+
+                <script>
+
+                    let data = <%- data %>;
+                    console.log(data)
+                    let $table = $('#table')
+                    let $remove = $('#remove')
+                    let selections = []
+                    let dataFiltro = null
+
+                        function getIdSelections()
+                        {
+                            return $.map($table.bootstrapTable('getSelections'), function (row)
+                            {
+                                return row.id
+                            })
+  }
+
+                    function buildTable($el)
+                    {
+
+                        $el.bootstrapTable({
+
+                            data: data,
+
+                        })
+                        $table.on('check.bs.table uncheck.bs.table ' +
+                            'check-all.bs.table uncheck-all.bs.table',
+                            function ()
+                            {
+                                $remove.prop('disabled', !$table.bootstrapTable('getSelections').length)
+
+                                // save your data, here just save the current page
+                                selections = getIdSelections()
+                                console.log(selections)
+                                // push or splice the selections if you want to save all data selections
+                            })
+                    }
+
+
+
+
+                    function iconformatter(value)
+                    {
+                        console.log(value)
+                        let img = `<img src="https://lusitanos.s3.us-east-1.amazonaws.com/hierros/${ value }.bmp" alt="" width="60" height="40" onerror=src="/assets/img/icono.png">`
+                        console.log(img)
+                        return img
+                    }
+
+                    function dateFormatter(value)
+                    {
+                        // if (value === null) {
+
+                        //     console.log(value)
+                        //     return value = '-'
+              
+                        // } 
+
+                        var date = new Date((value ? value:0));
+                        return new Date(date.getTime() - (date.getTimezoneOffset() * 60000 ))
+                        .toISOString()
+                        .split("T")[0];
+                        
+                    }
+                    
+                    function getData(){
+                     let argumento
+                        
+                        let color = $('#color option:selected').val();
+                        let sexo = $('#sex option:selected').val();
+                        let nacI = $('#aNacI').val();
+                        let nacF = $('#aNacF').val();
+                        let pais = $('#imported option:selected').val();
+                        let criador =  $('#criador option:selected').val();
+                        let dueno= $('#dueno option:selected').val();
+
+                       console.log("nacI", nacI.value)
+                        filtro = {
+                            color: (color != 'none'? color : null),
+                            sex: (sexo != 'none'? sexo : null),
+                            foalingDate: (nacI != 'none'? nacI : null),
+                            foalingDate: (nacF != 'none'? nacF : null),
+                            imported: (pais != 'none'? pais : null),
+                            breederId : (criador != 'none'? criador : null),
+                            ownerId : (dueno != 'none'? dueno : null),
+                        }
+                        console.log(filtro)
+
+
+                        const removeEmptyOrNull = (obj) =>
+                        {
+                            Object.keys(obj).forEach(k =>
+                                (obj[k] && typeof obj[k] === 'object') && removeEmptyOrNull(obj[k]) ||
+                                (!obj[k] && obj[k] !== undefined) && delete obj[k]
+                            )
+                            return obj
+                        }
+
+                        filter = removeEmptyOrNull(filtro)
+
+                        console.log(filter);
+                        
+                        res = data.filter(function (item)
+                        {
+                            for (var key in filter)
+                            {
+                                console.log(key)
+                                if (item[key] === undefined || item[key] != filter[key])
+                                    return false
+                            }
+                            return true
+                        })
+                        
+                        console.log(res)
+
+
+                        return (res)
+                    }
+
+                    $(function ()
+                    {
+                        buildTable($table)
+
+                        $('#load').click(function () {
+                            dataFiltro = getData()
+                            
+                            $table.bootstrapTable('load', dataFiltro)})
+
+                        $('#clean').click(function () {
+                            $('#color').val("none")
+                            $('#sex').val("none")
+                            $('#dueno').val("none")
+                            $('#criador').val("none")
+                            $('#country').val("none")
+                            $('#aNacI').val('')
+                            $('#aNacF').val('')
+                            dataFiltro = getData()
+                            
+                            $table.bootstrapTable('load', dataFiltro)})
+
+
+                        $('#print').click(function () {
+
+
+                            caballos(1,dataFiltro)
+                        })
+                        })
+
+                </script>
+
+                <!-- Modal -->
+                <div class="modal fade" id="owModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+                    role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-xl" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalLabel">Modal title</h5>
+                                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <%- include('../layouts/footer'); -%>
+
+
+
+        </body>
+
+</html>

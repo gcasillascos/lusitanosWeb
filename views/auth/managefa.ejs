@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+
+<%- include('../layouts/header'); -%>
+  <%- include('../layouts/scripts'); -%>
+
+
+    <html>
+
+    <body class="text-center">
+      <%- include('../layouts/menu'); -%>
+
+        <br>
+        <img class="mb-4" src="/assets/img/icono.png" alt="" width="101" height="80" />
+        <h1 class="h3 mb-3 fw-normal">Registro de MFA</h1>
+        <br />
+        <% if(errors !=null ){%>
+          <ul class="list-group">
+            <li class="list-group-item list-group-item-danger">
+              <%= errors %>
+            </li>
+          </ul>
+          <% } %>
+            <% if(success !=null ){%>
+              <ul class="list-group">
+                <li class="list-group-item list-group-item-success">
+                  <%= success %>
+                </li>
+              </ul>
+              <% } %>
+
+                <div class="container">
+                  <div class="row">
+                    <div class="col-sm">
+                      <br><br>
+                      <p class="text-left">
+                        <strong>Instrucciones para habilitar Multi Factor Autenticator:</strong> <br>
+                        <br>
+                        1. Descargar "Google Authenticator" de la app store de su preferencia. Ligas la final de la
+                        página.<br>
+                        2. Una vez instalada la aplicación, ingresar la llave o scannear el Codigo Qr.<br>
+                        3. Verificar que el proceso este correcto ingresando el token que aparece en la
+                        aplicación.<br>
+
+
+                      </p>
+                    </div>
+
+                    <div class="col-sm">
+                      <div class="form-qr">
+
+                        <%- js.qrcode %>
+                      </div>
+
+                      <br>
+                      <strong>
+                        <%= js.data %>
+                      </strong>
+
+                      <br><br>
+                    </div>
+
+                  </div>
+                </div>
+
+
+                <main class="form-signin2 text-center">
+                  <form action="/auth/faverify" method="POST" enctype="multipart/form-data">
+                    <div class="mb-3">
+                      <label for="totp" class="form-label">Qr Code Validator</label>
+                      <input type="text" class="form-control" id="totp" name="totp" placeholder="Qr Code Validator"
+                        aria-label="Qr Code Validator" />
+                    </div>
+                    <br>
+                    <button class="w-100 btn btn-lg btn-primary" type="submit">
+                      Validar MFA
+                    </button>
+                  </form>
+
+                </main>
+
+
+
+                <a href="http://itunes.apple.com/us/app/google-authenticator/id388497605?mt=8" target="_blank"><img
+                    src="/assets/img/apple.png" alt="Apple" style="width:134px;height:44px;"></a>
+                <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2"
+                  target="_blank"><img src="/assets/img/android.png" alt="Android" style="width:134px;height:44px;">
+                </a>
+
+
+                <%- include('../layouts/footer'); -%>
+    </body>
+
+    </html>

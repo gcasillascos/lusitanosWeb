@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+
+<%- include('../layouts/header'); -%>
+    <%- include('../layouts/scripts'); -%>
+
+        <html>
+
+        <body class="text-center">
+
+            <script>
+
+                $.extend(true, $.fn.dataTable.defaults, {
+                    "language": {
+                        "decimal": ",",
+                        "thousands": ".",
+                        "info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                        "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                        "infoPostFix": "",
+                        "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+                        "loadingRecords": "Cargando...",
+                        "lengthMenu": "Mostrar _MENU_ registros",
+                        "paginate": {
+                            "first": "Primero",
+                            "last": "Último",
+                            "next": "Siguiente",
+                            "previous": "Anterior"
+                        },
+                        "processing": "Procesando...",
+                        "search": "Buscar:",
+                        "searchPlaceholder": "Término de búsqueda",
+                        "zeroRecords": "No se encontraron resultados",
+                        "emptyTable": "Ningún dato disponible en esta tabla",
+                        "aria": {
+                            "sortAscending": ": Activar para ordenar la columna de manera ascendente",
+                            "sortDescending": ": Activar para ordenar la columna de manera descendente"
+                        },
+                        //only works for built-in buttons, not for custom buttons
+                        "buttons": {
+                            "create": "Nuevo",
+                            "edit": "Cambiar",
+                            "remove": "Borrar",
+                            "copy": "Copiar",
+                            "csv": "fichero CSV",
+                            "excel": "tabla Excel",
+                            "pdf": "documento PDF",
+                            "print": "Imprimir",
+                            "colvis": "Visibilidad columnas",
+                            "collection": "Colección",
+                            "upload": "Seleccione fichero...."
+                        },
+                        "select": {
+                            "rows": {
+                                _: '%d filas seleccionadas',
+                                0: 'clic fila para seleccionar',
+                                1: 'una fila seleccionada'
+                            }
+                        }
+                    }
+                });
+
+                $(document).ready(function ()
+                {
+                    $("#pedigreesTable").DataTable({
+                        aaSorting: [],
+                        responsive: true,
+
+                        columnDefs: [
+                            {
+                                responsivePriority: 1,
+                                targets: 0
+                            },
+                            {
+                                responsivePriority: 2,
+                                targets: -1
+                            }
+                        ]
+                    });
+
+                    $(".dataTables_filter input")
+                        .attr("placeholder", "Buscar ...")
+                        .css({
+                            width: "300px",
+                            display: "inline-block"
+                        });
+
+                    $('[data-toggle="tooltip"]').tooltip();
+                });
+            </script>
+
+
+
+            <%- include('../layouts/menu'); -%>
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 mx-auto">
+
+                            <main class="form-signin body-signin">
+                                <form action="/pedigrees/arbolx" method="POST" enctype="multipart/form-data"
+                                    onsubmit="return changeArbolValidation()">
+                                    <img class="mb-4" src="/assets/img/icono.png" alt="" width="101" height="80" />
+                                    <h1 class="h3 mb-3 fw-normal">Consulta del StudBook</h1>
+                                    <br />
+                                    <div id='msg' class="alert alert-dismissible fade show " style="display:none;">
+                                        <strong>Note!</strong> This is a simple example of dismissible alert.
+                                    </div>
+                                    <div class="form-check text-start">
+                                        <input class="form-check-input" type="radio" name="busqueda" id="nombre"
+                                            value="nombre" checked>
+                                        <label class="form-check-label" for="nombre">
+                                            Por Nombre del ejemplar
+                                        </label>
+                                    </div>
+                                    <div class="form-check text-start">
+                                        <input class="form-check-input" type="radio" name="busqueda" id="codigo"
+                                            value="codigo">
+                                        <label class="form-check-label" for="codigo">
+                                            Por Código del ejemplar
+                                        </label>
+                                    </div>
+                                    <div class="form-check  text-start">
+                                        <input class="form-check-input" type="radio" name="busqueda" id="ganaderia"
+                                            value="ganaderia">
+                                        <label class="form-check-label" for="ganaderia">
+                                            Por Ganaderia
+                                        </label>
+                                    </div>
+                                    <div class="form-check  text-start">
+                                        <input class="form-check-input" type="radio" name="busqueda" id="microchip"
+                                            value="microchip">
+                                        <label class="form-check-label" for="microchip">
+                                            Por Microchip
+                                        </label>
+                                    </div>
+                                    <br>
+                                    <div class="mb-3">
+                                        <label for="datos" class="form-label">Captura de datos</label>
+                                        <input type="text" class="form-control" id="datos" name="datos"
+                                            style="text-transform: capitalize" />
+                                    </div>
+                                    <br />
+
+                                    <button class="w-100 btn btn-lg btn-primary" id="sendLogin" type="submit">
+                                        Buscar
+                                    </button>
+                                </form>
+                            </main>
+                            <br>
+                            <div id="horseSearch">
+                                <H2><strong>Resultados de la Busqueda: </strong></H1>
+                            </div>
+                            <br>
+                            <div class="table-responsive">
+
+                                <table class="table table-hover" id="pedigreesTable" on>
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">No. de Registro</th>
+                                            <th scope="col">No. de Referencia</th>
+                                            <th scope="col">Nombre</th>
+                                            <th scope="col">Sexo</th>
+                                            <th scope="col">Padre</th>
+                                            <th scope="col">Madre</th>
+                                            <th scope="col">Microchip</th>
+                                            <th scope="col">Ganaderia</th>
+                                        </tr>
+                                    </thead>
+                                    <% for(var i=0; i < pedigrees.length; i++) { %>
+                                        <tr id="<%=pedigrees[i].regNum %>" onclick="llamaPedigree(this.id)">
+
+                                            <td>
+                                                <%= i+1 %>
+                                            </td>
+                                            <td>
+                                                <%= pedigrees[i].regNum %>
+                                            </td>
+                                            <td>
+                                                <%= pedigrees[i].regRef %>
+                                            </td>
+                                            <td>
+                                                <%= pedigrees[i].horseName%>
+                                            </td>
+                                            <td>
+
+
+                                                <% if (pedigrees[i].sex === 'H') {%>
+                                                    <i class="fa fa-venus" aria-hidden="true"></i>
+                                                    Hembra
+                                                    <%} else {%>
+                                                        <i class="fa fa-mars" aria-hidden="true"></i>
+                                                    Macho
+                                                    <%}%>
+                                            </td>
+                                            <td>
+                                                <%= pedigrees[i].sire %>
+                                            </td>
+                                            <td>
+                                                <%= pedigrees[i].dam %>
+                                            </td>
+                                            <td>
+                                                <%= pedigrees[i].microchip %>
+                                            </td>
+                                            <td>
+                                                <%= pedigrees[i].ownerId %>
+                                            </td>
+                                        </tr>
+                                        <% } %>
+                                </table>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal -->
+                <div class="modal fade" id="owModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+                    role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-xl" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalLabel">Modal title</h5>
+                                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <%- include('../layouts/footer'); -%>
+
+
+
+        </body>
+
+        </html>

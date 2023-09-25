@@ -1,0 +1,521 @@
+<div class="container">
+
+
+    <div class="row">
+        <div class="col-lg-11">
+            <div class="tab">
+                <button class="tablinks active" onclick="openForm(event, 'Ganaderia')">Ganaderia</button>
+                <button class="tablinks" onclick="openForm(event, 'Titular')">Titular</button>
+                <button class="tablinks" onclick="openForm(event, 'Representante')">Representante</button>
+                <button class="tablinks" onclick="openForm(event, 'Contacto')">Contacto</button>
+                <button class="tablinks" onclick="openForm(event, 'Fotos')">Fotos y Videos</button>
+            </div>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-11">
+            <form id="newOwner" action="javascript:owRegistrar()" method="POST" enctype="multipart/form-data">
+
+                <div id='msg' class="alert alert-dismissible fade show " style="display:none;">
+                    <strong>Note!</strong> This is a simple example of dismissible alert.
+                </div>
+
+                <div id="Titular" class="tabcontent">
+                    <h3>Titular</h3>
+                    <div class="row">
+                        <div class="checkbox mb-3">
+                            <label>
+                                <input type="checkbox" id="chkT" name="chkT"
+                                    value="<%= (data.titular[0].chk === null ) ? '' : data.titular[0].chk %>" checked />
+                                Monstrar datos en directorio
+                            </label>
+                        </div>
+                        <div class="col-lg-2 form-group floating-label-form-group controls">
+                            <label>Saludo:</label>
+                            <input type="text" class="form-control" placeholder="Saludo" id="salutationT"
+                                name="salutationT" style="text-transform:capitalize"
+                                value="<%= (data.salutation  === null) ? '' : data.salutation %>">
+                        </div>
+                        <div class="col-lg-5 form-group floating-label-form-group controls">
+                            <label>Nombre</label><i class="fa fa-asterisk rojo_aster"></i>
+                            <input type="text" class="form-control" placeholder="Nombre(s)" id="firstNameT"
+                                name="firstNameT" required
+                                value="<%= (data.firstName  === null) ? '' : data.firstName %>">
+                        </div>
+                        <div class="col-lg-5 form-group floating-label-form-group controls">
+                            <label>Apellidos:</label><i class="fa fa-asterisk rojo_aster"></i>
+                            <input type="text" class="form-control" placeholder="Apellidos" id="lastNameT"
+                                name="lastNameT" required value="<%= (data.lastName  === null) ? '' : data.lastName %>">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-4 form-group floating-label-form-group controls">
+                            <label>Dirección:</label><i class="fa fa-asterisk rojo_aster"></i>
+                            <input type="text" class="form-control" placeholder="Dirección" id="streetT" name="streetT"
+                                required
+                                value="<%= (data.titular[0].street  === null ) ? '' : data.titular[0].street %>">
+                        </div>
+                        <div class="col-lg-4 form-group floating-label-form-group controls">
+                            <label>Ciudad:</label><i class="fa fa-asterisk rojo_aster"></i>
+                            <input type="text" class="form-control" placeholder="Ciudad" id="cityT" name="cityT"
+                                required value="<%= (data.titular[0].city  === null) ? '' : data.titular[0].city %>">
+                        </div>
+                        <div class="col-lg-4 form-group floating-label-form-group controls">
+                            <label>Estado:</label><i class="fa fa-asterisk rojo_aster"></i>
+                            <input type="text" class="form-control" placeholder="Estado" id="stateT" name="stateT"
+                                required value="<%= (data.titular[0].state  === null) ? '' : data.titular[0].state %>">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-4 form-group floating-label-form-group controls">
+                            <label>Pais:</label><i class="fa fa-asterisk rojo_aster"></i>
+                            <input type="text" class="form-control" placeholder="Pais" id="countryT" name="countryT"
+                                required
+                                value="<%= (data.titular[0].country  === null) ? '' : data.titular[0].country %>">
+                        </div>
+                        <div class="col-lg-2 form-group floating-label-form-group controls">
+                            <label>Codigo Postal:</label><i class="fa fa-asterisk rojo_aster"></i>
+                            <input type="text" class="form-control" placeholder="Postal Code" id="postalCodeT"
+                                name="postalCodeT" required
+                                value="<%= (data.titular[0].postalCode  === null) ? '' : data.titular[0].postalCode %>">
+                        </div>
+                    </div>
+                    <hr>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-4 form-group floating-label-form-group controls">
+                            <label>Teléfono:</label>
+                            <input type="text" class="form-control" placeholder="Phone" id="phoneT" name="phoneT"
+                                value="<%= (data.titular[0].phone  === null) ? '' : data.titular[0].phone %>">
+                        </div>
+                        <div class="col-lg-4 form-group floating-label-form-group controls">
+                            <label>email:</label><i class="fa fa-asterisk rojo_aster"></i>
+                            <input type="text" class="form-control" placeholder="E mail" id="emailT" name="emailT"
+                                required value="<%= (data.titular[0].email  === null) ? '' : data.titular[0].email %>">
+                        </div>
+                    </div>
+                </div>
+                <div id="Representante" class="tabcontent">
+                    <h3>Representante</h3>
+                    <div class="row">
+                        <div class="checkbox mb-3">
+                            <label>
+                                <input type="checkbox" id="chkR" name="chkR"
+                                    value="<%= (data.representante[0].chk === null ) ? '' : data.representante[0].chk %>"
+                                    checked /> Monstrar datos en directorio
+                            </label>
+                        </div>
+                        <div class="col-lg-2 form-group floating-label-form-group controls">
+                            <label>Saludo:</label>
+                            <input type="text" class="form-control" placeholder="Saludo" id="salutationR"
+                                name="salutationR" style="text-transform:capitalize"
+                                value="<%= (data.representante[0].salutation  === null) ? '' : data.representante[0].salutation %>">
+                        </div>
+                        <div class="col-lg-5 form-group floating-label-form-group controls">
+                            <label>Nombre</label><i class="fa fa-asterisk rojo_aster"></i>
+                            <input type="text" class="form-control" placeholder="Nombre(s)" id="firstNameR"
+                                name="firstNameR" required
+                                value="<%= (data.representante[0].firstName  === null) ? '' : data.representante[0].firstName %>">
+                        </div>
+                        <div class="col-lg-5 form-group floating-label-form-group controls">
+                            <label>Apellidos:</label><i class="fa fa-asterisk rojo_aster"></i>
+                            <input type="text" class="form-control" placeholder="Apellidos" id="lastNameR"
+                                name="lastNameR" required
+                                value="<%= (data.representante[0].lastName  === null) ? '' : data.representante[0].lastName %>">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-4 form-group floating-label-form-group controls">
+                            <label>Dirección:</label><i class="fa fa-asterisk rojo_aster"></i>
+                            <input type="text" class="form-control" placeholder="Dirección" id="streetR" name="streetR"
+                                required
+                                value="<%= (data.representante[0].street  === null) ? '' : data.representante[0].street %>">
+                        </div>
+                        <div class="col-lg-4 form-group floating-label-form-group controls">
+                            <label>Ciudad:</label><i class="fa fa-asterisk rojo_aster"></i>
+                            <input type="text" class="form-control" placeholder="Ciudad" id="cityR" name="cityR"
+                                required
+                                value="<%= (data.representante[0].city  === null) ? '' : data.representante[0].city %>">
+                        </div>
+                        <div class="col-lg-4 form-group floating-label-form-group controls">
+                            <label>Estado:</label><i class="fa fa-asterisk rojo_aster"></i>
+                            <input type="text" class="form-control" placeholder="Estado" id="stateR" name="stateR"
+                                required
+                                value="<%= (data.representante[0].state  === null) ? '' : data.representante[0].state %>">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-4 form-group floating-label-form-group controls">
+                            <label>Pais:</label><i class="fa fa-asterisk rojo_aster"></i>
+                            <input type="text" class="form-control" placeholder="Pais" id="countryR" name="countryR"
+                                required
+                                value="<%= (data.representante[0].country  === null) ? '' : data.representante[0].country %>">
+                        </div>
+                        <div class="col-lg-2 form-group floating-label-form-group controls">
+                            <label>Codigo Postal:</label><i class="fa fa-asterisk rojo_aster"></i>
+                            <input type="text" class="form-control" placeholder="Postal Code" id="postalCodeR"
+                                name="postalCodeR" required
+                                value="<%= (data.representante[0].postalCode  === null) ? '' : data.representante[0].postalCode %>">
+                        </div>
+                    </div>
+                    <hr>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-4 form-group floating-label-form-group controls">
+                            <label>Teléfono:</label>
+                            <input type="text" class="form-control" placeholder="Phone" id="phoneR" name="phoneR"
+                                value="<%= (data.representante[0].phone  === null) ? '' : data.representante[0].phone  %>">
+                        </div>
+                        <div class="col-lg-4 form-group floating-label-form-group controls">
+                            <label>email:</label><i class="fa fa-asterisk rojo_aster"></i>
+                            <input type="text" class="form-control" placeholder="E mail" id="emailR" name="emailR"
+                                required
+                                value="<%= (data.representante[0].email  === null) ? '' : data.representante[0].email %>">
+                        </div>
+                    </div>
+                </div>
+
+                <div id="Contacto" class="tabcontent">
+                    <h3>Contacto</h3>
+                    <div class="row">
+                        <div class="checkbox mb-3">
+                            <label>
+                                <input type="checkbox" id="chkC" name="chkC"
+                                    value="<%= (data.contacto[0].chk === null ) ? '' : data.contacto[0].chk %>"
+                                    checked /> Monstrar datos en directorio
+                            </label>
+                        </div>
+                        <div class="col-lg-2 form-group floating-label-form-group controls">
+                            <label>Saludo:</label>
+                            <input type="text" class="form-control" placeholder="Saludo" id="salutationC"
+                                name="salutationC" style="text-transform:capitalize"
+                                value="<%= (data.contacto[0].salutation  === null) ? '' : data.contacto[0].salutation %>">
+                        </div>
+                        <div class="col-lg-5 form-group floating-label-form-group controls">
+                            <label>Nombre</label><i class="fa fa-asterisk rojo_aster"></i>
+                            <input type="text" class="form-control" placeholder="Nombre(s)" id="firstNameC"
+                                name="firstNameC" required
+                                value="<%= (data.contacto[0].firstName  === null) ? '' : data.contacto[0].firstName %>">
+                        </div>
+                        <div class="col-lg-5 form-group floating-label-form-group controls">
+                            <label>Apellidos:</label><i class="fa fa-asterisk rojo_aster"></i>
+                            <input type="text" class="form-control" placeholder="Apellidos" id="lastNameC"
+                                name="lastNameC" required
+                                value="<%= (data.contacto[0].lastName  === null) ? '' : data.contacto[0].lastName %>">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-4 form-group floating-label-form-group controls">
+                            <label>Dirección:</label><i class="fa fa-asterisk rojo_aster"></i>
+                            <input type="text" class="form-control" placeholder="Dirección" id="streetC" name="streetC"
+                                required
+                                value="<%= (data.contacto[0].street  === null) ? '' : data.contacto[0].street %>">
+                        </div>
+                        <div class="col-lg-4 form-group floating-label-form-group controls">
+                            <label>Ciudad:</label><i class="fa fa-asterisk rojo_aster"></i>
+                            <input type="text" class="form-control" placeholder="Ciudad" id="cityC" name="cityC"
+                                required value="<%= (data.contacto[0].city  === null) ? '' : data.contacto[0].city  %>">
+                        </div>
+                        <div class="col-lg-4 form-group floating-label-form-group controls">
+                            <label>Estado:</label><i class="fa fa-asterisk rojo_aster"></i>
+                            <input type="text" class="form-control" placeholder="Estado" id="stateC" name="stateC"
+                                required
+                                value="<%= (data.contacto[0].state  === null) ? '' : data.contacto[0].state %>">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-4 form-group floating-label-form-group controls">
+                            <label>Pais:</label><i class="fa fa-asterisk rojo_aster"></i>
+                            <input type="text" class="form-control" placeholder="Pais" id="countryC" name="countryC"
+                                required
+                                value="<%= (data.contacto[0].country  === null) ? '' : data.contacto[0].country %>">
+                        </div>
+                        <div class="col-lg-2 form-group floating-label-form-group controls">
+                            <label>Codigo Postal:</label><i class="fa fa-asterisk rojo_aster"></i>
+                            <input type="text" class="form-control" placeholder="Postal Code" id="postalCodeC"
+                                name="postalCodeC" required
+                                value="<%= (data.contacto[0].postalCode  === null) ? '' : data.contacto[0].postalCode %>">
+                        </div>
+                    </div>
+                    <hr>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-4 form-group floating-label-form-group controls">
+                            <label>Teléfono:</label>
+                            <input type="text" class="form-control" placeholder="Phone" id="phoneC" name="phoneC"
+                                value="<%= (data.contacto[0].phone === null) ? '' : data.contacto[0].phone %>">
+                        </div>
+                        <div class="col-lg-4 form-group floating-label-form-group controls">
+                            <label>email:</label><i class="fa fa-asterisk rojo_aster"></i>
+                            <input type="text" class="form-control" placeholder="E mail" id="emailC" name="emailC"
+                                required
+                                value="<%= (data.contacto[0].email  === null) ? '' : data.contacto[0].email  %>">
+                        </div>
+
+                    </div>
+                </div>
+
+                <div id="Ganaderia" class="tabcontent" style="display: block ;">
+                    <h3>Ganaderias</h3>
+                    <div class="row ">
+
+                        <div class="col-lg-2 form-group floating-label-form-group controls">
+                            <label>Id:</label><i class="fa fa-asterisk rojo_aster"></i>
+                            <input type="text" class="form-control is-invalid" placeholder="Id" id="_id" name="_id"
+                                required style="text-transform:uppercase" value="<%= (data._id) %>">
+
+                        </div>
+                        <div class="col-lg-6 form-group floating-label-form-group controls">
+                            <label>Ganadería:</label><i class="fa fa-asterisk rojo_aster"></i>
+                            <input type="text" class="form-control" placeholder="Ganadería" id="farm" name="farm"
+                                required value="<%= (data.farm) %>">
+                        </div>
+                        <div class="col-lg-3 form-group floating-label-form-group controls mb-5">
+                            <label>Hierro:</label>
+
+                            <div class="image-upload" style="
+                            margin-left: 50px;
+                        ">
+                                <label for="file-input">
+                                    <img src="<%=`https://lusitanos.s3.us-east-1.amazonaws.com/hierros/${data._id}.bmp`%>"
+                                        onerror="this.src='/assets/img/no_photo.png'" width="130" height="130" />
+                                </label>
+                                <input id="file-input" type="file" style="display:none" />
+                            </div>
+
+
+
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-lg-4 form-group floating-label-form-group controls">
+                            <label>Dirección:</label><i class="fa fa-asterisk rojo_aster"></i>
+                            <input type="text" class="form-control" placeholder="Dirección" id="street" name="street"
+                                required value="<%= (data.street) %>">
+
+                            <label>Ciudad:</label><i class="fa fa-asterisk rojo_aster"></i>
+                            <input type="text" class="form-control" placeholder="Ciudad" id="city" name="city" required
+                                value="<%= (data.city) %>">
+
+                            <label>Estado:</label><i class="fa fa-asterisk rojo_aster"></i>
+                            <input type="text" class="form-control" placeholder="Estado" id="state" name="state"
+                                required value="<%= (data.state) %>">
+                            <label>Pais:</label><i class="fa fa-asterisk rojo_aster"></i>
+                            <input type="text" class="form-control" placeholder="Pais" id="country" name="country"
+                                required value="<%= (data.country) %>">
+                            <label>Codigo Postal:</label><i class="fa fa-asterisk rojo_aster"></i>
+                            <input type="text" class="form-control" placeholder="Postal Code" id="postalCode"
+                                name="postalCode" required value="<%= (data.postalCode) %>">
+
+                        </div>
+                        <div class="col-lg-3 form-group floating-label-form-group controls mt-5">
+                            <div class="embed-responsive embed-responsive-16by9" style="height: 100%">
+                                <iframe
+                                    src="https://maps.google.com/maps/embed/v1/view?key=AIzaSyCFIAZ2P_IE8rzuqxWJVYznHGT4AifWzn0&zoom=8&center=<%= data.location.coordinates[1] %>, <%= data.location.coordinates[0] %>"
+                                    width="520" height="320" frameborder="0" style="border: 0"
+                                    allowfullscreen=""></iframe>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                    <br>
+
+
+                    <br>
+                    <div class="row">
+
+                        <div class="col-lg-3 form-group floating-label-form-group controls">
+                            <hr>
+                            <label>Teléfono:</label>
+                            <input type="text" class="form-control" placeholder="Phone" id="phone" name="phone"
+                                value="<%= (data.phone) %>">
+                        </div>
+                        <div class="col-lg-4 form-group floating-label-form-group controls">
+                            <label>email:</label><i class="fa fa-asterisk rojo_aster"></i>
+                            <input type="text" class="form-control" placeholder="E mail" id="email" name="email"
+                                required value="<%= (data.email) %>">
+                        </div>
+                        <div class="col-lg-4 form-group floating-label-form-group controls">
+                            <label>Website:</label>
+                            <input type="text" class="form-control" placeholder="Website" id="website" name="website"
+                                value="<%= (data.website) %>">
+                        </div>
+                        <br>
+                        <div class="col-lg-3 form-group floating-label-form-group controls">
+                            <label>R.F.C.:</label>
+                            <input type="text" class="form-control" placeholder="R.F.C." id="rfc" name="rfc"
+                                value="<%= (data.rfc) %>">
+                        </div>
+                    </div>
+                </div>
+
+        </div>
+        <div class="col-lg-1">
+
+            <div class="col-lg-1" style="padding-right:0px">
+                <% if (id==='0' ) { %>
+
+
+                    <div class="float-right mb-3">
+                        <button type="submit" class="btn btn-primary text-center" id="sendRegistrar"
+                            style="width:95px">Registrar</button>
+                    </div>
+
+
+
+                    <% } else { %>
+
+
+                        <div class=" float-right mb-3">
+
+                            <button type="button" class="btn btn-primary text-center" id="sendModificar"
+                                style="width:95px" onclick="owModificar('<%= id %>')">Modificar</button>
+                        </div>
+
+                        <div class=" float-right">
+
+                            <button type="button" class="btn btn-primary text-center" id="sendEliminar"
+                                style="width:95px" onclick="owEliminar('<%= id %>')">Eliminar</button>
+                        </div>
+
+
+                        <% } %>
+            </div>
+        </div>
+
+        </form>
+        <div id="Fotos" class="col-lg-11 tabcontent">
+            <div class="">
+
+                <h3>Fotos y Videos</h3>
+                <p>Fotos y Videos Fotos y Videos Fotos y Videos</p>
+                <div class="col-lg-6 ">
+
+                    <div id="carouselCaballos" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2500">
+                        <div class="carousel-inner">
+
+
+
+                            <% for ( let i=0; i <=files.length-1; i++) { let
+                                str=`https://lusitanos.s3.us-east-1.amazonaws.com/${files[i]}`; let alt=`slide${i}`; let
+                                img=`img${i}`; if(i===0){%>
+                                <div class="carousel-item active">
+                                    <%} else {%>
+                                        <div class="carousel-item">
+                                            <%}%>
+                                                <img class="d-block w-100 mx-auto" src="<%=str%>" id="<%= img %>"
+                                                    alt="<%=alt%>" />
+                                        </div>
+                                        <% } %>
+                                </div>
+                                <a class="carousel-control-prev" href="#carouselExampleControls"
+                                    data-bs-target="#carouselCaballos" type="button" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Prev</span>
+                                </a>
+                                <a class="carousel-control-next" href="#carouselExampleControls"
+                                    data-bs-target="#carouselCaballos" type="button" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                        </div>
+                    </div>
+
+                    <br>
+                    <div>
+                        <div class="row">
+
+                            <% for ( let i=0; i <=files.length-1; i++) { console.log(files[i]); let
+                                str=`https://lusitanos.s3.us-east-1.amazonaws.com/${files[i]}`; const
+                                nombres=files[i].split('/'); console.log(nombres); let alt=`${files[i]}`; let
+                                img=`img${i}`; %>
+                                <div class="col-sm-4">
+                                    <div class="card">
+                                        <div class="card-body text-center
+                                ">
+                                            <img src="<%=str%>" id="<%= img %>" alt="<%=alt%>" width="230" height="129"
+                                                onerror=src="/assets/img/icono.png">
+                                            <h5 class="card-title">
+                                                <%= nombres[nombres.length-1] %>
+                                            </h5>
+                                            <p class="card-text">Reseña de la foto.
+                                            </p>
+                                            <a href="#" class="btn btn-primary">Descargar</a>
+                                            <a href="#" class="btn btn-primary">Eliminar</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <% } %>
+
+                        </div>
+
+
+
+
+                    </div>
+                    <div>
+                        <div class="mb-3">
+                            <label for="formFile" class="form-label">Default file input example</label>
+                            <input class="form-control" type="file" id="formFile">
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+    function openForm(evt, form)
+    {
+        var i, tabcontent, tablinks
+        tabcontent = document.getElementsByClassName("tabcontent")
+        console.log(tabcontent)
+        for (i = 0; i < tabcontent.length; i++)
+        {
+            tabcontent[i].style.display = "none"
+        }
+        tablinks = document.getElementsByClassName("tablinks")
+        for (i = 0; i < tablinks.length; i++)
+        {
+            tablinks[i].className = tablinks[i].className.replace(" active", "")
+        }
+        document.getElementById(form).style.display = "block"
+        evt.currentTarget.className += " active"
+    }
+</script>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<%- include('../layouts/header'); -%>
+  <%- include('../layouts/scripts'); -%>
+    <html>
+
+    <body>
+
+      <body class="text-center">
+        <%- include('../layouts/menu'); -%>
+          <main class="form-signin body-signin">
+            <form action="/auth/forgotpwdx" method="POST" enctype="multipart/form-data">
+              <img class="mb-4" src="/assets/img/icono.png" alt="" width="101" height="80" />
+              <h1 class="h3 mb-3 fw-normal">Recuperación de Contraseña</h1>
+              <br />
+              <% if(errors !=null ){%>
+                <ul class="list-group">
+                  <li class="list-group-item list-group-item-danger">
+                    <%= errors %>
+                  </li>
+                </ul>
+                <% } %>
+                  <% if(success !=null ){%>
+                    <ul class="list-group">
+                      <li class="list-group-item list-group-item-success">
+                        <%= success %>
+                      </li>
+                    </ul>
+                    <% } %>
+                      <div class="mb-3">
+                        <label for="email" class="form-label" aria-label="name@example.com">Email address</label>
+                        <input type="email" class="form-control" id="email" name="email"
+                          placeholder="name@example.com" />
+                      </div>
+                      <br />
+
+
+
+                      <button class="w-100 btn btn-lg btn-primary" id="sendLogin" type="submit">
+                        Enviar...
+                      </button>
+            </form>
+          </main>
+
+          <%- include('../layouts/footer'); -%>
+      </body>
+
+    </html>

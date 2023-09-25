@@ -1,0 +1,160 @@
+
+  <nav class="navbar navbar-custom navbar-expand-lg navbar-dark navbar-text text-white-100 !important">
+
+    <div class="container-fluid">
+
+      <a class="navbar-brand" href="/">
+        <img src="/assets/img/logo.png" alt="" width="300" height="80" />
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+          <li class="nav-item active">
+            <a class="nav-link" href="/"><i class="fa fa-home fa icono_menu" aria-hidden="true"></i></a>
+          </li>
+
+
+          <% if (!loggedIn) { %>
+            <li class="nav-item">
+              <a class="nav-link" style="color:#ffffff" href="/auth/register">Registro</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" style="color:#ffffff" href="formato">Formatos</a>
+            </li>
+            <% } %>
+            <li class="nav-item">
+              <a class="nav-link" style="color:#ffffff" href="/pedigrees/arbol">Concursos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" style="color:#ffffff" href="/pedigrees/arbol">Dir. Ganaderos</a>
+            </li>
+              <li class="nav-item">
+                <a class="nav-link" style="color:#ffffff" href="/pedigrees/arbol">StudBook</a>
+              </li>
+              <% if (loggedIn) { %>
+
+                <li class="nav-item">
+                  <a class="nav-link"  style="color:#ffffff" href="/owners/owner">Ganaderias</a>
+                </li>
+
+
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                    data-bs-toggle="dropdown" style="color:#ffffff" aria-haspopup="true" aria-expanded="false">
+                    Caballos
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="/horses/horse">Caballos</a>
+                    <a class="dropdown-item" href="#">Pedigree</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="/cubriciones/cubricion">Cubriciones</a>
+                    <a class="dropdown-item" href="/bajas/baja">Bajas</a>
+                  </ul>
+                </li>
+
+                <li class="nav-item">
+                  <a class="nav-link" style="color:#ffffff" href="#">Pago en linea</a>
+                </li>
+
+
+
+
+
+
+
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" style="color:#ffffff" role="button"
+                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Reportes
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Reportes del semental</a>
+                    <a class="dropdown-item" href="#">Certificados de Registro</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Reporte del Registro</a>
+                  </ul>
+                </li>
+
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" style="color:#ffffff" href="#" id="navbarDropdown" role="button"
+                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Adminstración
+                  </a>
+
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="/users/user">Usuarios</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Generación de recibos</a>
+                    <a class="dropdown-item" href="#">Catálogos</a>
+                    <a class="dropdown-item" href="#">Formatos</a>
+                  </ul>
+                </li>
+                <% } %>
+
+        </ul>
+        <div class="d-flex justify-content-end">
+
+
+          <span class="navbar-text" style="color:#ffffff">
+            <% if (userData !==null) { %>
+              <%= `Hola, ${userData.user.name}` %>
+                <% } %>
+
+          </span>
+
+
+
+          <span class="nav-item dropdown me-2">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              <i class="fa fa-user icono_menu mr-auto " aria-hidden="true"></i>
+            </a>
+
+
+            <ul class="dropdown-menu me-5 " aria-labelledby="navbarDropdown">
+              <% if (!loggedIn) { %>
+                <a class="dropdown-item" href="/auth/login">Iniciar Sesión</a>
+                <a class="dropdown-item" href="/auth/register">Registrarse</a>
+                <% } %>
+                  <% if (loggedIn) { %>
+                    <a class="dropdown-item" href="/auth/updatepwd">Actualizar Contraseña</a>
+                    <% } %>
+                      <% if (!loggedIn) { %>
+                        <a class="dropdown-item" href="/auth/forgotpwd">Olvidaste Contraseña</a>
+                        <% } %>
+                          <% if (loggedIn) { %>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="/auth/updateinfo">Actualizar Información</a>
+                            <div class="dropdown-divider"></div>
+                            <% if ( !userData.user.isTwoFactorEnable ) { %>
+                              <a class="dropdown-item    " href="/auth/managefa">Activar MFA</a>
+                              <% } %>
+                                <a class="dropdown-item" href="/auth/disablefa">Desactivar MFA</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/auth/logout">Log Out</a>
+                                <% } %>
+            </ul>
+
+          </span>
+        </div>
+
+
+      </div>
+
+
+    </div>
+
+    </div>
+
+
+
+
+
+
+
+  </nav>

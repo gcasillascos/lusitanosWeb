@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('../layouts/header'); -%>
+    <%- include('../layouts/scripts'); -%>
+
+        <body>
+            <%- include('../layouts/menu'); -%>
+
+            
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-10 col-md-10 mx-auto">
+                
+                            <div class="page-heading text-center">
+                                &nbsp;
+                                <h1>Reporte general</h1>
+                                &nbsp;&nbsp;
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id= "toolbar" class="toolbar container">
+                    <div class="row">
+                
+                        <div class="row">
+                
+                
+                            <div class="col-lg-3 form-group floating-label-form-group controls">
+                                <label>Registro:</label>
+                                <input type="text" class="form-control " placeholder="Registro" id="id" name="id"
+                                    style="text-transform:uppercase" >
+                            </div>
+                            <div class="col-lg-3 form-group floating-label-form-group controls">
+                                <label>Nombre:</label>
+                                <input type="text" class="form-control" placeholder="Nombre" id="horseName" name="horseName"
+                                    style="text-transform:capitalize" >
+                            </div>
+                        </div>
+                
+                        <div class="row">
+                            <div class="col-lg-3 form-group floating-label-form-group controls">
+                                <label>Status</label>
+                                <select class="form-select" aria-label="estatus" id="estatus" name="estatus">
+                                    <option value="none" selected>Seleccionar...</option>
+                                    <option value="INSCRITO">INSCRITO</option>
+                                    <option value="PENDIENTE">PENDIENTE</option>
+                                </select>
+                                <!-- <script defer>
+                                    jQuery('#estatus').val("<%=// data.estatus  %>")
+                                </script> -->
+                            </div>
+                            <div class="col-lg-3 form-group floating-label-form-group controls">
+                                <label>Pais de Nacimiento:</label>
+                                <select class="form-select" aria-label="Nacido Pais" id="imported" name="imported">
+                                    <option value="none" selected>Seleccionar...</option>
+                                    <option value="México">México</option>
+                                    <option value="Bélgica">Bélgica</option>
+                                    <option value="Brasil">Brasil</option>
+                                    <option value="Canada">Canada</option>
+                                    <option value="Colombia">Colombia</option>
+                                    <option value="España">España</option>
+                                    <option value="Estados Unidos">Estados Unidos</option>
+                                    <option value="Francia">Francia</option>
+                                    <option value="Guatemala">Guatemala</option>
+                                    <option value="Nicaragua">Nicaragua</option>
+                                    <option value="Portugal">Portugal</option>
+                
+                
+                                </select>
+                                <!-- <script defer>
+                                    jQuery('#imported').val("<%=// data.imported %>")
+                                </script> -->
+                            </div>
+                            <div class="col-lg-3 form-group floating-label-form-group controls">
+                                <label>Año de Nacimiento:</label>
+                                <select class="form-select" aria-label="Nacido Pais" id="aNac" name="aNac">
+                                    <option value="none" selected>Seleccionar...</option>
+                                    <option value="2022">2022</option>
+                                    <option value="2021">2021</option>
+                                    <option value="2020">2020</option>
+                                    <option value="2019">2019</option>
+                                    <option value="2018">2018</option>
+                                    <option value="2017">2017</option>
+                                    <option value="2016">2016</option>
+                                    <option value="2015">2015</option>
+                                    <option value="2014">2014</option>
+                                    <option value="2013">2013</option>
+                
+                                </select>
+                                <!-- <script defer>
+                                    jQuery('#aNac').val("<%=// data.imported %>")
+                                </script> -->
+                            </div>
+                
+                        </div>
+                
+                        <div class="row">
+                            <div class="col-lg-3 form-group floating-label-form-group controls">
+                                <label>Tipo de Cubrición:</label>
+                                <select class="form-select" aria-label="Tipo de Cubrición" id="tipoCubricion" name="tipoCubricion"
+                                    required>
+                                    <option value="none" selected>Seleccionar...</option>
+                                    <option value="Monta Natural">MONTA NATURAL</option>
+                                    <option value="Inseminacion">INSEMINACIÓN</option>
+                                    <option value="Trans. Eembrionaria">TRANS. EMBRIONARIA</option>
+                                </select>
+                                <!-- <script defer>
+                                    jQuery('#tipoCubricion').val("<%= //data.tipoCubricion %>")
+                                </script> -->
+                            </div>
+                            <div class="col-lg-3 form-group floating-label-form-group controls">
+                                <label>Sexo:</label>
+                                <select class="form-select" aria-label="Sexo" id="sex" name="sex" required>
+                                    <option value="none" selected>Seleccionar...</option>
+                                    <option value="Hembra">HEMBRA</option>
+                                    <option value="Macho">MACHO</option>
+                                </select>
+                                <!-- <script defer>
+                                    jQuery('#sex').val("<%=// data.sex %>")
+                                </script> -->
+                            </div>
+                
+                
+                            <div class="col-lg-3 form-group floating-label-form-group controls">
+                                <label>Capa:</label>
+                                <select class="form-select" aria-label="Capa" id="color" name="color" required>
+                                    <option value="none" selected>Seleccionar...</option>
+                                    <option value="Alazana">ALAZANA</option>
+                                    <option value="Baya">BAYA</option>
+                                    <option value="Bayo">BAYO</option>
+                                    <option value="Castaña">CASTAÑA</option>
+                                    <option value="Isabelina">ISABELINA</option>
+                                    <option value="Palomina">PALOMINA</option>
+                                    <option value="Prieta">PRIETA</option>
+                                    <option value="Tordilla">TORDILLA</option>
+                
+                                </select>
+                                <!-- <script defer>
+                                    jQuery('#color').val("<%= //data.color %>")
+                                </script> -->
+                            </div>
+                
+                        </div>
+                
+                
+                    </div>
+                    <div class="float-right,d-flex justify-content-end mb-3">
+                        <button class="btn btn-primary text-center " id="load"
+                            style="width:95px">Buscar</button>
+                    </div>
+
+                
+                </div>
+
+                <div class="container">
+                    <div class="col-lg-12 col-md-12 mx-auto">
+                
+                        <table id="table" 
+                        data-search="true" 
+                        data-pagination="true" 
+                        data-page-list="[10, 25, 50, 100, all]" 
+                        data-toolbar="#toolbar" 
+                        
+                        data-id-field="_id"
+                        data-show-export="true"
+                        data-show-pagination-switch="true"
+                        data-show-refresh="true"
+                        data-show-toggle="true"
+                        data-show-fullscreen="true"
+                        data-show-columns="true"
+                        data-show-columns-toggle-all="true"
+                            >
+                            <thead>
+                                <tr class="header-color">
+                                    <th data-field="_id" 
+                                    data-sortable=true>Registro</th>
+                                    <th data-field="horseName" 
+                                    data-sortable=true>Horse Name</th>
+                                    <th data-field="sex" 
+                                    data-sortable=true>Sexo</th>
+                                    <th data-field="color" 
+                                    data-sortable=true>Capa</th>
+                                    <th data-field="foalingDate" 
+                                    data-formatter="dateFormatter"
+                                    data-sortable=true>Fec Nac.</th>
+                                    <th data-field="imported" 
+                                    data-sortable=true>Pais</th>
+                                    <th data-field="area" 
+                                    data-sortable=true>Estado</th>
+                                    <th data-field="tipoCubricion" 
+                                    data-visible=false
+                                    data-sortable=true>Tipo de cubrición</th>
+                                    <th data-field="pv" 
+                                    data-visible=false
+                                    data-sortable=true>pv</th>
+                                    <th data-field="castrated" 
+                                    data-visible=false
+                                    data-sortable=true>Castrado</th>
+                                    <th data-field="deceased"
+                                    data-visible=false
+                                    data-sortable=true>Desceso</th>
+
+                                </tr>
+                            </thead>
+                
+                        </table>
+                    </div>
+                </div>
+                
+
+
+                <script>
+
+                    let data = <%- data %>;
+                    console.log(data)
+                    var $table = $('#table')
+
+                    function buildTable($el)
+                    {
+
+                        $el.bootstrapTable({
+
+                            data: data,
+                            // detailView: "cells > 1",
+                            // onExpandRow: function (index, row, $detail)
+                            // {
+                            //     /* eslint no-use-before-define: ["error", { "functions": false }]*/
+                            //     console.log(index, row, row.horses, $detail)
+                            //     expandTable($detail, row)
+                            // }
+                        })
+                    }
+
+
+
+
+                    function iconformatter(value)
+                    {
+                        console.log(value)
+                        let img = `<img src="https://lusitanos.s3.us-east-1.amazonaws.com/hierros/${ value }.bmp" alt="" width="60" height="40" onerror=src="/assets/img/icono.png">`
+                        console.log(img)
+                        return img
+                    }
+
+                    function dateFormatter(value)
+                    {
+                        return value.slice(0, 10)
+                    }
+
+                    function getData(){
+                     let argumento
+                        
+                        let color = $('#color option:selected').val();
+                        let sexo = $('#sex option:selected').val();
+                        let tc = $('#criador option:selected').val();
+                        let nac = $('#aNac option:selected').val();
+                        let pais = $('#imported option:selected').val();
+
+                        let usu = data[0].ownerId 
+                       
+                        filtro = {
+                            color: (color != 'none'? color : null),
+                            sex: (sexo != 'none'? sexo : null),
+                            criador: (tc != 'none'? tc : null),
+                            anac: (nac != 'none'? nac : null),
+                            imported: (pais != 'none'? pais : null),
+
+
+                        }
+                        console.log(filtro)
+
+
+                        const removeEmptyOrNull = (obj) =>
+                        {
+                            Object.keys(obj).forEach(k =>
+                                (obj[k] && typeof obj[k] === 'object') && removeEmptyOrNull(obj[k]) ||
+                                (!obj[k] && obj[k] !== undefined) && delete obj[k]
+                            )
+                            return obj
+                        }
+
+                        filter = removeEmptyOrNull(filtro)
+
+                        console.log(filter);
+                        
+                        res = data.filter(function (item)
+                        {
+                            for (var key in filter)
+                            {
+                                console.log(key)
+                                if (item[key] === undefined || item[key] != filter[key])
+                                    return false
+                            }
+                            return true
+                        })
+
+                        console.log(res)
+
+
+                        return (res)
+                    }
+
+                    $(function ()
+                    {
+                        buildTable($table)
+
+                        $('#load').click(function () {
+                            $table.bootstrapTable('load', getData())
+                        })
+                    })
+                </script>
+
+                <!-- Modal -->
+                <div class="modal fade" id="owModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+                    role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-xl" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalLabel">Modal title</h5>
+                                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <%- include('../layouts/footer'); -%>
+
+
+
+        </body>
+
+</html>

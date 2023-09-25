@@ -1,0 +1,245 @@
+<h3>Nacimientos</h3>
+<div class="container">
+
+    <div class="row">
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end" id="toolbarPre">
+            <button type="button" class="btn btn-primary text-center" id="generaPreReg" style="width:300px"
+                onClick="generaPreReg()">Generar Pre Registro
+            </button>
+        </div>
+
+
+
+        <div class="col-lg-12 col-md-12 mx-auto">
+
+            <table id="nacimientos" 
+            data-search="true"
+            data-toggle="nacimientos"
+            data-pagination="true" 
+            data-toolbar="toolbarPre"
+            data-page-list="[10, 25, 50, 100, all]"
+            data-id-field="_id" 
+            data-multiple-select-row="true" 
+            data-click-to-select="true"
+            data-locale="es-MX">
+
+                <thead>
+                    <tr class="header-color">
+                        <th data-field="regPre" data-checkbox=true data-sortable=true>Pre Registro</th> 
+                        <th data-field="horseName" data-sortable=true>Nombre</th>
+                        <th data-field="foalingDate" data-sortable=true data-formatter="dateFormatter">Fecha Nacimiento
+                        </th>
+                        <th data-field="sex" data-sortable=true>sexo</th>
+                        <th data-field="sireRegNum" data-sortable=true>NIN Macho</th>
+                        <th data-field="tipoCubricion" data-sortable=true>Tipo de Cubrición</th>
+                        <th data-field="tipoRegistro" data-sortable=true>Tipo de Registro</th>
+                    </tr>
+                </thead>
+
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="nuevaNac" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog"
+    aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalLabel">Nacimientos</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card card-body">
+                    <form id="newOwner" class="was-validated" action="javascript:owRegistrar()" method="POST"
+                        enctype="multipart/form-data">
+                        <div class="row">
+                            <div>
+                                <table id="cubNacT" data-search="true" data-pagination="true"
+                                    data-page-list="[10, 25, 50, 100, all]" data-show-export="true"
+                                    data-toolbar="#toolbar" data-id-field="_id" data-show-export="true"
+                                    data-click-to-select="true">
+
+                                    <thead>
+                                        <tr class="header-color">
+                                            <th data-field="sireRegNum" data-sortable="true">Registro</th>
+                                            <th data-field="sireName" data-sortable="true"
+                                                data-formatter="horseFormatter">Nombre</th>
+                                            <th data-field="ultimaMonta" data-sortable="true"
+                                                data-formatter="dateFormatter">Fecha
+                                                Cubrición</th>
+                                            <th data-field="tipoCubricion" data-sortable="true">Tipo de Cubrición</th>
+                                            <th data-field="resCubricion" data-sortable="true">Resultado</th>
+                                            <th data-field="deliveryDate" data-sortable="true"
+                                                data-formatter="dateFormatter">Fecha
+                                                Estimada</th>
+                                        </tr>
+                                    </thead>
+
+                                </table>
+                                <br>
+                                <div class="row">
+                                    <input type="hidden" id="nacId" name="nacId" value="0">
+                                    <div class="col-lg-4 form-group floating-label-form-group controls mt-3 mb-3">
+                                        <label>Nombre:</label><i class="fa fa-asterisk rojo_aster"></i>
+                                        <input type="text" class="form-control" placeholder="Nombre" id="horseNameNac"
+                                            name="horseNameNac" required>
+                                    </div>
+                                    <div class="col-lg-5 form-group floating-label-form-group controls">
+                                        <label>Sexo:</label>
+                                        <select class="form-select" aria-label="Sexo" id="sexNac" name="sexNac"
+                                            required>
+                                            <option value="none" selected>Seleccionar...</option>
+                                            <option value="Hembra">HEMBRA</option>
+                                            <option value="Macho">MACHO</option>
+                                        </select>
+
+                                    </div>
+
+
+                                    <div class="col-lg-4 mt-3">
+
+                                        <label>Fecha de Nacimiento:</label>
+                                        <input type="date" class="form-control" id="foalingDateNac"
+                                            name="foalingDateNac">
+                                        <br><br><br>
+
+                                    </div>
+                                    <div class="col-lg-5 form-group floating-label-form-group controls">
+                                        <label>Tipo de Registro:</label>
+                                        <select class="form-select" aria-label="Sexo" id="tipoRegistroNac"
+                                            name="tipoRegistroNac" required>
+                                            <option value="none" selected>Seleccionar...</option>
+                                            <option value="PSL">PSL</option>
+                                            <option value="SOLO MEXICO">SOLO MEXICO</option>
+                                            <option value="RAZA SELECTA">RAZA SELECTA</option>
+                                        </select>
+
+                                    </div>
+
+                                    <div class="col-lg-4 form-group floating-label-form-group controls mt-3 mb-3">
+                                        <label>Tipo de Cubricion:</label><i class="fa fa-asterisk rojo_aster"></i>
+                                        <input type="text" class="form-control" placeholder="Tipo de Cubricion"
+                                            id="tipoCubricionNac" name="tipoCubricionNac required>
+                                    </div>
+
+
+
+            <div class=" modal-footer">
+                                        <button type="button" class="btn btn-primary text-center" id="sendAgregar"
+                                            onclick="nacAgregar('<%= id %>')">Agregar</button>
+                                        <button type="button" class="btn btn-primary text-center" id="sendModificar"
+                                            onclick="nacModificar('<%= id %>')">Modificar</button>
+                                        <button type="button" class="btn btn-primary text-center" id="sendEliminar"
+                                            onclick="nacEliminar('<%= id %>')">Eliminar</button>
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="nuevaReg" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog"
+    aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalLabel">Nacimientos</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card card-body">
+                    <form id="newOwner" class="was-validated" action="javascript:owRegistrar()" method="POST"
+                        enctype="multipart/form-data">
+                        <div class="row">
+                            <div>
+                                <br>
+                                <div class="row">
+                                    <input type="hidden" id="nacId" name="nacId" value="0">
+                                    <div class="col-lg-4 form-group floating-label-form-group controls mt-3 mb-3">
+                                        <label>Nombre:</label><i class="fa fa-asterisk rojo_aster"></i>
+                                        <input type="text" class="form-control" placeholder="Nombre" id="horseNameNac"
+                                            name="horseNameNac" required>
+                                    </div>
+                                    <div class="col-lg-5 form-group floating-label-form-group controls">
+                                        <label>Sexo:</label>
+                                        <select class="form-select" aria-label="Sexo" id="sexNac" name="sexNac"
+                                            required>
+                                            <option value="none" selected>Seleccionar...</option>
+                                            <option value="Hembra">HEMBRA</option>
+                                            <option value="Macho">MACHO</option>
+                                        </select>
+
+                                    </div>
+
+
+                                    <div class="col-lg-4 mt-3">
+
+                                        <label>Fecha de Nacimiento:</label>
+                                        <input type="date" class="form-control" id="foalingDateNac"
+                                            name="foalingDateNac">
+                                        <br><br><br>
+
+                                    </div>
+                                    <div class="col-lg-5 form-group floating-label-form-group controls">
+                                        <label>Tipo de Registro:</label>
+                                        <select class="form-select" aria-label="Sexo" id="tipoRegistroNac"
+                                            name="tipoRegistroNac" required>
+                                            <option value="none" selected>Seleccionar...</option>
+                                            <option value="PSL">PSL</option>
+                                            <option value="SOLO MEXICO">SOLO MEXICO</option>
+                                            <option value="RAZA SELECTA">RAZA SELECTA</option>
+                                        </select>
+
+                                    </div>
+
+                                    <div class="col-lg-4 form-group floating-label-form-group controls mt-3 mb-3">
+                                        <label>Tipo de Cubricion:</label><i class="fa fa-asterisk rojo_aster"></i>
+                                        <input type="text" class="form-control" placeholder="Tipo de Cubricion"
+                                            id="tipoCubricionNac" name="tipoCubricionNac" required>
+                                    </div>
+
+
+
+
+
+                                    <div class=" modal-footer">
+                                        <button type="button" class="btn btn-primary text-center" id="sendAgregar"
+                                            onclick="nacAgregar('<%= id %>')">Agregar</button>
+                                        <button type="button" class="btn btn-primary text-center" id="sendModificar"
+                                            onclick="nacModificar('<%= id %>')">Modificar</button>
+                                        <button type="button" class="btn btn-primary text-center" id="sendEliminar"
+                                            onclick="nacEliminar('<%= id %>')">Eliminar</button>
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+
+
+</script>

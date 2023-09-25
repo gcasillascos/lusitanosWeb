@@ -1,0 +1,92 @@
+<div class="row">
+    <div id="ownersf" class="col-lg-12 col-md-12 mx-auto">
+
+        <div id='msg' class="alert alert-dismissible fade show " style="display:none;">
+            <strong>Note!</strong> This is a simple example of dismissible alert.
+        </div>
+
+        <form id="newOwner" class="was-validated" action="javascript:owRegistrar()" method="POST"
+            enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-lg-11">
+                    <br>
+                    <div  class="row">
+
+                        <div class="col-lg-4 mt-3">
+
+                            <label>Fecha:</label>
+                            <input type="date" class="form-control" id="ultimaMonta" name="ultimaMonta">
+                            <br><br><br>
+
+                        </div>
+                        <div class="col-lg-4 form-group floating-label-form-group controls mt-3 mb-3">
+
+
+                        </div>
+
+
+
+                    </div>
+
+                    <hr>
+                    <div  class="row">
+
+
+                            <div class="col-lg-6 form-group floating-label-form-group controls mt-3 mb-3">
+                                <label> Estado del caballo</label>
+                                <select class="form-select" aria-label="Default select example">
+    
+                                    <option selected>Seleccione...</option>
+                                    <option >Muerte</option>
+                                    <option >Venta</option>
+                                    <option >Robo</option>
+
+    
+                                </select>
+    
+                            </div>
+
+                        <div class="col-lg-5 mt-3">
+                            <label>Comentarios</label>
+                            <textarea class="form-control" id="notes" name="notes"
+                                            rows="5"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-1" style="padding-right:0px">
+                    <% if (id==='0' ) { %>
+
+
+                        <div class="pull-right mb-3">
+                            <button type="submit" class="btn btn-primary text-center" id="sendRegistrar"
+                                style="width:95px">Registrar</button>
+                        </div>
+
+                        <% } else { %>
+
+                            <div class="pull-right  mb-3">
+                                <button type="button" class="btn btn-primary text-center" id="agregarBtn"
+                                    style="width:95px">Agregar</button>
+
+                            </div>
+                            <div class="pull-right mb-3">
+
+                                <button type="button" class="btn btn-primary text-center" id="sendModificar"
+                                    style="width:95px" onclick="owModificar('<%= id %>')">Modificar</button>
+                            </div>
+
+                            <div class="pull-right mb-3">
+
+                                <button type="button" class="btn btn-primary text-center" id="sendEliminar"
+                                    style="width:95px" onclick="owEliminar('<%= id %>')">Eliminar</button>
+                            </div>
+
+
+                            <% } %>
+                </div>
+                <br>
+                <br>
+            </div>
+        </form>
+    </div>
+</div>

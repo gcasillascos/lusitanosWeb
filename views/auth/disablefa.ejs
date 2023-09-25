@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+
+<%- include('../layouts/header'); -%>
+  <%- include('../layouts/scripts'); -%>
+
+
+    <html>
+
+    <body class="text-center">
+      <%- include('../layouts/menu'); -%>
+
+        <br>
+        <img class="mb-4" src="/assets/img/icono.png" alt="" width="101" height="80" />
+        <h1 class="h3 mb-3 fw-normal">Deshabilitar MFA</h1>
+        <br />
+        <% if(errors !=null ){%>
+          <ul class="list-group">
+            <li class="list-group-item list-group-item-danger">
+              <%= errors %>
+            </li>
+          </ul>
+          <% } %>
+            <% if(success !=null ){%>
+              <ul class="list-group">
+                <li class="list-group-item list-group-item-success">
+                  <%= success %>
+                </li>
+              </ul>
+              <% } %>
+
+
+                <br>
+
+                <p class="text-center">
+                  <strong>Deshabilitar Multi Factor Autenticator:</strong> <br>
+                  <br>
+
+
+                  Al deshabilitar MFA, usted reduce la seguridad de la aplicación.<br>
+
+
+                </p>
+
+
+                <main class="form-signin text-center">
+                  <form action="/auth/disablefax" method="POST" enctype="multipart/form-data">
+
+                    <div class="form-floating">
+                      <label for="floatingPassword">Password</label>
+                      <input type="password" class="form-control" id="password" name="password"
+                        placeholder="Password" />
+                    </div>
+
+                    <div class="form-floating">
+                      <label for="floatingPassword">MFA Code Validator</label>
+                      <input type="text" class="form-control" id="totp" name="totp" placeholder="MFA Code Validator" />
+                    </div>
+                    <br>
+                    <button class="w-100 btn btn-lg btn-primary" type="submit">
+                      Deshabilitar MFA
+                    </button>
+                  </form>
+
+                </main>
+
+
+
+
+                <%- include('../layouts/footer'); -%>
+    </body>
+
+    </html>

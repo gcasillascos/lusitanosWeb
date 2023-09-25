@@ -1,0 +1,202 @@
+<div class="container">
+    <div class="row">
+        <div id="ownersf" class="col-lg-12 col-md-12 mx-auto">
+
+            <div id='msg' class="alert alert-dismissible fade show " style="display:none;">
+                <strong>Note!</strong> This is a simple example of dismissible alert.
+            </div>
+
+            <form id="newOwner" class="was-validated" action="javascript:owRegistrar()" method="POST"
+                enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-lg-11">
+
+                        <div class="row ">
+
+                            <div class="col-lg-3 form-group floating-label-form-group controls">
+                                <label>Id:</label><i class="fa fa-asterisk rojo_aster"></i>
+                                <input type="date" class="form-control" id="fecha">
+                            </div>
+                            <div class="col-lg-6 form-group floating-label-form-group controls">
+                                <label>Ganadería:</label><i class="fa fa-asterisk rojo_aster"></i>
+                                <input type="textarea" class="form-control" placeholder="Ganadería" id="farm"
+                                    name="farm" required value="<%= data.farm %>">
+                            </div>
+
+
+                        </div>
+                        <br>
+                        <div class="row" style="background-color: darkgrey;">
+                            <div class="col-lg-4 form-group floating-label-form-group controls mt-3 mb-3">
+                                <label>Yegua:</label>
+                                <select class="form-select" aria-label="Default select example">
+                                    <option selected>Seleccione...</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                </select>
+                                <br>
+                                <div>
+                                    <div class="form-check form-group">
+                                        <input class="form-check-input" type="radio" name="exampleRadios"
+                                            id="montaNatural" value="option1" checked>
+                                        <label class="form-check-label" for="montaNatural">
+                                            Monta Natural
+                                        </label>
+                                    </div>
+                                    <div class="form-check form-group">
+                                        <input class="form-check-input" type="radio" name="exampleRadios"
+                                            id="inseminacion" value="option2">
+                                        <label class="form-check-label" for="inseminacion">
+                                            Inseminación
+                                        </label>
+                                    </div>
+                                    <div class="form-check form-group">
+                                        <input class="form-check-input" type="radio" name="exampleRadios"
+                                            id="transEmbrionaria" value="option3">
+                                        <label class="form-check-label" for="transEmbrionaria">
+                                            Transferencia Embrionaria
+                                        </label>
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+
+
+
+                            <div class="col-lg-4 form-group floating-label-form-group controls mt-3 mb-3">
+                                <label>Macho:</label>
+                                <select class="form-select" aria-label="Default select example">
+                                    <option selected>Seleccione...</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                </select>
+
+
+
+                            </div>
+                            <div class="col-lg-4 mt-3">
+
+                                <label>Ultima Monta:</label>
+                                <input type="date" class="form-control" id="ultimaMonta" name="ultimaMonta">
+                                <br><br><br>
+
+                                <div class= "pull-right">
+                                    <button type="button" class="btn btn-primary text-center" id="agregarCub"
+                                        style="width:95px">Agregar</button>
+
+                                </div>
+
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                    <div class="col-lg-1" style="padding-right:0px">
+                        <% if (id==='0' ) { %>
+
+
+                            <div class="float-right mb-3">
+                                <button type="submit" class="btn btn-primary text-center" id="sendRegistrar"
+                                    style="width:95px">Registrar</button>
+                            </div>
+
+                            <% } else { %>
+
+
+                                <div class=" float-right mb-3">
+
+                                    <button type="button" class="btn btn-primary text-center" id="sendModificar"
+                                        style="width:95px" onclick="owModificar('<%= id %>')">Modificar</button>
+                                </div>
+
+                                <div class=" float-right">
+
+                                    <button type="button" class="btn btn-primary text-center" id="sendEliminar"
+                                        style="width:95px" onclick="owEliminar('<%= id %>')">Eliminar</button>
+                                </div>
+
+
+                                <% } %>
+                    </div>
+                    <br>
+                    <br>
+
+            </form>
+
+            <div class="page-heading text-center">
+                &nbsp;
+                <h1>
+                    Bajas</h1>
+                &nbsp;&nbsp;
+            </div>
+
+            <div class="table-responsive">
+
+                <table id="tableCub" data-search="true" data-pagination="true" data-page-list="[10, 25, 50, 100, all]"
+                    data-show-export="true" data-toolbar="#toolbar" data-id-field="_id" data-show-export="true"
+                    data-click-to-select="true"
+                    data-checkbox-header="false">
+                    <thead>
+                        <tr>
+                            <th data-field="regNum" data-sortable=true>Yegua
+                            </th>
+                            <th data-field="regRef" data-sortable=true>Macho</th>
+                            <th data-field="horseName" data-sortable=true>Ultima Monta</th>
+                            <th data-field="sex" data-checkbox-enabled=false data-sortable=true>Monta Natural</th>
+                            <th data-field="sire" data-sortable=true>Inseminación</th>
+                            <th data-field="dam"  data-sortable=true>Trans. Embrionaria</th>
+                        </tr>
+
+
+                </table>
+                <script>
+
+                    let datoCub = <%- data %>;
+                    console.log('datos', datoCub)
+                    var $table = $('#tableCub')
+
+                    function buildTableCub($el)
+                    {
+
+                        $el.bootstrapTable({
+                            onClickRow: function (row, $element)
+                            {
+                                llamaPedigree(row.regNum);
+                            },
+                            data: datoCub,
+
+                        })
+                    }
+
+                    function sexFormatterCub(value)
+                    {
+                        return (value === 'H' ? 'HEMBRA' : 'MACHO');
+                    }
+
+                    function dateFormatterCub(value)
+                    {
+                        return value.slice(0, 10)
+                    }
+
+                    $(function ()
+                    {
+                        alert('Entro')
+                        buildTableCub($table)
+                    })
+                </script>
+
+            </div>
+
+
+
+        </div>
+    </div>
+
+
+</div>

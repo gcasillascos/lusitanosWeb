@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('layouts/header'); -%>
+
+<body>
+
+<%- include('layouts/menu'); -%>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-10 col-md-10 mx-auto">
+
+            <div class="page-heading text-center">
+                &nbsp;
+                <h1><i class="fa fa-user rojo"  ></i>
+                    Registro de Usuarios</h1>
+                &nbsp;&nbsp;
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Main Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 mx-auto">
+            <% if(errors != null ){%>
+                <ul class="list-group">
+                  <li class="list-group-item list-group-item-danger"><%= errors %></li>
+                </ul>
+                <% } %> 
+                <% if(success != null ){%>
+                <ul class="list-group">
+                  <li class="list-group-item list-group-item-success">
+                    <%= success %>
+                  </li>
+                </ul>
+                <% } %>
+            <form action="/users/register" method="POST" enctype="multipart/form-data">
+                <div class="form-row">
+
+                  
+                    <div class="col-lg-5 form-group floating-label-form-group controls">
+                        <label>Nombre del Usuario:</label><i class="fa fa-asterisk rojo_aster" ></i>
+                        <input type="text" class="form-control" placeholder="Usuario" id="username" name="username"   required="" value="<%= username %>">
+                    </div>
+                    <div class="col-lg-5 form-group floating-label-form-group controls">
+                        <label>Ganadería:</label><i class="fa fa-asterisk rojo_aster" ></i>
+                        <input type="text" class="form-control" placeholder="Usuario" id="ganaderia" name="ganaderia"   required="" >
+                    </div>
+                </div> 
+            
+                <div class="form-row">
+
+                    
+                        <div class="col-lg-5 form-group floating-label-form-group controls">
+                            <label>E mail:</label><i class="fa fa-asterisk rojo_aster" ></i>
+                            <input type="text" class="form-control" placeholder="Email" id="email" name="email"  onblur="validateEmail()">
+                        </div>
+
+                        <div class="col-lg-5 form-group floating-label-form-group controls">
+                            <label>Rol:</label><i class="fa fa-asterisk rojo_aster" ></i>
+                            <select name="role" id="role" class="form-control" >
+                                <option value="user">User</option>
+                                <option value="publisher">Publisher</option>
+                            </select>
+
+                        </div>
+                    
+
+
+                </div>
+                
+                <div class="form-row">
+
+                    <div class="col-lg-5 form-group floating-label-form-group controls">
+                        <label>Contraseña:</label><i class="fa fa-asterisk rojo_aster" ></i>
+                        <input type="password" class="form-control" placeholder="Contraseña" id="pwd" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"  title="Debe contener al menos un número, una letra mayúscula, minúscula, y al menos 8 o más caracteres"  required="">
+                    </div>
+                    <div class="col-lg-5 form-group floating-label-form-group controls">
+                        <label>Contraseña (confirmación):</label><i class="fa fa-asterisk rojo_aster" ></i>
+                        <input type="password" class="form-control" placeholder="Contraseña" id="pwd2" name="password2" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"  title="Debe contener al menos un número, una letra mayúscula, minúscula, y al menos 8 o más caracteres"  required="" onblur="validate()">
+                    </div>
+
+                </div>
+                <div class="form-row float-right mr-5">
+
+                    <button type="submit" class="btn btn-primary text-center" id="sendMessageButton">Registrar</button>  
+                </div>
+
+        </div>
+
+
+        </form>
+    </div>
+</div>
+
+
+<hr>
+
+<%- include('layouts/footer'); -%>
+
+<%- include('layouts/scripts'); -%>
+
+</body>
+
+</html>

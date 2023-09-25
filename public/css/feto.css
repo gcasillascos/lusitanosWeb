@@ -1,0 +1,162 @@
+/* 
+    Created on : 7 abr 2020, 12:35:47
+    Author     : gcasillascos
+*/
+
+#imgLogo {
+  position: relative;
+  top: 80%;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.letrero {
+  font-size: 1.3rem;
+  font-weight: 500;
+}
+
+.datos {
+  /*  width: 800px;*/
+  height: auto;
+  width: auto;
+  background-color: #eee;
+  overflow-y: scroll;
+}
+
+.datos1 {
+  width: 800px;
+  height: 150px;
+  background-color: #eee;
+  overflow-y: scroll;
+}
+
+
+.carousel-control-next-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='rgba(138,21,56,1.00)' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E");
+}
+
+.carousel-control-prev-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='rgba(138,21,56,1.00)' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E");
+}
+
+.navbar-custom {
+  background-color: #8B0000;
+  color: white !important;
+}
+
+.navbar-text {
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.nav-link  {
+  color: #ffffff;
+}
+
+ .dropdown-toggle {
+  color: #ffffff;
+}
+
+.nav-item  {
+  margin: auto;
+}
+
+#navigation * {
+  color: #ffffff;
+}
+
+#recuperaPwd {
+  font-size: 11px;
+  align-content: center;
+  justify-content: center;
+}
+
+.rojo {
+  color: #8B0000;
+}
+
+.rojo_aster {
+  color: #8B0000;
+  font-size: 9px;
+}
+
+.icono_menu {
+  color: #ffffff;
+  font-size: 40px;
+}
+
+
+/* 
+/* @media (min-width: 576px) {
+  .carousel-item img {
+    width: auto !important;
+    /* height: 600px;
+    max-height: 600px; 
+        object-fit: contain;
+  }
+} */ 
+
+img {
+  object-fit: cover;
+  overflow: hidden;
+      }
+
+
+input::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #8B0000;
+  opacity: 1; /* Firefox */
+}
+
+/* Style the tab */
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+}
+
+.header-color {
+  background-color: #8B0000;
+  color: #ffffff;
+}
+

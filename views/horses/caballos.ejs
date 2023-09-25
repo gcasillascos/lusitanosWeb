@@ -1,0 +1,1142 @@
+<!-- <h3>Caballo</h3> -->
+
+<div class="container">
+    <div class="row">
+        <div id="ownersf" class="col-lg-12 col-md-12 mx-auto">
+
+            <form id="newOwner" class="was-validated" action="javascript:owRegistrar()" method="POST"
+                enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-lg-11">
+
+
+                        <br>
+                        <div class="row">
+                            <div class="col-sm">
+                                <!-- eliminado el 221004
+                                    <div class="col-lg-7 form-group floating-label-form-group controls">
+                                    <label>Status</label>
+                                    <label><strong>
+                                            <h3>
+                                                <%= //data.estatus %>
+                                            </h3>
+                                        </strong></label>
+
+                                </div> -->
+                                <div class="col-lg-4 form-group floating-label-form-group controls">
+                                    <label>Registro Mexicano:</label>
+                                    <h3>
+                                        <%= data._id %>
+                                    </h3>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group floating-label-form-group controls">
+                                            <label>Nombre:</label>
+                                            <input type="text" class="form-control" placeholder="Nombre" id="horseName"
+                                                name="horseName" style="text-transform:capitalize"
+                                                value="<%= data.horseName  %>">
+                                        </div>
+
+                                        <div class=" form-group floating-label-form-group controls">
+                                            <label>Fec. Nacimiento:</label><i class="fa fa-asterisk rojo_aster"></i>
+                                            <input type="date" class="form-control" placeholder="yyyy-mm-dd"
+                                                id="foalingDate" name="foalingDate" required
+                                                value="<%= (data.foalingDate === null) ? '' : data.foalingDate.slice(0, 10) %>">
+                                        </div>
+
+                                        <div class=" form-group floating-label-form-group controls">
+                                            <label>Tipo de Cubrición:</label>
+                                            <select class="form-select" aria-label="Tipo de Cubrición"
+                                                id="tipoCubricion" name="tipoCubricion" required>
+                                                <option value="none" selected>Seleccionar...</option>
+                                                <option value="Monta Natural">MONTA NATURAL</option>
+                                                <option value="Inseminacion">INSEMINACIÓN</option>
+                                                <option value="Trans. Embrionaria">TRANS. EMBRIONARIA</option>
+                                            </select>
+                                            <script defer>
+                                                jQuery('#tipoCubricion').val("<%= data.tipoCubricion %>")
+                                            </script>
+                                        </div>
+
+                                        <% if(role==='admin' ) {%>
+
+                                            <div class=" form-group floating-label-form-group controls">
+                                                <label>Tipo de Registro:</label>
+                                                <select class="form-select" aria-label="Tipo de Registro" id="tipoReg"
+                                                    name="tipoReg" required>
+                                                    <option value="none" selected>Seleccionar...</option>
+                                                    <option value="PSL">PSL</option>
+                                                    <option value="SOLO MEXICO">SOLO MEXICO</option>
+                                                    <option value="CRUZADO">CRUZADO</option>
+                                                </select>
+                                                <script defer>
+                                                    jQuery('#tipoReg').val("<%= data.tipoReg %>")
+                                                </script>
+                                            </div>
+
+                                    </div>
+                                    <div class="col">
+                                        <h1 class="text-center">Hierro</h1>
+                                        <div class="d-flex justify-content-center">
+
+                                            <img src="<%=`https://lusitanos.s3.us-east-1.amazonaws.com/hierros/${data.breederId}.bmp`%>"
+                                                alt="" width="200" height="auto" onerror=src="/assets/img/icono.png">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-4 form-group floating-label-form-group controls">
+                                        <label>NIN:</label>
+                                        <input type="text" class="form-control" placeholder="NIN:" id="pslNum"
+                                            name="pslNum" required value="<%= data.pslNum %>">
+                                    </div>
+                                    <div class="col-lg-4 form-group floating-label-form-group controls">
+                                        <label>LGN:</label>
+                                        <input type="text" class="form-control" placeholder="LGN" id="pslSN"
+                                            name="pslSN" required value="<%= data.pslSN %>">
+                                    </div>
+                                    <div class="col-lg-4 form-group floating-label-form-group controls">
+                                        <label>LGA:</label>
+                                        <input type="text" class="form-control" placeholder="LGA" id="otherId"
+                                            name="otherId" required value="<%= data.otherId %>">
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-4 form-group floating-label-form-group controls">
+                                        <label>Valoración:</label>
+                                        <h6>
+                                            <%= data.valoracion[0]?.calificacion.toFixed(2)%>
+                                        </h6>
+
+                                    </div>
+                                    <div class="col-lg-4 form-group floating-label-form-group controls">
+                                        <button type="button" class="btn btn-primary text-center" id="nuevaValu"
+                                            style="width:160px;margin-top: 25px;" data-bs-toggle="modal"
+                                            data-bs-target="#nuevaVal" aria-expanded="false" aria-controls="nuevaVal"
+                                            value="<%= sanId = '0' %>" onclick="sanitarioBtnNueva('<%= id %>')">Detalle
+                                        </button>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-4 form-group floating-label-form-group controls">
+                                            <label>Alzada:</label>
+                                            <h6>
+                                                <%= data.valoracion[0]?.alzada.toFixed(2)%>
+                                            </h6>
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-4 form-group floating-label-form-group controls">
+                                            <label>No. Criador</label>
+                                            <input type="text" class="form-control" placeholder="No. Criador"
+                                                id="noCriador" name="noCriador" required value="<%= data.noCriador %>">
+
+                                        </div>
+                                        <div class="col-lg-4 form-group floating-label-form-group controls">
+                                            <label>No. Propietario</label>
+                                            <input type="text" class="form-control" placeholder="No. Criador"
+                                                id="noCriador" name="noCriador" required value="<%= data.noCriador %>">
+
+                                        </div>
+
+                                    </div>
+
+
+
+
+                                </div>
+                                <% } %>
+                                    <hr>
+
+                                    <div class="row">
+                                        <div class="col-lg-7 form-group floating-label-form-group controls">
+                                            <label>Sexo:</label>
+                                            <select class="form-select" aria-label="Sexo" id="sex" name="sex" required>
+                                                <option value="none" selected>Seleccionar...</option>
+                                                <option value="Hembra">HEMBRA</option>
+                                                <option value="Macho">MACHO</option>
+                                            </select>
+                                            <script defer>
+                                                jQuery('#sex').val("<%= data.sex %>")
+                                            </script>
+                                        </div>
+
+
+                                        <div class="col-lg-7 form-group floating-label-form-group controls">
+                                            <label>Capa:</label>
+                                            <select class="form-select" aria-label="Capa" id="color" name="color"
+                                                required>
+                                                <option value="none" selected>Seleccionar...</option>
+                                                <option value="Alazana">ALAZANA</option>
+                                                <option value="Baya">BAYA</option>
+                                                <option value="Bayo">BAYO</option>
+                                                <option value="Castaña">CASTAÑA</option>
+                                                <option value="Isabelina">ISABELINA</option>
+                                                <option value="Palomina">PALOMINA</option>
+                                                <option value="Prieta">PRIETA</option>
+                                                <option value="Tordilla">TORDILLA</option>
+
+                                            </select>
+                                            <script defer>
+                                                jQuery('#color').val("<%= data.color %>")
+                                            </script>
+                                        </div>
+
+                                    </div>
+
+                            </div>
+                            <div class="col-sm">
+
+                                <div class="row">
+                                    <div class="col">
+
+                                        <div style="background-color: #d2e8f1" class="pb-3 rounded-3">
+                                            <h1 class="text-center">Padre</h1>
+                                            <div class="col-lg-10 form-group floating-label-form-group controls"
+                                                style="margin-left: 25px;">
+                                                <div class="d-flex justify-content-center">
+
+                                                    <img src="<%=`https://lusitanos.s3.us-east-1.amazonaws.com/hierros/${ data.pedigree[0]?.abuelo[0]?.breeder}.bmp`%>"
+                                                        alt="" width="60" height="auto"
+                                                        onerror=src="/assets/img/icono.png">
+                                                </div>
+                                                <div>
+                                                    <label>Nombre:</label><i class="fa fa-asterisk rojo_aster"></i>
+                                                    <input type="text" class="form-control" placeholder="nombre"
+                                                        id="sire" name="sire" required
+                                                        value="<%= data.pedigree[0]?.abuelo[0]?.horseName %>">
+
+                                                </div>
+
+                                                <div>
+                                                    <label>Referencia:</label><i class="fa fa-asterisk rojo_aster "></i>
+                                                    <input type="text" class="form-control" placeholder="referencia"
+                                                        id="sireRefNum" name="sireRefNum" required
+                                                        value="<%= data.pedigree[0]?.abuelo[0]?.regRef %>">
+                                                </div>
+                                                <div>
+                                                    <label>Reg No:</label>
+                                                    <input type="text" class="form-control" placeholder="Reg No"
+                                                        id="xsireRegNum" name="xsireRegNum" required
+                                                        value="<%= data.pedigree[0]?.abuelo[0]?.regNum %>">
+
+                                                </div>
+                                                <div>
+                                                    <label>Criador:</label></i>
+                                                    <input type="text" class="form-control" placeholder="Criador"
+                                                        id="sireBreeder" name="sireBreeder" required
+                                                        value="<%= data.pedigree[0]?.abuelo[0]?.abueloDat[0].farm %>">
+                                                </div>
+
+                                                <div>
+                                                    <label>ADN No:</label>
+                                                    <label id="sireBloodTypeCaseNo">
+                                                        <%= data.pedigree[0]?.abuelo[0]?.bloodTypeCaseNo %>
+                                                    </label>
+
+                                                </div>
+                                                <div>
+                                                    <label>Microchip:</label>
+                                                    <label id="sireMicrochip">
+                                                        <%= data.pedigree[0]?.abuelo[0]?.microchip %>
+                                                    </label>
+
+                                                </div>
+                                                <div class="d-flex justify-content-center  form-group">
+
+                                                    <button type="button" class="btn btn-primary text-center"
+                                                        id="sendModificar" style="width:160px;margin-top: 25px;"
+                                                        onclick="owsdfcar('<%= id %>')">Modificar</button>
+                                                </div>
+                                            </div>
+
+
+
+
+                                        </div>
+
+                                    </div>
+                                    <div class="col">
+                                        <div style="background-color: #f7e2f7" class="pb-3 rounded-3">
+                                            <h1 class="text-center">Madre</h1>
+                                            <div class="col-lg-10 form-group floating-label-form-group controls"
+                                                style="margin-left: 25px;">
+                                                <div class="d-flex justify-content-center">
+                                                    <%= console.log(`https://lusitanos.s3.us-east-1.amazonaws.com/hierros/${
+                                                        data.pedigree[0]?.abuela[0]?.breeder}.bmp`) %>
+                                                        <img src="<%=`https://lusitanos.s3.us-east-1.amazonaws.com/hierros/${ data.pedigree[0]?.abuela[0]?.breeder}.bmp`%>"
+                                                            alt="" width="60" height="auto"
+                                                            onerror=src="/assets/img/icono.png">
+                                                </div>
+                                                <div>
+                                                    <label>Nombre:</label><i class="fa fa-asterisk rojo_aster"></i>
+                                                    <input type="text" class="form-control" placeholder="nombre"
+                                                        id="dam" name="dam" required
+                                                        value="<%= data.pedigree[0]?.abuela[0]?.horseName %>">
+
+                                                </div>
+
+                                                <div>
+                                                    <label>Referencia:</label><i class="fa fa-asterisk rojo_aster "></i>
+                                                    <input type="text" class="form-control" placeholder="referencia"
+                                                        id="sireRefNum" name="sireRefNum" required
+                                                        value="<%= data.pedigree[0]?.abuela[0]?.regRef %>">
+                                                </div>
+                                                <div>
+                                                    <label>Reg No:</label><i class="fa fa-asterisk rojo_aster"></i>
+                                                    <input type="text" class="form-control" placeholder="Reg No"
+                                                        id="sireRegNum3" name="sireRegNum3" required
+                                                        value="<%= data.pedigree[0]?.abuela[0]?.regNum %>">
+
+                                                </div>
+                                                <div>
+                                                    <label>Criador:</label><i class="fa fa-asterisk rojo_aster"></i>
+                                                    <input type="text" class="form-control" placeholder="Criador"
+                                                        id="sireBreeder" name="sireBreeder" required
+                                                        value="<%= data.pedigree[0]?.abuela[0]?.abuelaDat[0].farm%>">
+                                                </div>
+
+                                                <div>
+                                                    <label>ADN No:</label><i class="fa fa-asterisk rojo_aster"></i>
+                                                    <label>
+                                                        <%= data.pedigree[0]?.abuela[0]?.bloodTypeCaseNo %>
+                                                    </label>
+
+                                                </div>
+
+                                                <div>
+                                                    <label>Microchip:</label><i class="fa fa-asterisk rojo_aster"></i>
+                                                    <label>
+                                                        <%= data.pedigree[0]?.abuela[0]?.microchip %>
+                                                    </label>
+
+                                                </div>
+                                                <div class="d-flex justify-content-center form-group">
+
+                                                    <button type="button" class="btn btn-primary text-center"
+                                                        id="sendModificar" style="width:160px;margin-top: 25px;"
+                                                        onclick="owsdfcar('<%= id %>')">Modificar</button>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <br>
+
+                                <div style="background-color: #d6dcc0" class="pb-3 rounded-3">
+                                    <h1 class="text-center">Cambio de Propietario</h1>
+                                    <div class="col-lg-10 form-group floating-label-form-group controls mx-auto"
+                                        style="margin-left: 25px;">
+
+                                        <div class="row">
+                                            <div class=" col-lg-6">
+
+                                                <div class="d-flex justify-content-center">
+
+                                                    <img src="<%=`https://lusitanos.s3.us-east-1.amazonaws.com/hierros/${data.breederId}.bmp`%>"
+                                                        alt="" width="60" height="auto"
+                                                        onerror=src="/assets/img/icono.png">
+                                                </div>
+                                                <label>Criador:</label><i class="fa fa-asterisk rojo_aster "></i>
+                                                <input type="text" class="form-control" placeholder="referencia"
+                                                    id="sireRefNum" name="sireRefNum" required
+                                                    value="<%= data.breederId %>">
+                                                <% if(role==='admin' ) {%>
+                                                    <div class="row">
+                                                        <div class=" form-group floating-label-form-group controls">
+
+                                                            <select class="form-select"
+                                                                aria-label="Default select example" id="breederId"
+                                                                name="breederId">
+
+                                                                <option selected>Seleccione...</option>
+                                                                <% for ( let i=0;i <=owners.length-1;i++){ %>
+
+                                                                    <option value="<%=owners[i]._id %>">
+                                                                        <%= ( (owners[i].farm===null ?
+                                                                            (owners[i].firstName===null ? '' :
+                                                                            owners[i].firstName ) + ' ' +
+                                                                            (owners[i].lastName===null ? '' :
+                                                                            owners[i].lastName) : owners[i].farm
+                                                                            )).toUpperCase() %>
+
+                                                                    </option>
+                                                                    <%}%>
+
+
+                                                            </select>
+                                                            <script defer>
+                                                                jQuery('#breederId').val("<%= data.breederId %>")
+                                                            </script>
+                                                        </div>
+
+
+
+                                                    </div>
+                                                    <%}%>
+
+
+                                                        <h6>
+                                                            <%= `${data.breeder[0]?.firstName}
+                                                                ${data.breeder[0]?.lastName}`.trim() %>
+                                                        </h6>
+                                                        <h6>
+                                                            <%= data.breeder[0]?.farm %>
+                                                        </h6>
+                                                        <h6>
+                                                            <%= `${data.breeder[0]?.city},
+                                                                ${data.breeder[0]?.state}`.trim() %>
+                                                        </h6>
+                                                        <div class="d-flex justify-content-center form-group">
+                                                            <button type="button" class="btn btn-primary text-center"
+                                                                name="personas" id="personas"
+                                                                style="width:160px;margin-top: 25px;">Personas</button>
+                                                        </div>
+                                            </div>
+                                            <div class=" col-lg-6">
+
+                                                <div class="d-flex justify-content-center">
+
+                                                    <img src="<%=`https://lusitanos.s3.us-east-1.amazonaws.com/hierros/${data.ownerId}.bmp`%>"
+                                                        alt="" width="60" height="auto"
+                                                        onerror=src="/assets/img/icono.png">
+                                                </div>
+
+                                                <label>Propietario:</label><i class="fa fa-asterisk rojo_aster"></i>
+                                                <input type="text" class="form-control" placeholder="Reg No"
+                                                    id="sireRegNum1" name="sireRegNum1" required
+                                                    value="<%= data.ownerId %>">
+                                                <div class="form-group floating-label-form-group controls">
+
+                                                    <select class="form-select" aria-label="Default select example"
+                                                        id="ownerId" name="ownerId">
+
+                                                        <option selected>Seleccione...</option>
+                                                        <% for ( let i=0;i <=owners.length-1;i++){ %>
+
+                                                            <option value="<%=owners[i]._id %>">
+                                                                <%= ( (owners[i].farm===null ?
+                                                                    (owners[i].firstName===null ? '' :
+                                                                    owners[i].firstName ) + ' ' +
+                                                                    (owners[i].lastName===null ? '' :
+                                                                    owners[i].lastName) : owners[i].farm
+                                                                    )).toUpperCase() %>
+
+                                                            </option>
+                                                            <%}%>
+
+
+                                                    </select>
+                                                    <script defer>
+                                                        jQuery('#ownerId').val("<%= data.ownerId %>")
+                                                    </script>
+                                                </div>
+
+                                                <h6>
+                                                    <%= `${data.owner[0]?.firstName} ${data.owner[0]?.lastName}`.trim()
+                                                        %>
+                                                </h6>
+                                                <h6>
+                                                    <%= data.owner[0]?.farm %>
+                                                </h6>
+                                                <h6>
+                                                    <%= `${data.owner[0]?.city}, ${data.owner[0]?.state}`.trim() %>
+                                                </h6>
+
+                                                <div class="d-flex justify-content-center form-group">
+                                                    <button type="button" class="btn btn-primary text-center"
+                                                        id="sendModificar" style="width:160px;margin-top: 25px;"
+                                                        onclick="owsdfcar('<%= id %>')">Transferir</button>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+
+                        <% if(role==='admin' ) {%>
+                            <div class="row">
+                                <div class="col-lg-3 form-group floating-label-form-group controls">
+                                    <label>ADN No.</label>
+                                    <input type="text" class="form-control" placeholder="Sanguineo No." id="sanguineo"
+                                        name="sanguineo" value="<%= data.pedigree[0]?.bloodTypeCaseNo %>">
+                                </div>
+                                <div class="col-lg-3 form-group floating-label-form-group controls">
+                                    <label>Filiación Determinado:</label>
+                                    <select class="form-select" aria-label="Filiación Determinado" id="pv" name="pv"
+                                        required>
+                                        <option value="none" selected>Seleccionar...</option>
+                                        <option value="No">FILIACION NO COMPATIBLE</option>
+                                        <option value="Filiacion Compatible">FILIACION COMPATIBLE</option>
+                                    </select>
+                                    <script defer>
+                                        jQuery('#pv').val("<%= data.pv %>")
+                                    </script>
+                                </div>
+                                <div class="col-lg-3 form-group floating-label-form-group controls">
+                                    <label>Microchip No.:</label>
+                                    <input type="text" class="form-control" placeholder="Microchip" id="microchip"
+                                        name="microchip" value="<%= data.pedigree[0]?.microchip %>">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3 form-group floating-label-form-group controls">
+                                    <label>Nacido en Pais:</label>
+                                    <div class="form-group floating-label-form-group controls">
+                                        <label for="country">Pais:</label>
+                                        <input type="text" list="country" class="form-control" placeholder="Pais" id="imported" value="<%= (data.imported).toUpperCase() %>">
+                                        <datalist id= "country">
+                                            
+                                            <% for ( let i=0;i <=countries.length-1;i++){ %>
+                                                <option value="<%=(countries[i]).toUpperCase() %>">
+                                                <%}%>
+                                        </datalist>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 form-group floating-label-form-group controls">
+                                    <label>Ciudad:</label>
+                                    <input type="text" class="form-control" placeholder="area" id="area" name="area"
+                                        value="<%= data.area %>">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3 form-group floating-label-form-group controls">
+                                    <label>Fecha de Registro:</label>
+                                    <input type="date" class="form-control" placeholder="yyyy-mm-dd" id="issueDate"
+                                        name="issueDate" required
+                                        value="<%= (data.issueDate=== null) ? '' : data.issueDate.slice(0, 10) %>">
+
+                                </div>
+                                <div class="col-lg-3 form-group floating-label-form-group controls">
+                                    <label>Fecha de Reg Nuevo:</label>
+                                    <input type="date" class="form-control" placeholder="yyyy-mm-dd" id="reIssued"
+                                        name="reIssued"
+                                        value="<%= (data.reIssued=== null) ? '' : data.reIssued.slice(0, 10) %>">
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-lg-3 form-group floating-label-form-group controls">
+                                    <label for="castrated">Castrado:</label>
+                                    <input type="date" class="form-control" placeholder="yyyy-mm-dd" id="castrated"
+                                        name="castrated" required
+                                        value="<%= (data.castrated === null) ? '' : data.castrated.slice(0, 10) %>">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3 form-group floating-label-form-group controls">
+                                    <label>Fecha de Muerte:</label>
+                                    <input type="date" class="form-control" placeholder="yyyy-mm-dd" id="deceased"
+                                        name="deceased"
+                                        value="<%= (data.deceased=== null) ? '' : data.deceased.slice(0, 10) %>">
+                                </div>
+                                <div class=" form-group floating-label-form-group controls">
+                                    <label>Notas sobre la muerte:</label>
+                                    <textarea class="form-control" id="deceasedDesc" name="deceasedDesc"
+                                        rows="5"><%= data.deceasedDesc %></textarea>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+
+                                <div class="form-group">
+                                    <label for="notes">Notas:</label>
+                                    <textarea class="form-control" id="notes" name="notes"
+                                        rows="5"><%= data.notes %></textarea>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                Grado de Pureza
+                                <div class="col-lg-2 form-group floating-label-form-group controls">
+                                    <input type="text" class="form-control" placeholder="Val 1" id="val1" name="val1"
+                                        value="<%= data.val1 %>">
+                                    <input type="text" class="form-control" placeholder="Val 5" id="val5" name="val5"
+                                        value="<%= data.val5 %>">
+                                </div>
+                                <div class="col-lg-2 form-group floating-label-form-group controls">
+                                    <input type="text" class="form-control" placeholder="Val 2" id="val3" name="val3"
+                                        value="<%= data.val3 %>">
+                                    <input type="text" class="form-control" placeholder="Val 6" id="val6" name="val6"
+                                        value="<%= data.val6 %>">
+                                </div>
+                                <div class="col-lg-2 form-group floating-label-form-group controls">
+                                    <input type="text" class="form-control" placeholder="Val 3" id="val3" name="val3"
+                                        value="<%= data.val3 %>">
+                                    <input type="text" class="form-control" placeholder="Val 7" id="val7" name="val7"
+                                        value="<%= data.val7 %>">
+                                </div>
+                                <div class="col-lg-2 form-group floating-label-form-group controls">
+                                    <input type="text" class="form-control" placeholder="Val 4" id="val4" name="val4"
+                                        value="<%= data.val4 %>">
+                                    <input type="text" class="form-control" placeholder="Val 8" id="val8" name="val8"
+                                        value="<%= data.val8 %>">
+                                </div>
+                            </div>
+                            <% } %>
+                    </div>
+                    <div class="col-lg-1" style="padding-right:0px">
+                        <% if (id==='0' ) { %>
+
+
+                            <div class="float-right mb-3">
+                                <button type="submit" class="btn btn-primary text-center" id="sendRegistrar"
+                                    style="width:95px">Registrar</button>
+                            </div>
+
+
+
+                            <% } else { %>
+
+
+                                <div class=" float-right mb-3">
+
+                                    <button type="button" class="btn btn-primary text-center" id="sendModificar"
+                                        style="width:95px" onclick="owModificar('<%= id %>')">Modificar</button>
+                                </div>
+
+                                <div class=" float-right">
+
+                                    <button type="button" class="btn btn-primary text-center" id="sendEliminar"
+                                        style="width:95px" onclick="owEliminar('<%= id %>')">Eliminar</button>
+                                </div>
+
+
+                                <% } %>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="nuevaVal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog"
+    aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalLabel">Detalles de Valuación</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card card-body">
+                    <form id="newSan" class="was-validated" action="javascript:sanitRegistrar(<%= id %>)" method="POST"
+                        enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="col-lg-11">
+
+                                <table class="table table-borderless table-sm table-descend mt-2">
+                                    <thead>
+                                        <tr class="header-color">
+
+                                            <th class="text-center col-6" colspan="2">Región</th>
+                                            <th class="text-center col-1">Parcial</th>
+                                            <th class="text-center col-2">Calificación</th>
+                                            <th class="text-center col-1">Coef.</th>
+                                            <th class="text-center col-2">Calificación Final</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        <%= total=12 %>
+                                            <tr>
+                                                <td style="vertical-align: center;" rowspan="2">Cabeza y Cuello</td>
+                                                <td class="text-center">Cabeza</td>
+                                                <td class="text-center">
+                                                    <input type="number" name="cabeza" id="cabeza"
+                                                        value="<%= data.valoracion[0]?.cabezaCuello.cabeza%>">
+                                                </td>
+                                                <td class="text-center" rowspan="2">
+                                                    <%= data.valoracion[0]?.cabezaCuello.cabeza.toFixed(2) %>
+                                                </td>
+                                                <td class="text-center" rowspan="2">1.00</td>
+                                                <td class="text-center" rowspan="2"><b>
+                                                        <%= data.valoracion[0]?.cabezaCuello.cabeza.toFixed(2) %>
+                                                    </b></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center">Cuello</td>
+                                                <td class="text-center">
+                                                    <input type="number" name="cuello" id="cuello"
+                                                        value="<%= data.valoracion[0]?.cabezaCuello.cuello%>">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">Espalda y Cruz</td>
+                                                <td class="text-center"></td>
+                                                <td class="text-center">
+                                                    <input type="number" name="espalda" id="espalda"
+                                                        value="<%= //espaldaCruz.toFided(2) %>">
+                                                </td>
+                                                <td class="text-center">1.00</td>
+                                                <td class="text-center"><b>
+                                                        <%= //espaldaCruz.toFixed(2) %>
+                                                    </b></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">Pecho y Costado</td>
+
+                                                <td class="text-center"></td>
+                                                <td class="text-center">
+                                                    <input type="number" name="pechoCostado" id="pechoCostado"
+                                                        value="<%= data.valoracion[0]?.pechoCostado.toFixed(2)%>">
+                                                </td>
+                                                <td class="text-center">1.00</td>
+                                                <td class="text-center"><b>
+                                                        <%= data.valoracion[0]?.pechoCostado.toFixed(2) %>
+                                                    </b></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">Dorso y Riñon</td>
+
+                                                <td class="text-center"></td>
+                                                <td class="text-center"><input type="number" name="dorsoRinon"
+                                                        id="dorsoRinon"
+                                                        value="<%= data.valoracion[0]?.dorsoRinon.toFixed(2) %>"></td>
+                                                <td class="text-center">1.50</td>
+                                                <td class="text-center"><b>
+                                                        <%= (+data.valoracion[0]?.dorsoRinon * 1.5).toFixed(2) %>
+                                                    </b></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">Grupa</td>
+
+                                                <td class="text-center"></td>
+                                                <td class="text-center"><input type="number" name="grupa" id="grupa"
+                                                        value="<%= data.valoracion[0]?.grupa%>"></td>
+                                                <td class="text-center">1.0</td>
+                                                <td class="text-center"><b>
+                                                        <%= data.valoracion[0]?.grupa.toFixed(2)%>
+                                                    </b></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="vertical-align: center;" rowspan="2">Miembros</td>
+                                                <td class="text-center">Anteriores</td>
+                                                <td class="text-center"><input type="number" name="anteriores"
+                                                        id="anteriores"
+                                                        value="<%= data.valoracion[0]?.miembros.anteriores%>"></td>
+                                                <td class="text-center" rowspan="2">
+                                                    <%= ((+data.valoracion[0]?.miembros.anteriores +
+                                                        data.valoracion[0]?.miembros.posteriores)/2).toFixed(2) %>
+                                                </td>
+                                                <td class="text-center" rowspan="2">1.5</td>
+                                                <td class="text-center" rowspan="2" id="miembros"><b>
+                                                        <%= (((+data.valoracion[0]?.miembros.anteriores +
+                                                            data.valoracion[0]?.miembros.posteriores)/2))*1.5.toFixed(2)
+                                                            %>
+                                                    </b></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center">Posteriores</td>
+                                                <td class="text-center"><input type="number" name="posteriores"
+                                                        id="posteriores"
+                                                        value="<%= data.valoracion[0]?.miembros.posteriores%>"></td>
+
+                                            </tr>
+                                            <tr>
+                                                <td style="vertical-align: center;" rowspan="3">Andamientos</td>
+                                                <td class="text-center">Paso</td>
+                                                <td class="text-center"><input type="number" name="paso" id="paso"
+                                                        value="<%= data.valoracion[0]?.andamientos.paso%>"></td>
+                                                <td class="text-center" rowspan="3">
+                                                    <%= ((+data.valoracion[0]?.andamientos.paso +
+                                                        data.valoracion[0]?.andamientos.trote +
+                                                        data.valoracion[0]?.andamientos.galope)/3).toFixed(2)%>
+                                                </td>
+                                                <td class="text-center" rowspan="3">1.50</td>
+                                                <td class="text-center" rowspan="3"><b>
+                                                        <%=(((+data.valoracion[0]?.andamientos.paso +
+                                                            data.valoracion[0]?.andamientos.trote +
+                                                            data.valoracion[0]?.andamientos.galope)/3)*1.5).toFixed(2)%>
+                                                    </b></td>
+                                            </tr>
+                                            <tr>
+
+                                                <td class="text-center">Trote</td>
+                                                <td class="text-center"><input type="number" name="trote" id="trote"
+                                                        value="<%= data.valoracion[0]?.andamientos.trote%>"></td>
+
+                                            </tr>
+                                            <tr>
+
+                                                <td class="text-center">Galope</td>
+                                                <td class="text-center"><input type="number" name="galope" id="galope"
+                                                        value="<%= data.valoracion[0]?.andamientos.galope%>"></td>
+
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">Conjunto de Formas</td>
+
+                                                <td class="text-center"></td>
+                                                <td class="text-center"><input type="number" name="formas" id="formas"
+                                                        value="<%= data.valoracion[0]?.formas%>"></td>
+                                                <td class="text-center">1.5</td>
+                                                <td class="text-center"><b>
+                                                        <%= (+data.valoracion[0]?.formas * 1.5).toFixed(2)%>
+                                                    </b></td>
+                                            </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="2">Total:</td>
+                                            <td class="text-center"></td>
+                                            <td class="text-center"></td>
+                                            <td class="text-center"></td>
+                                            <td class="text-center"><b>
+                                                    <%= total %>
+                                                </b></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">Alzada en mts.</td>
+                                            <td class="text-center"></td>
+                                            <td class="text-center"></td>
+                                            <td class="text-center"></td>
+                                            <td class="text-center"><b><input type="number" name="alzada" id="alzada"
+                                                        value="<%= data.valoracion[0]?.alzada.toFixed(2)%>"></b></td>
+                                        </tr>
+                                    </tfoot>
+
+                                </table>
+                                <br>
+
+                            </div>
+                        </div>
+                </div>
+                </form>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary text-center" onclick="sanitAgrega('<%= id %>')"
+                    id="sanitAgregar">Agregar</button>
+                <button type="button" class="btn btn-primary text-center" id="sanitModificar"
+                    onclick="sanitModifica('<%= id %>')">Modificar</button>
+                <button type="button" class="btn btn-primary text-center" id="sanitEliminar"
+                    onclick="sanitElimina('<%= id %>')">Eliminar</button>
+
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal validación padres -->
+<div class="modal fade" id="valPads" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog"
+    aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalLabel">Validación de Ejemplar</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card card-body">
+                    <table id="valEjem" data-search="true" data-pagination="true"
+                        data-page-list="[10, 25, 50, 100, all]" data-toolbar="#toolbar" data-id-field="_id"
+                        data-click-to-select="true">
+                        <thead>
+                            <tr class="header-color">
+                                <th data-field="regNum" data-sortable=true>No. Reg. Mex</th>
+                                <th data-field="regRef" data-sortable=true>Referencia</th>
+                                <th data-field="horseName" data-sortable=true>Nombre</th>
+                                <th data-field="sex" data-sortable=true data-formatter="sexFormatter">Sexo</th>
+                                <th data-field="sire" data-sortable=true>Padre</th>
+                                <th data-field="dam" data-sortable=true>Madre</th>
+                                <th data-field="breeder" data-sortable=true>Criador</th>
+                            </tr>
+                        </thead>
+
+                    </table>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal validación propietarios -->
+<!-- <div class="modal fade" id="valOwnsXXXX" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog"
+    aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalLabel">Validación Ganaderos</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card card-body">
+                    <table id="tabOws" data-search="true" data-pagination="true"
+                        data-page-list="[10, 25, 50, 100, all]" data-id-field="_id"
+                        data-click-to-select="true">
+                        <thead>
+                            <tr class="header-color">
+                                <th data-sortable= true data-field="_id">Id</th>
+                                <th data-sortable= true data-field="lastName">Apellido</th>
+                                <th data-sortable= true data-field="firstName">Nombre</th>
+                                <th data-sortable= true data-field="farm" >Ganaderia</th>
+                            </tr>
+                        </thead>
+
+                    </table>
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+
+<div class="modal fade" id="valOwns" aria-hidden="true" aria-labelledby="valOwns" tabindex="-1"
+    data-bs-backdrop="static">
+    <div class="modal-dialog  modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalToggleLabel">Propietarios</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="card card-body">
+                    <table id="tabOws" data-search="true" data-pagination="true" data-page-list="[10, 25, 50, 100, all]"
+                        data-id-field="_id" data-click-to-select="true">
+                        <thead>
+                            <tr class="header-color">
+                                <th data-sortable=true data-field="_id">Id</th>
+                                <th data-sortable=true data-field="lastName">Apellido</th>
+                                <th data-sortable=true data-field="firstName">Nombre</th>
+                                <th data-sortable=true data-field="farm">Ganaderia</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal"
+                    data-bs-dismiss="modal">Propietario Nuevo</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
+    tabindex="-1">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalToggleLabel2">Registra un nuevo Propietario</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form  class="was-validated">
+
+
+                    <div class="row">
+                        <div class="col">
+                            <div class=" form-group floating-label-form-group controls">
+                                <label for="_id">Codigo de Identificación:</label><i class="fa fa-asterisk rojo_aster"></i>
+                                <input type="text" class="form-control" placeholder="Codigo de Identificación" id="_id" name="_id" required >
+                            </div>
+                            <div class=" form-group floating-label-form-group controls">
+                                <label for="firstName">Nombre(s):</label>
+                                <input type="text" class="form-control" placeholder="Nombre(s)" id="firstName" name="firstName">
+                            </div>
+                            <div class=" form-group floating-label-form-group controls">
+                                <label for="lastName">Apellidos:</label>
+                                <input type="text" class="form-control" placeholder="Apellidos" id="lastName" name="lastName">
+                            </div>
+
+                            <div class=" form-group floating-label-form-group controls">
+                                <label for="farm">Rancho:</label>
+                                <input type="text" class="form-control" placeholder="Ganaderia" id="farm" name="farm">
+                            </div>
+
+                        </div>
+                        <div class="col">
+                            <div class="form-group floating-label-form-group controls">
+                                <label>Dirección:</label>
+                                <input type="text" class="form-control" placeholder="Dirección" id="street" name="street">
+                            </div>
+                            <div class="form-group floating-label-form-group controls">
+                                <label>Ciudad:</label>
+                                <input type="text" class="form-control" placeholder="Ciudad" id="city" name="city">
+                            </div>
+                            <div class="form-group floating-label-form-group controls">
+                                <label>Estado:</label>
+                                <input type="text" class="form-control" placeholder="Estado" id="state" name="state">
+                            </div>
+                            <div class="form-group floating-label-form-group controls">
+                                <label for="country">Pais:</label>
+                                <input type="text" list="country" class="form-control" placeholder="Seleccione...">
+                                <datalist id= "country">
+                                    <% for ( let i=0;i <=countries.length-1;i++){ %>
+                                        <option value="<%=(countries[i]).toUpperCase() %>">
+                                        <%}%>
+                                </datalist>
+                            </div>
+                            <div class="form-group floating-label-form-group controls">
+                                <label>Codigo Postal:</label>
+                                <input type="text" class="form-control" placeholder="C.P." id="postalCode" name="postalCode">
+                            </div>
+
+                            <div class="form-group floating-label-form-group controls">
+                                <label>Teléfono:</label>
+                                <input type="text" class="form-control" placeholder="Teléfono" id="phone" name="phone">
+                            </div>
+                            <div class="form-group floating-label-form-group controls">
+                                <label>email:</label>
+                                <input type="text" class="form-control" placeholder="E mail" id="email" name="email">
+                            </div>  
+                        </div>
+                        <div class="col">
+                                <h1 class="text-center">Hierro</h1>
+                                <div class="d-flex justify-content-center">
+                                    <img id="hierro" src="/assets/img/icono.png"
+                                        alt="" width="200" height="auto" onerror='src="/assets/img/icono.png"'>
+                                </div>
+                                
+                                <div class="form-group floating-label-form-group controls">
+                                    <label>Hierro:</label>
+                                    <input type="file" class="form-control" placeholder="Hierro..." id="perFile" name="perFile" accept=".bmp, .jpg, .jpeg, .png">
+                                </div> 
+                        </div>
+                    </div>
+
+
+                </form>
+
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary"> Guardar</button>
+                <button class="btn btn-primary" data-bs-target="#valOwns" data-bs-toggle="modal"
+                    data-bs-dismiss="modal">Regresar</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<a class="btn btn-primary" data-bs-toggle="modal" href="#valOwns" role="button">Open first modal</a>
+
+
+
+
+
+
+
+
+
+<script>
+    $('#sire').on('keypress', function (event)
+    {
+        if (event.which == 13)
+        {
+            console.log(event.keyCode)
+            event.preventDefault()
+            validaCaballo($('#sire').val(), 'M', `<%= token %>`)
+            $('#valPads').modal('toggle')
+        } else
+            console.log(event.keyCode)
+    })
+
+
+    $('#dam').on('keypress', function (event)
+    {
+        if (event.which == 13)
+        {
+            console.log(event.keyCode)
+            event.preventDefault()
+            $('#valPads').modal('toggle')
+        } else
+            console.log(event.keyCode)
+    })
+
+
+    $('#sireRefNum').on('keypress', async function (event)
+    {
+        if (event.which == 13)
+        {
+            console.log(event.keyCode)
+            event.preventDefault()
+            regreso = await validaReferencia($('#sireRefNum').val(), `<%= token %>`)
+            console.log("res", regreso)
+            alert("salio " + JSON.stringify(regreso))
+            if (regreso.sex == 'H')
+            {
+                alert("El ejemplar seleccionado es Hembra")
+                $('#sireRefNum').val('')
+            } else
+            {
+                agregarCab = confirm("El ejemplar seleccionado es Hembra")
+            }
+
+        } else
+            console.log(event.keyCode)
+    })
+
+    $("#personas").on('click', function ()
+        {
+            var resultsArr = [];
+            <% for(var i = 0, len = owners.length; i < len; i++)
+                { %>
+                resultsArr.push(<%- JSON.stringify(owners[i]) %>);
+            <% } %>
+            console.log(resultsArr)
+            owPersonas(resultsArr)
+        })
+
+
+    $('#perFile').on('change', function(event)
+    {
+        console.log($('#perFile').val())
+        $('#hierro').attr('src', URL.createObjectURL(event.target.files[0])).load(function(){
+            $(this).width()})
+    })
+
+
+    $('#_id').on('blur', function (event)
+    {
+        alert("Validar el objeto")
+    })
+
+</script>
+
+
+
+
+
+
+

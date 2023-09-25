@@ -1,0 +1,354 @@
+<div class="tab">
+    <button class="tablinks active" onclick="openForm(event, 'Ganaderia')">Ganaderia</button>
+    <button class="tablinks" onclick="openForm(event, 'Titular')">Titular</button>
+    <button class="tablinks" onclick="openForm(event, 'Representante')">Representante</button>
+    <button class="tablinks" onclick="openForm(event, 'Finca')">Finca</button>
+    <button class="tablinks" onclick="openForm(event, 'Contacto')">Contacto</button>
+    <button class="tablinks" onclick="openForm(event, 'Fotos')">Fotos y Videos</button>
+</div>
+
+<script>
+    function openForm(evt, form)
+    {
+        var i, tabcontent, tablinks
+        tabcontent = document.getElementsByClassName("tabcontent")
+        console.log(tabcontent)
+        for (i = 0; i < tabcontent.length; i++)
+        {
+            tabcontent[i].style.display = "none"
+        }
+        tablinks = document.getElementsByClassName("tablinks")
+        for (i = 0; i < tablinks.length; i++)
+        {
+            tablinks[i].className = tablinks[i].className.replace(" active", "")
+        }
+        document.getElementById(form).style.display = "block"
+        evt.currentTarget.className += " active"
+    }
+</script>
+
+
+<div id='msg' class="alert alert-dismissible fade show " style="display:none;">
+    <strong>Note!</strong> This is a simple example of dismissible alert.
+</div>
+
+
+<div id="Titular" class="tabcontent">
+    <h3>Titular</h3>
+    <div class="container">
+        <div class="row">
+            <div id="ownersf" class="col-lg-12 col-md-12 mx-auto">
+
+                <div id='msg' class="alert alert-dismissible fade show " style="display:none;">
+                    <strong>Note!</strong> This is a simple example of dismissible alert.
+                </div>
+
+                <form id="newOwner" class="was-validated" action="javascript:owRegistrar()" method="POST"
+                    enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="col-lg-11">
+
+                            <div class="row ">
+
+
+
+
+
+
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-lg-2 form-group floating-label-form-group controls">
+                                    <label>Saludo:</label>
+                                    <input type="text" class="form-control" placeholder="Saludo" id="salutation"
+                                        name="salutation" style="text-transform:capitalize"
+                                        value="<%= data.salutation  %>">
+                                </div>
+                                <div class="col-lg-5 form-group floating-label-form-group controls">
+                                    <label>Nombre</label><i class="fa fa-asterisk rojo_aster"></i>
+                                    <input type="text" class="form-control" placeholder="Nombre(s)" id="firstName"
+                                        name="firstName" required value="<%= data.firstName %>">
+                                </div>
+                                <div class="col-lg-5 form-group floating-label-form-group controls">
+                                    <label>Apellidos:</label><i class="fa fa-asterisk rojo_aster"></i>
+                                    <input type="text" class="form-control" placeholder="Apellidos" id="lastName"
+                                        name="lastName" required value="<%= data.lastName %>">
+                                </div>
+                            </div>
+                            <hr>
+                            <br>
+
+                            <hr>
+                            <br>
+                            <div class="col-lg-5 form-group floating-label-form-group controls">
+                                <label>R.F.C.:</label>
+                                <input type="text" class="form-control" placeholder="R.F.C." id="rfc" name="rfc"
+                                    value="<%= data.rfc %>">
+                            </div>
+                            <!-- <hr>
+                                            <br>
+                                             <div class="col-lg-5 form-group floating-label-form-group controls">
+                                                <label>Miembro desde:</label><i class="fa fa-asterisk rojo_aster"></i>
+                                                <input type="text" class="form-control" placeholder="Member since"
+                                                    id="memberDate" name="memberDate" required
+                                                    value="<%= data.memberDate %>">
+                                            </div> -->
+
+
+                        </div>
+                        <div class="col-lg-1" style="padding-right:0px">
+                            <% if (id==='0' ) { %>
+
+
+                                <div class="float-right mb-3">
+                                    <button type="submit" class="btn btn-primary text-center" id="sendRegistrar"
+                                        style="width:95px">Registrar</button>
+                                </div>
+
+
+
+                                <% } else { %>
+
+
+                                    <div class=" float-right mb-3">
+
+                                        <button type="button" class="btn btn-primary text-center" id="sendModificar"
+                                            style="width:95px" onclick="owModificar('<%= id %>')">Modificar</button>
+                                    </div>
+
+                                    <div class=" float-right">
+
+                                        <button type="button" class="btn btn-primary text-center" id="sendEliminar"
+                                            style="width:95px" onclick="owEliminar('<%= id %>')">Eliminar</button>
+                                    </div>
+
+
+                                    <% } %>
+                        </div>
+                </form>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+<div id="Representante" class="tabcontent">
+    <h3>Representante</h3>
+    <p>Fotos y Videos Fotos y Videos Fotos y Videos</p>
+</div>
+<div id="Finca" class="tabcontent">
+    <h3>Finca</h3>
+    <div class="row">
+        <div class="col-lg-4 form-group floating-label-form-group controls">
+            <label>Dirección:</label><i class="fa fa-asterisk rojo_aster"></i>
+            <input type="text" class="form-control" placeholder="Dirección" id="street" name="street" required
+                value="<%= data.street %>">
+        </div>
+        <div class="col-lg-4 form-group floating-label-form-group controls">
+            <label>Ciudad:</label><i class="fa fa-asterisk rojo_aster"></i>
+            <input type="text" class="form-control" placeholder="Ciudad" id="city" name="city" required
+                value="<%= data.city %>">
+        </div>
+        <div class="col-lg-4 form-group floating-label-form-group controls">
+            <label>Estado:</label><i class="fa fa-asterisk rojo_aster"></i>
+            <input type="text" class="form-control" placeholder="Estado" id="state" name="state" required
+                value="<%= data.state %>">
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-lg-4 form-group floating-label-form-group controls">
+            <label>Pais:</label><i class="fa fa-asterisk rojo_aster"></i>
+            <input type="text" class="form-control" placeholder="Pais" id="country" name="country" required
+                value="<%= data.country %>">
+        </div>
+        <div class="col-lg-2 form-group floating-label-form-group controls">
+            <label>Codigo Postal:</label><i class="fa fa-asterisk rojo_aster"></i>
+            <input type="text" class="form-control" placeholder="Postal Code" id="postalCode" name="postalCode" required
+                value="<%= data.postalCode %>">
+        </div>
+    </div>
+    <hr>
+    <br>
+    <div class="row">
+        <div class="col-lg-4 form-group floating-label-form-group controls">
+            <label>Teléfono:</label>
+            <input type="text" class="form-control" placeholder="Phone" id="phone" name="phone"
+                value="<%= data.phone %>">
+        </div>
+        <div class="col-lg-4 form-group floating-label-form-group controls">
+            <label>email:</label><i class="fa fa-asterisk rojo_aster"></i>
+            <input type="text" class="form-control" placeholder="E mail" id="email" name="email" required
+                value="<%= data.email %>">
+        </div>
+        <div class="col-lg-4 form-group floating-label-form-group controls">
+            <label>Website:</label>
+            <input type="text" class="form-control" placeholder="Website" id="website" name="website"
+                value="<%= data.website %>">
+        </div>
+    </div>
+</div>
+<div id="Contacto" class="tabcontent">
+    <h3>Contacto</h3>
+    <p>Fotos y Videos Fotos y Videos Fotos y Videos</p>
+</div>
+<div id="Fotos" class="tabcontent">
+    <h3>Fotos y Videos</h3>
+    <p>Fotos y Videos Fotos y Videos Fotos y Videos</p>
+</div>
+<div id="Ganaderia" class="tabcontent">
+    <h3>Ganaderia</h3>
+    <div class="container">
+        <div class="row">
+            <div id="ownersf" class="col-lg-12 col-md-12 mx-auto">
+
+                <div id='msg' class="alert alert-dismissible fade show " style="display:none;">
+                    <strong>Note!</strong> This is a simple example of dismissible alert.
+                </div>
+
+                <form id="newOwner" class="was-validated" action="javascript:owRegistrar()" method="POST"
+                    enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="col-lg-11">
+
+                            <div class="row ">
+
+                                <div class="col-lg-2 form-group floating-label-form-group controls">
+                                    <label>Id:</label><i class="fa fa-asterisk rojo_aster"></i>
+                                    <input type="text" class="form-control is-invalid" placeholder="Id" id="_id"
+                                        name="_id" required style="text-transform:uppercase" value="<%= data._id %>">
+                                </div>
+                                <div class="col-lg-6 form-group floating-label-form-group controls">
+                                    <label>Ganadería:</label><i class="fa fa-asterisk rojo_aster"></i>
+                                    <input type="text" class="form-control" placeholder="Ganadería" id="farm"
+                                        name="farm" required value="<%= data.farm %>">
+                                </div>
+                                <div class="col-lg-3 form-group floating-label-form-group controls">
+                                    <label>Hierro:</label>
+                                    <!-- <img id="hierroImagen"
+                                         src="<%=`https://lusitanos.s3.us-east-1.amazonaws.com/hierros/${data._id}.bmp`%>" 
+                                        alt="" width="100" height="100" onerror="this.src='/assets/img/no_photo.png'"
+                                        role="button" type="file" onclick=agregaImagen();> -->
+
+
+                                    <div class="image-upload">
+                                        <label for="file-input">
+                                            <img src="<%=`https://lusitanos.s3.us-east-1.amazonaws.com/hierros/${data._id}.bmp`%>"
+                                                onerror="this.src='/assets/img/no_photo.png'" width="100"
+                                                height="100" />
+                                        </label>
+                                        <input id="file-input" type="file" style="display:none" />
+                                    </div>
+
+
+
+                                </div>
+
+                            </div>
+                            <br>
+
+                            <hr>
+                            <br>
+                            <div class="row">
+                                <div class="col-lg-4 form-group floating-label-form-group controls">
+                                    <label>Dirección:</label><i class="fa fa-asterisk rojo_aster"></i>
+                                    <input type="text" class="form-control" placeholder="Dirección" id="street"
+                                        name="street" required value="<%= data.street %>">
+                                </div>
+                                <div class="col-lg-4 form-group floating-label-form-group controls">
+                                    <label>Ciudad:</label><i class="fa fa-asterisk rojo_aster"></i>
+                                    <input type="text" class="form-control" placeholder="Ciudad" id="city" name="city"
+                                        required value="<%= data.city %>">
+                                </div>
+                                <div class="col-lg-4 form-group floating-label-form-group controls">
+                                    <label>Estado:</label><i class="fa fa-asterisk rojo_aster"></i>
+                                    <input type="text" class="form-control" placeholder="Estado" id="state" name="state"
+                                        required value="<%= data.state %>">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-lg-4 form-group floating-label-form-group controls">
+                                    <label>Pais:</label><i class="fa fa-asterisk rojo_aster"></i>
+                                    <input type="text" class="form-control" placeholder="Pais" id="country"
+                                        name="country" required value="<%= data.country %>">
+                                </div>
+                                <div class="col-lg-2 form-group floating-label-form-group controls">
+                                    <label>Codigo Postal:</label><i class="fa fa-asterisk rojo_aster"></i>
+                                    <input type="text" class="form-control" placeholder="Postal Code" id="postalCode"
+                                        name="postalCode" required value="<%= data.postalCode %>">
+                                </div>
+                            </div>
+                            <hr>
+                            <br>
+                            <div class="row">
+                                <div class="col-lg-4 form-group floating-label-form-group controls">
+                                    <label>Teléfono:</label>
+                                    <input type="text" class="form-control" placeholder="Phone" id="phone" name="phone"
+                                        value="<%= data.phone %>">
+                                </div>
+                                <div class="col-lg-4 form-group floating-label-form-group controls">
+                                    <label>email:</label><i class="fa fa-asterisk rojo_aster"></i>
+                                    <input type="text" class="form-control" placeholder="E mail" id="email" name="email"
+                                        required value="<%= data.email %>">
+                                </div>
+                                <div class="col-lg-4 form-group floating-label-form-group controls">
+                                    <label>Website:</label>
+                                    <input type="text" class="form-control" placeholder="Website" id="website"
+                                        name="website" value="<%= data.website %>">
+                                </div>
+                            </div>
+                            <hr>
+                            <br>
+                            <div class="col-lg-5 form-group floating-label-form-group controls">
+                                <label>R.F.C.:</label>
+                                <input type="text" class="form-control" placeholder="R.F.C." id="rfc" name="rfc"
+                                    value="<%= data.rfc %>">
+                            </div>
+                            <!-- <hr>
+                                            <br>
+                                             <div class="col-lg-5 form-group floating-label-form-group controls">
+                                                <label>Miembro desde:</label><i class="fa fa-asterisk rojo_aster"></i>
+                                                <input type="text" class="form-control" placeholder="Member since"
+                                                    id="memberDate" name="memberDate" required
+                                                    value="<%= data.memberDate %>">
+                                            </div> -->
+
+
+                        </div>
+                        <div class="col-lg-1" style="padding-right:0px">
+                            <% if (id==='0' ) { %>
+
+
+                                <div class="float-right mb-3">
+                                    <button type="submit" class="btn btn-primary text-center" id="sendRegistrar"
+                                        style="width:95px">Registrar</button>
+                                </div>
+
+
+
+                                <% } else { %>
+
+
+                                    <div class=" float-right mb-3">
+
+                                        <button type="button" class="btn btn-primary text-center" id="sendModificar"
+                                            style="width:95px" onclick="owModificar('<%= id %>')">Modificar</button>
+                                    </div>
+
+                                    <div class=" float-right">
+
+                                        <button type="button" class="btn btn-primary text-center" id="sendEliminar"
+                                            style="width:95px" onclick="owEliminar('<%= id %>')">Eliminar</button>
+                                    </div>
+
+
+                                    <% } %>
+                        </div>
+                </form>
+            </div>
+        </div>
+
+
+    </div>
+</div>

@@ -1,0 +1,145 @@
+<h3>Valoraciones</h3>
+<div class="container">
+
+    <div class="row">
+
+
+    </div>
+
+    <div class="col-lg-11" style="margin : 0 auto;">
+        <%= console.log('valoracion', data) %>
+         <% if (data.valoracion === undefined || data.valoracion.length === 0) { %>
+            <%=console.log(data.valoracion)%>
+            <div class="text-center">
+                <b>No existen datos de valoración para este ejemplar.</b>
+                
+            </div>
+       <% } else { %>
+    
+            <table class="table  table-sm table-descend mt-2" >
+            <thead>
+                <tr class="header-color">
+        
+                    <th class="text-center col-6" colspan="2">Región</th>
+                    <th class="text-center col-1">Parcial</th>
+                    <th class="text-center col-2">Calificación</th>
+                    <th class="text-center col-1">Coef.</th>
+                    <th class="text-center col-2">Calificación Final</th>
+                </tr>
+    
+            </thead>
+            <tbody>
+                <tr>
+    
+                    <td class="align-middle" rowspan="2"><b>Cabeza y Cuello</b></td>
+                    <td class="text-start"><b>Cabeza</b></td>
+                    <td class="text-center"><%= (+data.valoracion[0]?.cabezaCuello.cabeza).toFixed(2)%></td>
+                    <td class="align-middle text-center" rowspan="2"><%= (+data.valoracion[0]?.cabezaCuello.calificacion).toFixed(2) %></td>
+                    <td class="align-middle text-center" rowspan="2">1.00</td>
+                    <td class="align-middle text-center" rowspan="2"><b> <%= (+data.valoracion[0]?.cabezaCuello.calificacion * 1.0).toFixed(2) %></b></td>
+                </tr>
+                <tr>
+                    <td class="text-start"><b>Cuello</b></td>
+                    <td class="text-center"><%= (+data.valoracion[0]?.cabezaCuello.cuello).toFixed(2) %></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><b>Espalda y Cruz</b></td>
+                    <td class="text-center"></td>
+                    <td class="text-center"><%= (+data.valoracion[0]?.espaldaCruz).toFixed(2) %></td>
+                    <td class="text-center">1.00</td>
+                    <td class="text-center" ><b><%= (+data.valoracion[0]?.espaldaCruz * 1.0).toFixed(2) %></b></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><b>Pecho y Costado</b></td>
+        
+                    <td class="text-center"></td>
+                    <td class="text-center"><%= (+data.valoracion[0]?.espaldaCruz).toFixed(2) %></td>
+                    <td class="text-center">1.00</td>
+                    <td class="text-center"><b><%= (data.valoracion[0]?.espaldaCruz * 1.0).toFixed(2) %></b></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><b>Dorso y Riñon</b></td>
+        
+                    <td class="text-center"></td>
+                    <td class="text-center"><%= (+data.valoracion[0]?.dorsoRinon).toFixed(2) %></td>
+                    <td class="text-center">1.50</td>
+                    <td class="text-center"><b><%= (data.valoracion[0]?.dorsoRinon * 1.5).toFixed(2) %></b></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><b>Grupa</b></td>
+        
+                    <td class="text-center"></td>
+                    <td class="text-center"><%= (+data.valoracion[0]?.grupa).toFixed(2) %></td>
+                    <td class="text-center">1.00</td>
+                    <td class="text-center"><b><%= (+data.valoracion[0]?.grupa * 1.0).toFixed(2) %></b></td>
+                </tr>
+                <tr  >
+                    <td class="align-middle" rowspan="2"><b>Miembros</b></td>
+                    <td class="text-start"><b>Anteriores</b></td>
+                    <td class="text-center"><%= (+data.valoracion[0]?.miembros.anteriores).toFixed(2) %></td>
+                    <td class="align-middle text-center" rowspan="2"><%= (+data.valoracion[0]?.miembros.calificacion).toFixed(2) %></td>
+                    <td class="align-middle text-center" rowspan="2">1.50</td>
+                    <td class="align-middle text-center" rowspan="2"><b><%= (+data.valoracion[0]?.miembros.calificacion * 1.5).toFixed(2) %></b></td>
+                </tr>
+                <tr>
+                    <td class="text-start"><b>Posteriores</b></td>
+                    <td class="text-center"><%= (data.valoracion[0]?.miembros.posteriores).toFixed(2) %></td>
+        
+                </tr>
+                <tr>
+                    <td class="align-middle"  rowspan="3"><b>Andamientos</b></td>
+                    <td class="text-start"><b>Paso</b></td>
+                    <td class="text-center"><%= (+data.valoracion[0]?.andamientos.paso).toFixed(2) %></td>
+                    <td class="align-middle text-center" rowspan="3"><%= (+data.valoracion[0]?.andamientos.calificacion).toFixed(2) %></td>
+                    <td class="align-middle text-center" rowspan="3">1.50</td>
+                    <td class="align-middle text-center" rowspan="3"><b><%= (+data.valoracion[0]?.andamientos.calificacion * 1.5).toFixed(2) %></b></td>
+                </tr>
+                <tr>
+        
+                    <td class="text-start"><b>Trote</b></td>
+                    <td class="text-center"><%= (+data.valoracion[0]?.andamientos.trote).toFixed(2) %></td>
+        
+                </tr>
+                <tr>
+        
+                    <td class="text-start"><b>Galope</b></td>
+                    <td class="text-center"><%= (+data.valoracion[0]?.andamientos.galope).toFixed(2) %></td>
+        
+                </tr>
+                <tr>
+                    <td colspan="2"><b>Conjunto de Formas</b></td>
+        
+                    <td class="text-center"></td>
+                    <td class="text-center"><%= (+data.valoracion[0]?.formas).toFixed(2) %></td>
+                    <td class="text-center">1.50</td>
+                    <td class="text-center"><b><%= (+data.valoracion[0]?.formas  * 1.5).toFixed(2) %></b></td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="2"><b>Total:</b></td>
+                    <td class="text-center"></td>
+                    <td class="text-center"></td>
+                    <td class="text-center"></td>
+                    <td class="text-center"><b><%= (+data.valoracion[0]?.calificacion).toFixed(2) %></b></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><b>Alzada en mts.</b></td>
+                    <td class="text-center"></td>
+                    <td class="text-center"></td>
+                    <td class="text-center"></td>
+                    <td class="text-center"><b><%= (+data.valoracion[0]?.alzada).toFixed(2) %></b></td>
+                </tr>
+            </tfoot>
+        
+        </table>
+      <% } %>   
+        
+       
+    
+    
+        <br>
+    
+    </div>
+</div>
+

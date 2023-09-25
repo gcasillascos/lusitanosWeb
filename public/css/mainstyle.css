@@ -1,0 +1,47 @@
+.wrapper {
+    max-width: 900px;
+    margin: auto;
+    font-family: "Arial";
+}
+ 
+.toolbar{
+    width: 100%;
+    background-color: #8B0000;
+    overflow: auto;
+}
+ 
+.toolbar a {
+    float: left;
+    width: 11%;
+    text-align: center;
+    padding: 6px 5px;
+    transition: all 0.5s ease;
+    color: white;
+}
+ 
+/* Change color on hover */
+.toolbar a:hover {
+    background-color: #000;
+  }
+ 
+/* Change color on selected icon */
+.selected {
+    background-color:  #b3acac;; 
+}
+ 
+#my-canvas{
+    width: 100%;
+    border:5px solid #8B0000;
+}
+ 
+#img-data-div{
+    width: 100%;
+    max-width: 900px;
+    height: 200px;
+}
+ 
+/* Resize image to container */
+.toolbar a img{
+    max-width:100%;
+    height:auto;
+}

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<%- include('../layouts/header'); -%>
+  <%- include('../layouts/scripts'); -%>
+
+    <html>
+
+    <body class="text-center">
+      <%- include('../layouts/menu'); -%>
+        <main class="form-signin body-signin">
+          <form action="/auth/loginx" method="POST" enctype="multipart/form-data">
+            <img class="mb-4" src="/assets/img/icono.png" alt="" width="101" height="auto" />
+            <h1 class="h3 mb-3 fw-normal">Inicio de Sesión</h1>
+            <br />
+            <% if(errors !=null ){%>
+              <ul class="list-group">
+                <li class="list-group-item list-group-item-danger">
+                  <%= errors %>
+                </li>
+              </ul>
+              <% } %>
+                <div class="mb-3">
+                  <label for="email" class="form-label">Email address</label>
+
+                  <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com"
+                    aria-label="name@example.com" />
+                </div>
+                <br />
+                <div class="mb-3">
+                  <label for="password" class="form-label">Password</label>
+
+                  <input type="password" class="form-control" id="password" name="password" placeholder="Password"
+                    aria-label="Password" />
+                </div>
+
+                <div class="checkbox mb-3">
+                  <label>
+                    <input type="checkbox" value="remember-me" /> Remember me
+                  </label>
+                </div>
+                <button class="w-100 btn btn-lg btn-primary" id="sendLogin" type="submit">
+                  Login
+                </button>
+          </form>
+        </main>
+        <%- include('../layouts/footer'); -%>
+    </body>
+
+    </html>

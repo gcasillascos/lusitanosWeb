@@ -1,0 +1,205 @@
+<h3>Cubriciones</h3>
+<script>
+    $("#sendCubAgregar").hide()
+    $("#sendCubModificar").hide()
+    $("#sendCubEliminar").hide()
+</script>
+<div class="container">
+
+    <div class="row">
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <button type="button" class="btn btn-primary text-center" id="nuevaCubricion" style="width:95px"
+                data-bs-toggle="modal" data-bs-target="#nuevaCub" aria-expanded="false" aria-controls="nuevaCub"
+                onClick="cubricionBtnNueva('<%= id %>')">Nuevo
+            </button>
+        </div>
+
+
+        <!-- tabla de cubriciones -->
+        <div class="col-lg-12 col-md-12 mx-auto">
+
+            <table id="cubriciones" data-search="true" data-pagination="true"
+                data-page-list="[10, 25, 50, 100, all]" data-show-export="true" data-toolbar="#nuevaCub"
+                data-id-field="_id" data-show-export="true" data-click-to-select="true"
+                data-locale="es-Mx">
+
+                <thead>
+                    <tr class="header-color">
+                        <th data-field="sireRegNum" data-sortable="true">Registro</th>
+                        <th data-field="sireName" data-sortable="true" data-formatter="horseFormatter">Nombre</th>
+                        <th data-field="ultimaMonta" data-sortable="true" data-formatter="dateFormatter">Fecha
+                            Cubrición</th>
+                        <th data-field="tipoCubricion" data-sortable="true">Tipo de Cubrición</th>
+                        <th data-field="resCubricion" data-sortable="true">Resultado</th>
+                        <th data-field="deliveryDate" data-sortable="true" data-formatter="dateFormatter">Fecha
+                            Estimada</th>
+                    </tr>
+                </thead>
+
+            </table>
+        </div>
+    </div>
+
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="nuevaCub" tabindex="-1"  data-bs-backdrop="static" data-bs-keyboard="false"
+    role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalLabel">Cubriciones</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card card-body">
+                    <form id="newCub" class="was-validated" action="javascript:owRegistrar()" method="POST"
+                        enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="col-lg-11">
+                                <br>
+                                <div class="row">
+                                    <input type="hidden" id="cubId" name="cubId" value="0">
+                                    <input type="hidden" id="damRegNum" name="damRegNum" value="0">
+                                    <input type="hidden" id="deliveryDate" name="deliveryDate" value="">
+                                    <!-- <div class="col-lg-4 mt-3 form-group floating-label-form-group controls">
+    
+                                        <label>Registro Mexicano:</label>
+                                        <input type="text" class="form-control" id="sireRegNum" name="sireRegNum">
+                                        <br>
+    
+                                    </div> -->
+                                    <div class="col-lg-4 form-group floating-label-form-group controls mt-3 mb-3">
+                                        <label>Semental:</label>
+                                        <select class="form-select" aria-label="Default select example" id="sireName"
+                                            name="sireName">
+    
+                                            <option value="none" selected>Seleccione...</option>
+                                            <%for ( let i=0;i <=machos.length-1;i++){ %>
+                                                <option value="<%=machos[i]._id %>">
+                                                    <%= machos[i].horseName %>
+                                                </option>
+    
+                                                <%}%>
+    
+    
+                                        </select>
+                                        <script defer>
+                                            jQuery('#sireName').val("$('#sireRegNum').val()")
+                                        </script>
+                                    </div>
+                                    <div class="col-lg-4 mt-3">
+    
+                                        <label>Ultima Monta:</label>
+                                        <input type="date" class="form-control" id="ultimaMonta" name="ultimaMonta"
+                                            onchange="calculaFecha($('#ultimaMonta').val())">
+                                        <br>
+    
+                                    </div>
+                                    <div class="col-lg-4 form-group floating-label-form-group controls mt-3 mb-3">
+
+                                        <div>
+                                            <div class=" form-group floating-label-form-group controls">
+                                                <label>Tipo de Cubrición:</label>
+                                                <select class="form-select"
+                                                    aria-label="Default select example" id="tipoCubricion"
+                                                    name="tipoCubricion">
+
+                                                    <option value=none selected>Seleccione...</option>
+                                                    <option value='Monta Natural'>Monta Natural</option>
+                                                    <option value='Inseminación'>Inseminación</option>
+                                                    <option value='Transferencia Embrionaria'>Transferencia Embrionaria</option>
+                                                </select>
+
+                                            </div>
+
+                                        </div>
+    
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-4 mt-3">
+                                        <label> Fecha Estimada de Nac.</label>
+                                        <strong><label id="fecEst"> </label></strong>
+                                    </div>
+                                    <div class="col-lg-4 mt-3">
+                                        <label> % Consanguineidad</label>
+                                    </div>
+                                    <div class="col-lg-4 mt-3">
+                                        <label> % Parentesco</label>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+    
+    
+                                    <div class="col-lg-6 form-group floating-label-form-group controls mt-3 mb-3">
+                                        <label id="lblResCub"> Resultado de la cubrición</label>
+                                        <select class="form-select" aria-label="resCubricion" id="resCubricion" name="resCubricion">
+    
+                                            <option value="none" selected>Seleccione...</option>
+                                            <option value="Pendiente">Pendiente</option>
+                                            <option value="Gestante">Gestante</option>
+                                            <option value="Vacia">Vacía</option>
+                                            <option value="Reabsorcion">Reabsorción</option>
+                                            <option value="Aborto">Aborto</option>
+                                            <option value="Gestacion_Gemelar">Gestación  Gemelar</option>
+                                        </select>
+    
+                                    </div>
+    
+                                    <div class="col-lg-5 mt-3">
+                                        <label id="lblComents">Comentarios</label>
+                                        <textarea class="form-control" id="desc" name="desc" rows="5"></textarea>
+                                    </div>
+                                </div>
+                                
+                                <div class="row" id="tercera">
+                                    
+                                    <hr  class="mt-5">
+                                    <div class="col-lg-4 mt-3">
+                                        <label for="horseNameC">Nombre del ejemplar:</label>
+                                        <input type="text" class="form-control" id="horseNameC" name="horseNameC">
+                                    </div>
+                                    <div class="col-lg-4 mt-3">
+                                        <label>Fecha de Nacimiento:</label>
+                                        <input type="date" class="form-control" id="foalingDateC" name="foalingDateC">
+                                    <br>
+
+                                    </div>
+                                    <div class="col-lg-4 mt-3">
+                                        <label>Sexo:</label>
+                                        <select class="form-select" aria-label="SexoC" id="sexC" name="sexC" required>
+                                            <option value="none" selected>Seleccionar...</option>
+                                            <option value="Hembra">HEMBRA</option>
+                                            <option value="Macho">MACHO</option>
+                                        </select>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary text-center" id="sendCubAgregar"
+                 onclick="cubRegistrar('<%= id %>')">Agregar</button>
+                <button type="button" class="btn btn-primary text-center" id="sendCubModificar"
+                 onclick="cubModificar('<%= id %>')">Actualizar</button>
+                <button type="button" class="btn btn-primary text-center" id="sendCubEliminar"
+                 onclick="cubEliminar('<%= id %>')">Eliminar</button>
+
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div> 

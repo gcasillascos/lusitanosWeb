@@ -1,0 +1,47 @@
+/*
+    Created on : Jan 25, 2021, 11:58:39 PM
+    Author     : gcasillascos
+*/
+
+.footer {
+  background: #8A1538;
+  color: white;
+
+  .links {
+    ul {
+      list-style-type: none;
+    }
+
+    li a {
+      color: white;
+      transition: color 0.2s;
+    }
+
+    li:hover a:hover {
+      text-decoration: none;
+      color: #dee2e8;
+    }
+  }
+  .about-company {
+    i {
+      font-size: 25px;
+    }
+
+    a {
+      color: white;
+      transition: color 0.2s;
+    }
+
+    a:hover {
+      color: #dee2e8;
+    }
+  }
+
+  .location i {
+    font-size: 18px;
+  }
+
+  .copyright p {
+    border-top: 1px solid white;
+  }
+}

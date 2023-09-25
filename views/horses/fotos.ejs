@@ -1,0 +1,72 @@
+<h3>Fotos y Videos</h3>
+<div class="col-lg-6 ">
+
+    <div id="carouselCaballos" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2500">
+        <div class="carousel-inner">
+
+
+
+            <% for ( let i=0; i <=files.length-1; i++) { console.log(files[i]); let
+                str=`https://lusitanos.s3.us-east-1.amazonaws.com/${files[i]}`; let alt=`slide${i}`; let
+                img=`img${i}`; if(i===0){%>
+                <div class="carousel-item active">
+                    <%} else {%>
+                        <div class="carousel-item">
+                            <%}%>
+                                <img class="d-block w-100 mx-auto" src="<%=str%>" id="<%= img %>" alt="<%=alt%>" />
+                        </div>
+
+                        <% } %>
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleControls" data-bs-target="#carouselCaballos"
+                    type="button" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Prev</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleControls" data-bs-target="#carouselCaballos"
+                    type="button" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+        </div>
+    </div>
+
+    <br>
+    <div>
+        <div class="row">
+
+            <% for ( let i=0; i <=files.length-1; i++) { console.log(files[i]); let
+                str=`https://lusitanos.s3.us-east-1.amazonaws.com/${files[i]}`; const nombres=files[i].split('/');
+                console.log(nombres); let alt=`${files[i]}`; let img=`img${i}`; %>
+                <div class="col-sm-4">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <img src="<%= str %>" id="<%= img %>" alt="<%=alt%>" width="230" height="129"
+                                onerror="this.src='/assets/img/icono.png';">
+                            <h5 class="card-title">
+                                <%= nombres[nombres.length-1] %>
+                            </h5>
+                            <p class="card-text">Reseña de la foto.
+                            </p>
+                            <a href="#" class="btn btn-primary">Descargar</a>
+                            <a href="#" class="btn btn-primary">Eliminar</a>
+                        </div>
+                    </div>
+                </div>
+
+                <% } %>
+
+        </div>
+
+
+
+
+    </div>
+    <div>
+        <div class="mb-3">
+            <label for="formFile" class="form-label">Default file input example</label>
+            <input class="form-control" type="file" id="formFile">
+        </div>
+
+    </div>
+</div>

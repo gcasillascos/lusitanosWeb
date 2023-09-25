@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('../layouts/header'); -%>
+    <%- include('../layouts/scripts'); -%>
+
+        <body>
+
+
+            <%- include('../layouts/menu'); -%>
+                <div class="spinner-border text-primary" id="spinner" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-10 col-md-10 mx-auto">
+
+                            <div class="page-heading text-center">
+                                &nbsp;
+                                <h1><i class="fas fa-horse rojo"></i>
+                                    Tabla de Tarifas</h1>
+                                &nbsp;&nbsp;
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Content -->
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-9 col-md-9 mx-auto">
+
+
+
+                                
+                                <div class="table-responsive">
+
+
+                                    <table id="table" data-search="true" data-pagination="true"
+                                        data-page-list="[10, 25, 50, 100, all]" data-show-export="true"
+                                        data-toolbar="#toolbar" data-id-field="_id" data-show-export="true"
+                                        data-click-to-select="true">
+                                        <thead>
+                                            <tr class="header-color">
+                                                <th data-field="servicio" data-sortable=true>Concepto
+                                                </th>
+                                                <th data-field="montoSocios" data-sortable=true data-formatter="pesosFormatter" class="text-end">
+                                                    Monto Socios</th>
+                                                    <th data-field="montoNoSocios" data-sortable=true data-formatter="pesosFormatter" class="text-end">
+                                                        Monto No Socios</th>
+                                            </tr>
+    
+    
+    
+                                    </table>
+                                    <script>
+    
+                                        let data = <%- data %>
+                                            console.log(data)
+                                        var $table = $('#table')
+    
+                                        function buildTable($el)
+                                        {
+    
+                                            $el.bootstrapTable({
+    
+                                                data: data,
+    
+                                            })
+    
+                                        }
+    
+    
+                                        function farmFormatter(value)
+                                        {
+                                            return (value === null ? `${ data.firstName } ${ data.lastName }` : value)
+                                        }
+    
+                                        function iconformatter(value)
+                                        {
+                                            console.log(value)
+                                            let img = `<img src="https://lusitanos.s3.us-east-1.amazonaws.com/hierros/${ value }.bmp" alt="" width="60" height="40" onerror=src="/assets/img/icono.png">`
+                                            console.log(img)
+                                            return img
+                                        }
+    
+                                        function pesosFormatter(value)
+                                        {
+                                            let formatter = new Intl.NumberFormat('en-US', {
+                                                style: 'currency',
+                                                currency: 'USD',
+    
+                                                // These options are needed to round to whole numbers if that's what you want.
+                                                //minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
+                                                //maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
+                                            })
+    
+                                            
+    
+                                            return formatter.format(value)
+                                        }
+    
+                                        function dateFormatter(value)
+                                        {
+                                            return value.slice(0, 10)
+                                        }
+    
+                                        $(function ()
+                                        {
+                                            buildTable($table)
+                                            hideSpinner()
+                                        })
+                                    </script>
+    
+                                </div>
+                            
+
+
+
+                            
+                        </div>
+
+                    </div>
+                    <hr>
+                </div>
+
+
+                <!-- Modal -->
+                <div class="modal fade" id="owModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+                    role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-xl" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalLabel">Modal title</h5>
+                                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <%- include('../layouts/footer'); -%>
+
+
+
+        </body>
+
+</html>

@@ -1,0 +1,94 @@
+<h3>Registros Sanitarios</h3>
+<div class="container">
+
+    <div class="row">
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <button type="button" class="btn btn-primary text-center" id="nuevaSant" style="width:95px"
+                data-bs-toggle="modal" data-bs-target="#nuevaSan" aria-expanded="false" aria-controls="nuevaSan"
+                value="<%= sanId = '0' %>" onclick="sanitarioBtnNueva('<%= id %>')">Nuevo
+            </button>
+        </div>
+
+
+    </div>
+
+    <div class="col-lg-12 col-md-12 mx-auto">
+
+        <table id="sanitario" data-search="true" data-pagination="true" data-page-list="[10, 25, 50, 100, all]"
+            data-show-export="true" data-toolbar="#toolbar" data-id-field="_id" data-show-export="true"
+            data-click-to-select="true">
+
+            <thead>
+                <tr class="header-color">
+                    <th data-sortable="true" data-field="fecha" data-formatter="dateFormatter">Fecha
+                        Aplicación</th>
+                    <th data-sortable="true" data-field="comentario">Descripción</th>
+                    <th data-sortable="true" data-field="monto">Monto</th>
+
+                </tr>
+            </thead>
+
+        </table>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="nuevaSan" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog"
+    aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalLabel">Sanitarios</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card card-body">
+                    <form id="newSan" class="was-validated" action="javascript:sanitRegistrar(<%= id %>)" method="POST"
+                        enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="col-lg-11">
+                                <br>
+                                <div class="row">
+                                    <input type="hidden" id="sanId" name="sanId" value="0">
+                                    <div class="col-lg-3 mt-3">
+
+                                        <label>Fecha Aplicación:</label>
+                                        <input type="date" class="form-control" id="fechAplSan" name="fechAplSan">
+                                        <br><br><br>
+
+                                    </div>
+                                    <div class="col-lg-5 mt-3">
+                                        <label>Comentarios</label>
+                                        <textarea class="form-control" id="notesSan" name="notesSan"
+                                            rows="5"></textarea>
+                                    </div>
+                                    <div class="col-lg-3 mt-3">
+                                        <label>Monto</label>
+                                        <input type="input" class="form-control" id="montoSan" name="montoSan">
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                </form>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary text-center"
+                onclick="sanitAgrega('<%= id %>')" id="sanitAgregar"
+                >Agregar</button>
+                <button type="button" class="btn btn-primary text-center" id="sanitModificar"
+                 onclick="sanitModifica('<%= id %>')">Modificar</button>
+                <button type="button" class="btn btn-primary text-center" id="sanitEliminar"
+                 onclick="sanitElimina('<%= id %>')">Eliminar</button>
+
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div> 

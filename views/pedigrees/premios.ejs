@@ -1,0 +1,80 @@
+<h3>Premios</h3>
+<div class="container">
+
+    <div class="row">
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            
+        </div>
+
+
+
+        <div class="col-lg-12 col-md-12 mx-auto">
+
+            <table id="premiosA" data-search="true" 
+            data-pagination="true" 
+            data-page-list="[10, 25, 50, 100, all]"
+            data-show-export="true" 
+            data-toolbar="#toolbar" 
+            data-id-field="_id" 
+            data-show-export="true"
+            >
+
+                <thead>
+                    <tr class="header-color">
+                        
+                        <th data-sortable="true" data-field="competicion">Competicion</th>
+                        <th data-sortable="true" data-field="fecha" data-formatter="dateFormatter">Fecha</th>
+                        <th data-sortable="true" data-field="Grupo" >Grupo</th>
+                        <th data-sortable="true" data-field="GrupoNo">Grupo No</th>
+                        <th data-sortable="true" data-field="nombreGrupo">nombre Grupo</th>
+                        <th data-sortable="true" data-field="caballoNo">caballoNo</th>
+                    </tr>
+                </thead>
+
+            </table>
+
+            <script>
+                
+                dataPremio = <%- JSON.stringify(resHorse.prem[0]?.Premios) %>
+                   console.log('DATAPREMIO',dataPremio) 
+                var $tableP = $('#premiosA')
+
+                function buildTable($el)
+                {
+
+                    $el.bootstrapTable({
+
+                        data: dataPremio,
+
+                    })
+                    delete dataPremio
+                }
+
+
+
+
+                function iconformatter(value)
+                {
+                    console.log(value)
+                    let img = `<img src="https://lusitanos.s3.us-east-1.amazonaws.com/hierros/${ value }.bmp" alt="" width="60" height="40" onerror=src="/assets/img/icono.png">'`
+                    console.log(img)
+                    return img
+                }
+
+                function dateFormatter(value)
+                {
+                    return value.slice(0, 10)
+                }
+
+                $(function ()
+                {
+                    buildTable($tableP)
+
+                })
+            </script>
+        </div>
+    </div>
+
+</div>
+
+

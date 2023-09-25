@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+<%- include('../layouts/header'); -%>
+  <%- include('../layouts/scripts'); -%>
+
+    <html>
+
+    <body class="text-center">
+      <%- include('../layouts/menu'); -%>
+        <main class="form-signin body-signin">
+          <form action="/users/updatepwdx" method="POST" enctype="multipart/form-data"
+            onsubmit="return changePwdValidation()">
+            <img class="mb-4" src="/assets/img/icono.png" alt="" width="101" height="80" />
+            <h1 class="h3 mb-3 fw-normal">Cambio de Contraseña</h1>
+            <br />
+            <% if(errors !=null ){%>
+              <ul class="list-group">
+                <li class="list-group-item list-group-item-danger">
+                  <%= errors %>
+                </li>
+              </ul>
+              <% } %>
+                <% if(success !=null ){%>
+                  <ul class="list-group">
+                    <li class="list-group-item list-group-item-success">
+                      <%= success %>
+                    </li>
+                  </ul>
+                  <% } %>
+                    <div class="mb-3">
+                      <label for="currentPassword" class="form-label">Password actual</label>
+                      <input type="password" class="form-control" id="currentPassword" name="currentPassword"
+                        placeholder="Password actual" aria-label="Password actual" />
+                    </div>
+                    <br />
+                    <div class="mb-3">
+                      <label for="newPassword" class="form-label">Password</label>
+                      <input type="password" class="form-control" id="newPassword" name="newPassword"
+                        placeholder="Password" aria-label="Password" onblur="equalPassword()" />
+                    </div>
+
+                    <div class="mb-3">
+                      <label for="newPasswordConf" class="form-label">Password</label>
+                      <input type="password" class="form-control" id="newPasswordConf" name="newPasswordConf"
+                        placeholder="Password" aria-label="Password" onblur="validatePwd()" />
+                    </div>
+
+                    <button class="w-100 btn btn-lg btn-primary" type="submit">
+                      Cambiar Contraseña
+                    </button>
+          </form>
+        </main>
+        <%- include('../layouts/footer'); -%>
+
+    </body>
+
+    </html>

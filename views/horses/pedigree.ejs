@@ -1,0 +1,124 @@
+<div>
+    <H2><strong>Genealogia </strong></H2>
+</div>
+<br><br>
+<div class="chart-container" width=100%; style="border: 3px solid #8B0000">
+</div>
+
+
+<script id="arbolChart">
+    var chart
+    datas = <%- arbolData %>
+
+
+    chart = new d3.OrgChart()
+        .container('.chart-container')
+        .svgWidth(1000)
+        .svgHeight(700)
+    //    .backgroundColor("#ffffff")
+        .data(datas)
+        .nodeHeight((d) => 120)
+        .nodeWidth((d) => 320)
+        .linkUpdate(function (d, i, arr)
+        {
+            d3.select(this)
+                .attr("stroke", "#8B0000")
+                .attr("stroke-width", 2)
+
+        })
+        .siblingsMargin(node => 200)
+        .compactMarginPair(node => 100)
+        .onNodeClick(d => seleccionaNodo(d, datas))
+        .layout('left')
+        .nodeContent(function (d, i, arr, state)
+        {
+
+            if (d.data.sex === 'M')
+            {
+                color = '#ffffff'
+                sexo = `Macho`
+            } else
+            {
+                color = '#ffffff'
+                sexo = `Hembra`
+            }
+            if (d.data.parentId === "")
+            {
+                d.height = 280
+                imagenData = `<img src="/assets/img/icono.png"
+        style="position:absolute;margin-top:90px;margin-left:${ -200 }px;border-radius:75px;width:150px;height:auto;" />`
+                nodoData1 = `<div style="color:#716E7B;margin-left:20px;margin-top:3px;font-size:13px;"><strong>Psl Num: </strong> 
+                <%=data.pslNum%>
+             </div>
+             <div style="color:#716E7B;margin-left:20px;margin-top:3px;font-size:13px;"><strong>Psl SN: </strong> 
+                <%=data.pslSN%>
+             </div>`
+                nodoData2 = `<div style="color:#716E7B;margin-left:20px;margin-top:3px;font-size:13px;"><strong>Nacimiento: </strong> 
+                <%=data.foalingDate.slice(0,10)%>
+             </div>
+             <div style="color:#716E7B;margin-left:20px;margin-top:3px;font-size:13px;"><strong>Microchip: </strong> 
+            <%=data.pedigree[0]?.microchip%> </div>
+            <div style="color:#716E7B;margin-left:20px;margin-top:3px;font-size:13px;"><strong>Capa: </strong> 
+            <%=data.color%> </div>
+            <div style="color:#716E7B;margin-left:20px;margin-top:3px;font-size:13px;"><strong>Pv: </strong> 
+                <%=data.pv%>
+             </div>
+             <div style="color:#716E7B;margin-left:20px;margin-top:3px;font-size:13px;"><strong>Tipo de Cubrición: </strong> 
+                <%=data.tipoCubricion%>
+             </div>
+             <div style="color:#716E7B;margin-left:20px;margin-top:3px;font-size:13px;"><strong>Area: </strong> 
+                <%=(data.area.trim() + " " +data.imported.trim()).trim() %>
+             </div>
+             <div style="color:#716E7B;margin-left:20px;margin-top:3px;font-size:13px;"><strong>Ganaderia: </strong> 
+                ${ d.data.breeder }
+                <% if (data.owner[0]?.farm !=null ) { %>
+                    <%=data.owner[0]?.farm %>
+                <%} else{%>
+                    <%=(data.owner[0]?.firstName + " " + data.owner[0]?.lastName).trim()%>
+                <%}%> </div>`
+
+            } else
+            {
+                d.height = 150
+                imagenData = ``
+                nodoData1 = ``
+                nodoData2 = `<div style="color:#716E7B;margin-left:20px;margin-top:3px;font-size:13px;"><strong>Microchip: </strong> 
+                ${ d.data.microchip }
+             </div>
+             <div style="color:#716E7B;margin-left:20px;margin-top:3px;font-size:13px;"><strong>Capa: </strong> 
+            ${ d.data.color } </div>
+             <div style="color:#716E7B;margin-left:20px;margin-top:3px;font-size:13px;"><strong>Ganaderia: </strong> 
+                ${ d.data.breeder }
+             </div>`
+            }
+            return `<div
+style="font-family: 'Inter', sans-serif;background-color:${ color }; position:absolute;text-align: left ;margin-top:-1px; margin-left:-1px;width:${ d.width }px;height:${ d.height }px;border-radius:10px;border: 3px solid #8B0000">
+${ imagenData }
+<img src=" ${ `https://lusitanos.s3.us-east-1.amazonaws.com/hierros/${ d.data.breeder }.bmp` }"onerror="this.src='/assets/img/icono.png'"
+    style="position:absolute;margin-top:35px;margin-left:${ 250 }px;border-radius:100px;width:40px;height:auto;" />
+            <div style="font-size:25px;color:#ffffff;background-color:#8B0000; justify-content:center; display:flex"> <strong> ${ d.data.horseName
+                } </strong></div>
+            <div style="color:#716E7B;margin-left:20px;margin-top:3px;font-size:13px;"><strong>No. Registro: </strong> ${ d.data.regNum
+                } </div>
+            <div style="color:#716E7B;margin-left:20px;margin-top:3px;font-size:13px;"><strong>No. Referencia: </strong> ${ d.data.regRef
+                } </div>
+            ${ nodoData1 }
+            <div style="color:#716E7B;margin-left:20px;margin-top:3px;font-size:13px;"><strong>Sexo: </strong> 
+            ${ sexo } </div>
+            ${ nodoData2 }
+            <div style="color:#716E7B; margin-left:20px; margin-top:3px;font-size:13px;"> ${ d.data.id }, ${ d.data.parentId } </div>
+</div>`
+
+
+
+        })
+
+        .render()
+    chart.setExpanded("8").render()
+    chart.setExpanded("10").render()
+    chart.setExpanded("12").render()
+    chart.setExpanded("14").render()
+    chart.fit()
+
+
+</script>

@@ -1,0 +1,151 @@
+
+<div class="container--fluid">
+
+  <!-- ============= COMPONENT ============== -->
+  <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+   <div class="container-fluid">
+      <a class="navbar-brand" href="/">
+        <img src="/assets/img/logo.png" alt="" width="200" height="auto" />
+      </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main_nav"  aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    <div class="collapse navbar-collapse" id="main_nav">
+    
+  
+    <ul class="navbar-nav">
+
+      <li class="nav-item active"> <a class="nav-link" href="/"><i class="fa fa-home fa icono_menu" aria-hidden="true"></i></a> </li>
+      <% if (!loggedIn) { %>
+        <li class="nav-item" ><a class="nav-link" href="/auth/register" style="color:#ffffff"> Registro </a></li>
+        <li class="nav-item"><a class="nav-link" href="formato" style="color:#ffffff"> Formatos </a></li>
+        <li class="nav-item"><a class="nav-link" href="reglamento" style="color:#ffffff" > Reglamentos </a></li>
+        <li class="nav-item"><a class="nav-link" href="/pedigrees/arbol" style="color:#ffffff"> Concursos </a></li>
+        <li class="nav-item"><a class="nav-link" href="/owners/ownerdir" style="color:#ffffff"> Dir. Ganaderos </a></li>
+      <% } %>
+
+      <li class="nav-item"><a class="nav-link" href="/pedigrees/arbol" style="color:#ffffff"> Studbook </a></li>
+      <% if (loggedIn) { %>
+      <li class="nav-item" ><a class="nav-link" href="/owners/owner" style="color:#ffffff"> Ganaderias </a></li>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" style="color:#ffffff">  Caballos  </a>
+          <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="/horses/horse"> Caballos </a></li>
+          <li><a class="dropdown-item" href="/formatos/preregistro"> Pre Registro </a></li>
+          <!-- <li><a class="dropdown-item" href="#"> Pedigree </a></li> -->
+          <div class="dropdown-divider"></div>
+          <li><a class="dropdown-item" href="/estados/ganaderia"> Estado de Ganaderias </a></li>
+          <!-- <li><a class="dropdown-item" href="/cubriciones/cubricion"> Cubriciones </a></li>
+          <li><a class="dropdown-item" href="/bajas/baja"> Bajas </a></li> -->
+          </ul>
+      </li>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" style="color:#ffffff">  Pagos  </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#"> Pago en Linea </a></li>
+            <li><a class="dropdown-item" href="/cuentas/conceptos"> Tarifas </a></li>
+          </ul>
+      </li>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" style="color:#ffffff">  Reportes  </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/reportes/general"> Reportes general </a></li>
+            <div class="dropdown-divider"></div>
+            <li><a class="dropdown-item" href="#"> Reportes del semental </a></li>
+            <li><a class="dropdown-item" href="#"> Certificados de Registro </a></li>
+            <div class="dropdown-divider"></div>
+            <li><a class="dropdown-item" href="#"> Reportes &raquo; </a>
+              <ul class="submenu dropdown-menu">
+                <li><a class="dropdown-item" href="/reportes/caballos/1"> Pedigree </a></li>
+                <li><a class="dropdown-item" href="/reportes/caballos/2">Caballos</a></li>
+                <li><a class="dropdown-item" href="/reportes/caballos/3">Descendencia</a></li>
+                <li><a class="dropdown-item" href="#">Criadores</a></li>
+              </ul>
+            </li>
+
+          </ul>
+      </li>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" style="color:#ffffff">  Formatos  </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/formatos/preregistro"> PreRegistro </a></li>
+            <div class="dropdown-divider"></div>
+            <li><a class="dropdown-item" href="/formatos/valoraciones"> Valoraciones </a></li>
+            <li><a class="dropdown-item" href="/formatos/fertilidad"> Estudio de Fertilidad </a></li>
+            <div class="dropdown-divider"></div>
+            <li><a class="dropdown-item" href="#"> Estado de Ganaderia </a></li>
+            <div class="dropdown-divider"></div>
+            <li><a class="dropdown-item" href="#"> Concurso &raquo; </a>
+              <ul class="submenu dropdown-menu">
+                <li><a class="dropdown-item" href="#"> Festival Lusitano </a></li>
+                <li><a class="dropdown-item" href="#"> Equitación de Trabajo </a></li>
+                <li><a class="dropdown-item" href="#"> Adiestramiento </a></li>
+              </ul>
+            </li>
+          </ul>
+      </li>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" style="color:#ffffff">  Administración </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/users/user"> Usuarios </a></li>
+            <div class="dropdown-divider"></div>
+            <li><a class="dropdown-item" href="#"> Generación de recibos </a></li>
+            <li><a class="dropdown-item" href="#"> Catálogos </a></li>
+          </ul>
+      </li>
+      <% } %>
+    </ul>
+  
+    <span class="navbar-text ms-auto" style="color:#ffffff">
+      <% if (userData !==null) { %>
+        <%= `Hola, ${userData.user.name}` %>
+          <% } else {%>
+            <%= `` %>
+            <% } %>
+    </span>
+
+    <ul class="navbar-nav ms-auto">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"> <i class="fa fa-user icono_menu mr-auto " aria-hidden="true"></i> </a>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <% if (!loggedIn) { %>
+              <li><a class="dropdown-item" href="/auth/login"> Iniciar Sesión </a></li>
+              <li><a class="dropdown-item" href="/auth/register"> Registrarse </a></li>
+            <% } %>
+            <% if (loggedIn) { %>
+              <li><a class="dropdown-item" href="/auth/updatepwd"> Actualizar Contraseña </a></li>
+            <% } %>
+            <% if (!loggedIn) { %>
+              <li><a class="dropdown-item" href="/auth/forgotpwd"> Olvidaste Contraseña </a></li>
+            <% } %>
+            <% if (loggedIn) { %>
+              <div class="dropdown-divider"></div>
+              <li><a class="dropdown-item" href="/auth/updateinfo"> Actualizar Información </a></li>
+              <div class="dropdown-divider"></div>
+              <% if (userData !== null) { %>
+                  <% if (!userData.user.isTwoFactorEnable) { %>
+                    <li><a class="dropdown-item" href="/auth/managefa"> Activar MFA </a></li>
+                  <% } %>
+              <% } %>
+
+              <li><a class="dropdown-item" href="/auth/disablefa"> Desactivar MFA </a></li>
+              <div class="dropdown-divider"></div>
+              <li><a class="dropdown-item" href="/auth/logout"> Log Out </a></li>
+            <% } %>
+          </ul>
+      </li>
+    </ul>
+  
+    </div> <!-- navbar-collapse.// -->
+   </div> <!-- container-fluid.// -->
+  </nav>
+  
+  <!-- ============= COMPONENT END// ============== -->
+  
+
+</div>

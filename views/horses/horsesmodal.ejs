@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('../layouts/header'); -%>
+    <%- include('../layouts/scripts'); -%>
+
+        <body>
+            <%- include('../layouts/menu'); -%>
+<br>
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h3><strong>
+                    <%= `${data._id} ${data.horseName}` %>
+                </strong> </h3>
+        </div>
+        <div class="col d-flex justify-content-end">
+            <input type="button" value="Regresar a Caballos" class="btn btn-primary text-center"
+        onclick="history.go(-1)">
+        </div>
+    </div>
+
+</div>
+
+
+
+<br>
+<div class="tab">
+    <button class="tablinks active" onclick="openForm(event, 'Caballo')">Ejemplar</button>
+    <button class="tablinks" onclick="openForm(event, 'Pedigree')">Pedigree</button>
+    <% if(role==='admin' ) { %>
+        <button class="tablinks" onclick="openForm(event, 'Markings')">Reseña</button>
+
+        <% } %>
+
+    <% if(data.sex==='Hembra' ) { %>
+        <button class="tablinks" onclick="openForm(event, 'Cubriciones')">Cubriciones</button>
+        <button class="tablinks" onclick="openForm(event, 'Nacimientos')">Nacimientos</button>
+    <% } %>
+        
+
+
+    <button class="tablinks" onclick="openForm(event, 'Hijos')">Descendencia</button>
+
+    <!-- <button class="tablinks" onclick="openForm(event, 'Valoracion')">Valoraciones</button> -->
+    <button class="tablinks" onclick="openForm(event, 'Premios')">Premios</button>
+    
+    <% if(role !=='admin' ) { %>
+        <button class="tablinks" onclick="openForm(event, 'Fotos')">Fotos y Videos</button>
+        <button class="tablinks" onclick="openForm(event, 'Sanitarios')">Sanitarios</button>
+        <button class="tablinks" onclick="openForm(event, 'Nutricionales')">Nutricionales</button>
+    <% } %>
+
+</div>
+
+<div id='msg' class="alert alert-dismissible fade show " style="display:none;">
+    <strong>Note!</strong> This is a simple example of dismissible alert.
+</div>
+
+<div id="Hijos" class="tabcontent">
+    <%- include('hijos'); -%>
+</div>
+<div id="Markings" class="tabcontent">
+    <%- include('resena'); -%>
+</div>
+<div id="Pedigree" class="tabcontent">
+    <%- include('pedigree'); -%>
+</div>
+<div id="Cubriciones" class="tabcontent">
+    <%- include('cubriciones'); -%>
+</div>
+<div id="Nacimientos" class="tabcontent">
+    <%- include('nacimientos'); -%>
+</div>
+<div id="Fotos" class="tabcontent">
+    <%- include('fotos'); -%>
+</div>
+<div id="Premios" class="tabcontent">
+    <%- include('premios'); -%>
+</div>
+<div id="Sanitarios" class="tabcontent">
+    <%- include('sanitarios'); -%>
+</div>
+<div id="Nutricionales" class="tabcontent">
+    <%- include('nutricionales'); -%>
+</div>
+<div id="Caballo" class="tabcontent" style="display: block ;">
+    <%- include('caballos'); -%>
+</div>
+
+
+<%- include('../layouts/footer'); -%>
+
+
+
+
+</body>
+
+</html>
+
+
+<script>
+    function openForm(evt, form)
+    {
+        var i, tabcontent, tablinks
+        tabcontent = document.getElementsByClassName("tabcontent")
+        console.log(tabcontent)
+        for (i = 0; i < tabcontent.length; i++)
+            {
+                tabcontent[i].style.display = "none"
+            }
+        tablinks = document.getElementsByClassName("tablinks")
+        for (i = 0; i < tablinks.length; i++)
+            {
+                tablinks[i].className = tablinks[i].className.replace(" active", "")
+            }
+        document.getElementById(form).style.display = "block"
+        evt.currentTarget.className += "active"
+    }
+
+
+
+    function buildTable($el)
+    {
+
+        console.log('tabla', $el.attr('id'))
+
+            if ($el.attr('id') === 'cubriciones') {
+                $el.bootstrapTable({
+            data: <%- JSON.stringify(data.cubricion) %>,
+            onClickRow: function (row, $element)
+            {
+                // row: the record corresponding to the clicked row, 
+                // $element: the tr element.
+                nuevaCubricion(row)
+            },
+                })
+            } else if ($el.attr('id') === 'sanitario') {
+                $el.bootstrapTable({
+            data: <%- JSON.stringify((data.sanitario[0]?.Sanit ? data.sanitario[0]?.Sanit : [] ) ) %>,
+            onClickRow: function (row, $element)
+            {
+                nuevaSanitario(row)
+            },
+                })
+            } else if ($el.attr('id') === 'nacimientos') {
+                $el.bootstrapTable({
+            data: <%- JSON.stringify(data.nacimiento) %>,
+            // onClickRow: function (row, $element)
+            //{
+            //    nuevaNacimiento(row)
+            //}, 
+                })
+            } else if ($el.attr('id') === 'nutricional') {
+                $el.bootstrapTable({
+            data: <%- JSON.stringify((data.nutricion[0]?.Nutri? data.nutricion[0]?.Nutri : [])) %>,
+            onClickRow: function (row, $element)
+            {
+                nuevaNutricional(row)
+            },
+                })
+            } else if ($el.attr('id') === 'premios') { 
+                $el.bootstrapTable(
+                    {
+            data: <%- JSON.stringify((data.prem[0]?.Premios ? data.prem[0]?.Premios : [])) %>,
+            onClickRow: function (row, $element)
+            {
+                nuevaPremio(row)
+            },
+                })
+
+            } else if ($el.attr('id') === 'cubNacT') { 
+                $el.bootstrapTable(
+                    {
+            data: <%- JSON.stringify(data.cubricion) %>,
+            onClickRow: function (row, $element)
+            {
+                recuperaNacimiento(row)
+            },
+                })
+
+            } else if ($el.attr('id') === 'hijos') { 
+                $el.bootstrapTable(
+                    {
+            data: <%- JSON.stringify(hijos) %>,
+                })
+
+            } 
+
+
+
+        
+    }
+
+
+    function iconformatter(value)
+    {
+        console.log(value)
+        let img = `<img src="https://lusitanos.s3.us-east-1.amazonaws.com/hierros/${ value }.bmp" alt="" width="60" height="40" onerror=src="/assets/img/icono.png">'`
+        console.log(img)
+        return img
+    }
+
+    function dateFormatter(value)
+    {
+        console.log(value)
+        if (value != undefined)
+        {
+            return value.slice(0, 10)
+        } else
+        {
+            return value = '-'
+        }
+
+    }
+
+    function sexFormatter(value)
+    {
+        console.log(value)
+        if (value == 'H')
+        {
+            return 'HEMBRA'
+        } else
+        {
+            return value = 'MACHO'
+        }
+
+    }
+
+    function horseFormatter(value, row)
+    {
+        console.log('cubricion', row)
+
+        return row?.horseData[0]?.horseName
+
+    }
+
+    $(function ()
+    {
+        buildTable($('#cubriciones'))
+        buildTable($('#sanitario'))
+        buildTable($('#nacimientos'))
+        buildTable($('#nutricional'))
+        buildTable($('#premios'))
+        buildTable($('#cubNacT'))
+        buildTable($('#hijos'))
+    })
+
+</script>
+

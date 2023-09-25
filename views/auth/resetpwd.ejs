@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+<%- include('../layouts/header'); -%> <%- include('../layouts/scripts'); -%>
+
+<html>
+  <body class="text-center">
+    <%- include('../layouts/menu'); -%>
+    <main class="form-signin body-signin">
+      <form
+        action="/auth/resetpwdx"
+        method="POST"
+        enctype="multipart/form-data"
+        onsubmit="return changePwdValidation()"
+      >
+        <img
+          class="mb-4"
+          src="/assets/img/icono.png"
+          alt=""
+          width="101"
+          height="80"
+        />
+        <h1 class="h3 mb-3 fw-normal">Recuperación de Contraseña</h1>
+        <br />
+        <% if(errors != null ){%>
+        <ul class="list-group">
+          <li class="list-group-item list-group-item-danger"><%= errors %></li>
+        </ul>
+        <% } %> <% if(success != null ){%>
+        <ul class="list-group">
+          <li class="list-group-item list-group-item-success">
+            <%= success %>
+          </li>
+        </ul>
+        <% } %>
+        <br />
+        <div class="form-floating">
+          <label for="floatingPassword">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="newPassword"
+            name="newPassword"
+            placeholder="Password"
+            onblur="equalPassword()"
+          />
+        </div>
+
+        <div class="form-floating">
+          <label for="floatingPassword">Confirmar Password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="newPasswordConf"
+            name="newPasswordConf"
+            placeholder="Password"
+            onblur="validatePwd()"
+          />
+        </div>
+
+        <button class="w-100 btn btn-lg btn-primary" type="submit">
+          Enviar...
+        </button>
+      </form>
+    </main>
+
+    <%-include('../layouts/footer'); -%>
+  </body>
+</html>

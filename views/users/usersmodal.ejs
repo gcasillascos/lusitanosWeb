@@ -1,0 +1,105 @@
+<div class="container">
+    <div class="row">
+        <div id="ownersf" class="col-lg-12 col-md-12 mx-auto">
+
+            <div id='msg' class="alert alert-dismissible fade show " style="display:none;">
+                <strong>Note!</strong> This is a simple example of dismissible alert.
+            </div>
+
+            <form id="newOwner" class="was-validated" action="javascript:usRegistrar()" method="POST"
+                enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-lg-11">
+
+                        <div class="row ">
+
+                            <div class="col-lg-5 form-group floating-label-form-group controls">
+                                <label>Nombre:</label><i class="fa fa-asterisk rojo_aster"></i>
+                                <input type="text" class="form-control is-invalid" placeholder="Nombre" id="name"
+                                    name="name" required value="<%= data.name %>">
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row ">
+                            <div class="col-lg-6 form-group floating-label-form-group controls">
+                                <label>Ganadería:</label><i class="fa fa-asterisk rojo_aster"></i>
+                                <input type="text" class="form-control" placeholder="Ganadería" id="owner" name="owner"
+                                    required value="<%= data.owner %>">
+                            </div>
+
+                        </div>
+
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-6 form-group floating-label-form-group controls">
+                                <label>E mail:</label><i class="fa fa-asterisk rojo_aster"></i>
+                                <input type="text" class="form-control" placeholder="E mail" id="email" name="email"
+                                    required value="<%= data.email  %>">
+                            </div>
+
+                            <div class="col-lg-3 form-group floating-label-form-group controls">
+                                <label>Role:</label><i class="fa fa-asterisk rojo_aster"></i>
+                                <select class="form-select" aria-label="Default select example" id="role" name="role"
+                                    required>
+                                    <option value="none" selected>Seleccionar...</option>
+                                    <option value="user">User</option>
+                                    <option value="publisher">Publisher</option>
+                                </select>
+                                <script defer>
+                                    jQuery('#role').val("<%= data.role  %>")
+                                </script>
+
+
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-lg-5 form-group floating-label-form-group controls">
+                                <label>Password</label><i class="fa fa-asterisk rojo_aster"></i>
+                                <input type="password" class="form-control" placeholder="Password" id="pwd" name="pwd"
+                                    required>
+                            </div>
+                            <div class="col-lg-5 form-group floating-label-form-group controls">
+                                <label>Password (conf):</label><i class="fa fa-asterisk rojo_aster"></i>
+                                <input type="password" class="form-control" placeholder="Passwrod" id="passwordConf"
+                                    name="passwordConf" required>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="col-lg-1" style="padding-right:0px">
+                        <% if (id==='0' ) { %>
+
+
+                            <div class="float-right mb-3">
+                                <button type="submit" class="btn btn-primary text-center" id="sendRegistrar"
+                                    style="width:95px">Registrar</button>
+                            </div>
+
+
+
+                            <% } else { %>
+
+
+                                <div class=" float-right mb-3">
+
+                                    <button type="button" class="btn btn-primary text-center" id="sendModificar"
+                                        style="width:95px" onclick="usModificar('<%= id %>')">Modificar</button>
+                                </div>
+
+                                <div class=" float-right">
+
+                                    <button type="button" class="btn btn-primary text-center" id="sendEliminar"
+                                        style="width:95px" onclick="usEliminar('<%= id %>')">Eliminar</button>
+                                </div>
+
+
+                                <% } %>
+                    </div>
+            </form>
+        </div>
+    </div>
+
+
+</div>

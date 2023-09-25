@@ -1,0 +1,225 @@
+<h3>Reseña</h3>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-11">
+            <main>
+                <div class="left-block">
+                    <div class="colors">
+                        <button type="button" value="#0000ff"></button>
+                        <button type="button" value="#009fff"></button>
+                        <button type="button" value="#0fffff"></button>
+                        <button type="button" value="#bfffff"></button>
+                        <button type="button" value="#000000"></button>
+                        <button type="button" value="#333333"></button>
+                        <button type="button" value="#666666"></button>
+                        <button type="button" value="#999999"></button>
+                        <button type="button" value="#ffcc66"></button>
+                        <button type="button" value="#ffcc00"></button>
+                        <button type="button" value="#ffff00"></button>
+                        <button type="button" value="#ffff99"></button>
+                        <button type="button" value="#003300"></button>
+                        <button type="button" value="#555000"></button>
+                        <button type="button" value="#00ff00"></button>
+                        <button type="button" value="#99ff99"></button>
+                        <button type="button" value="#f00000"></button>
+                        <button type="button" value="#ff6600"></button>
+                        <button type="button" value="#ff9933"></button>
+                        <button type="button" value="#f5deb3"></button>
+                        <button type="button" value="#330000"></button>
+                        <button type="button" value="#663300"></button>
+                        <button type="button" value="#cc6600"></button>
+                        <button type="button" value="#deb887"></button>
+                        <button type="button" value="#aa0fff"></button>
+                        <button type="button" value="#cc66cc"></button>
+                        <button type="button" value="#ff66ff"></button>
+                        <button type="button" value="#ff99ff"></button>
+                        <button type="button" value="#e8c4e8"></button>
+                        <button type="button" value="#ffffff"></button>
+                    </div>
+                    <div class="brushes">
+                        <button type="button" value="1"></button>
+                        <button type="button" value="2"></button>
+                        <button type="button" value="3"></button>
+                        <button type="button" value="4"></button>
+                        <button type="button" value="5"></button>
+                    </div>
+                    <div class="buttons">
+                        <button id="delete" type="button">Delete</button>
+                        <button id="clear" type="button">Clear</button>
+                        <button id="save" type="button">Save</button>
+                    </div>
+                </div>
+                <div class="right-block">
+                        <canvas id="paint-canvas" width="640" height="450" '></canvas>
+
+
+                </div>
+            </main>
+
+
+
+        </div>
+        <div class="col-lg-1" style="padding-right:0px">
+            <% if (id==='0' ) { %>
+
+
+                <div class="float-right mb-3">
+                    <button type="submit" class="btn btn-primary text-center" id="sendRegistrar"
+                        style="width:95px">Registrar</button>
+                </div>
+
+
+
+                <% } else { %>
+
+
+                    <div class=" float-right mb-3">
+
+                        <button type="button" class="btn btn-primary text-center" id="sendModificar" style="width:95px"
+                            onclick="owModificar('<%= id %>')">Modificar</button>
+                    </div>
+
+                    <div class=" float-right">
+
+                        <button type="button" class="btn btn-primary text-center" id="sendEliminar" style="width:95px"
+                            onclick="owEliminar('<%= id %>')">Eliminar</button>
+                    </div>
+
+
+                    <% } %>
+        </div>
+        <br>
+        <div class="col-lg-11">
+            <label for="notes">Reseña:</label>
+            <textarea class="form-control" id="markings" name="markings" rows="5"><%= data.markings %></textarea>
+        </div>
+
+    </div>
+</div>
+
+<script>
+
+    let canvas = document.getElementById('paint-canvas')
+    let ctx = canvas.getContext('2d')
+    let boundings = canvas.getBoundingClientRect()
+    console.log(canvas, ctx)
+
+    const img = new Image()
+    // img.src = 'horse.png' 
+    img.src = `https://lusitanos.s3.us-east-1.amazonaws.com/markings/<%- id %>.bmp`
+    console.log(img.src)
+    img.onload = function ()
+    {
+        
+        let mouseX = 0
+        let mouseY = 0
+        ctx.strokeStyle = 'black'
+        ctx.lineWidth = 1
+        let isDrawing = false
+
+
+       
+
+        console.log(this)
+        let color = document.getElementsByClassName('colors')[0]
+        
+        color.addEventListener('click', function (event)
+        {
+            ctx.strokeStyle = event.target.value || 'black'
+            console.log(ctx.strokeStyle)
+        })
+
+        let brush = document.getElementsByClassName('brushes')[0]
+
+        brush.addEventListener('click', function (event)
+        {
+            ctx.lineWidth = event.target.value || 1
+            console.log(ctx.lineWidth)
+        })
+
+        let button = document.getElementsByClassName('buttons')[0]
+
+        button.addEventListener('click', function (event)
+        {
+            console.log(event.target.value)
+
+
+        })
+
+        canvas.addEventListener('mousedown', function (event)
+        {
+            setMouseCoord(event)
+            isDrawing = true
+
+            ctx.beginPath()
+            ctx.moveTo(mouseX, mouseY)
+        })
+
+        canvas.addEventListener('mousemove', function (event)
+        {
+            setMouseCoord(event)
+
+            if (isDrawing)
+            {
+                ctx.lineTo(mouseX, mouseY)
+                ctx.stroke()
+            }
+
+        })
+
+        canvas.addEventListener('mouseup', function (event)
+        {
+            setMouseCoord(event)
+            isDrawing = false
+        })
+
+
+        let clearButton = document.getElementById('clear')
+
+        clearButton.addEventListener('click', function ()
+        {
+            ctx.clearRect(0, 0, canvas.width, canvas.height)
+            ctx.drawImage(img, 0, 0)
+            console.log('clear')
+
+        })
+
+
+        let saveButton = document.getElementById('save')
+
+        saveButton.addEventListener('click', function ()
+        {
+            console.log('save')
+
+        })
+
+
+        let deleteButton = document.getElementById('delete')
+
+        deleteButton.addEventListener('click', function ()
+        {
+            console.log('delete')
+            ctx.strokeStyle = 'white'
+        })
+
+        function setMouseCoord(event)
+        {
+            mouseX = event.clientX - boundings.left
+            mouseY = event.clientY - boundings.top
+            console.log(mouseX, mouseY)
+        }
+
+
+        function drawImg()
+        {
+
+            ctx.drawImage(this, 0, 0, canvas.width, canvas.height)
+        }
+
+
+
+
+    }
+
+</script>
