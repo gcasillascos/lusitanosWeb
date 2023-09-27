@@ -228,6 +228,17 @@
 
     }
 
+    function stateFormatter(value, row)
+    {
+        console.log('status', value)
+        if(value){
+            return {
+                disabled: true,
+                checked: true
+              }
+        }
+    }
+
     function horseFormatter(value, row)
     {
         console.log('cubricion', row)

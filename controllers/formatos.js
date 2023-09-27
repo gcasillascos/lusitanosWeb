@@ -54,16 +54,21 @@ exports.agregaPreRegistro = asyncHandler(async (req, res) => {
   const errors = null;
   const success = null;
   let urlax = null;
+  let data = null;
+  const id = req.body._id
+
 
   if (req.session.role !== 'admin') {
     urlax = `api/v1/owners?_id=${req.session.owner}`
   } else {
     urlax = `api/v1/preregistros`
+    data = mapeoNacimiento(req.body)
   }
 
   const config = {
     method: 'POST',
     url: `${baseurl}/${urlax}`,
+    data,
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${req.session.token}`,
@@ -76,11 +81,11 @@ exports.agregaPreRegistro = asyncHandler(async (req, res) => {
       console.log(datos);
       datos.token = req.session.token;
 
-      res.render('./formatos/preregistro', {
-        success,
-        errors,
-        data: JSON.stringify(datos.data),
-      });
+      // res.render('./formatos/preregistro', {
+      //   success,
+      //   errors,
+      //   data: JSON.stringify(datos.data),
+      // });
     })
     .catch((err) => {
       console.log(err.response.data);
@@ -88,6 +93,41 @@ exports.agregaPreRegistro = asyncHandler(async (req, res) => {
       valError = err.response.data.error;
       res.render('./formatos/preregistro', { errors: valError, success: null });
     });
+
+// Hacer el update del registro de nacimientos
+    urlNac = `api/v1/nacimientos/${id}`
+
+
+    const configNac = {
+      method: 'PUT',
+      url: `${baseurl}/${urlNac}`,
+      data: {regPre: true},
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${req.session.token}`,
+      },
+    };
+
+
+    await axios(configNac)
+    .then((response) => {
+      const datos = response.data;
+      console.log(datos);
+      datos.token = req.session.token;
+
+    })
+    .catch((err) => {
+      console.log(err.response.data);
+
+      valError = err.response.data.error;
+  //    res.render('./formatos/preregistro', { errors: valError, success: null });
+    });
+
+
+
+
+
+
 });
 
 
@@ -370,3 +410,21 @@ exports.fertilidad = asyncHandler(async (req, res) => {
         });
     }
   });
+
+
+  function mapeoNacimiento(data) {
+
+    data.nacimientos = data._id
+    delete data._id
+    delete data.regPre
+    delete data.regFinal
+    delete data.deleted
+    delete data.lastUpdate
+    delete data.__v
+    delete data.id
+    data.ownerId = data.breederId
+    return data
+  }
+
+
+  

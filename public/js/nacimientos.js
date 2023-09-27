@@ -19,6 +19,7 @@
               $('#msg').text(data.error);
             }
           });
+
     })
 
     // seleccion.forEach( async (sel) => {

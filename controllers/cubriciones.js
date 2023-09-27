@@ -285,6 +285,7 @@ function newRegMapping(data){
     damRegNum: data.damRegNum,
     sireRegNum: data.sireName,
     tipoCubricion: data.tipoCubricion,
+    tipoRegistro: data.tipoRegistro,
     ultimaMonta: data.ultimaMonta,
     deliveryDate: data.deliveryDate,
   }
@@ -298,6 +299,7 @@ function updateRegMapping(data) {
   damRegNum: data.damRegNum,
   sireRegNum: data.sireName,
   tipoCubricion: data.tipoCubricion,
+  tipoRegistro: data.tipoRegistro,
   ultimaMonta: data.ultimaMonta,
   deliveryDate: data.deliveryDate,
   resCubricion: data.resCubricion,
@@ -328,5 +330,6 @@ function mapeoNacimiento(data) {
     damRegNum: data.damRegNum,
     sireRegNum: data.sireRegNum,
     tipoCubricion: data.tipoCubricion,
+    tipoRegistro: data.tipoRegistro
   }
 } 

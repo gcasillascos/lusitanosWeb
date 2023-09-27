@@ -30,6 +30,7 @@
                         <th data-field="ultimaMonta" data-sortable="true" data-formatter="dateFormatter">Fecha
                             Cubrición</th>
                         <th data-field="tipoCubricion" data-sortable="true">Tipo de Cubrición</th>
+                        <th data-field="tipoRegistro" data-sortable="true">Tipo de Registro</th>
                         <th data-field="resCubricion" data-sortable="true">Resultado</th>
                         <th data-field="deliveryDate" data-sortable="true" data-formatter="dateFormatter">Fecha
                             Estimada</th>
@@ -101,7 +102,6 @@
                                     </div>
                                     <div class="col-lg-4 form-group floating-label-form-group controls mt-3 mb-3">
 
-                                        <div>
                                             <div class=" form-group floating-label-form-group controls">
                                                 <label>Tipo de Cubrición:</label>
                                                 <select class="form-select"
@@ -116,10 +116,24 @@
 
                                             </div>
 
-                                        </div>
-    
                                     </div>
+                                    <div class="col-lg-4 form-group floating-label-form-group controls mt-3 mb-3">
 
+                                        <div class=" form-group floating-label-form-group controls">
+                                            <label>Tipo de Registro:</label>
+                                            <select class="form-select"
+                                                aria-label="Default select example" id="tipoCubricion"
+                                                name="tipoCubricion">
+
+                                                <option value='none' selected>Seleccione...</option>
+                                                <option value='PSL'>PSL</option>
+                                                <option value='SOLO MEXICO'>SOLO MEXICO</option>
+                                                <option value='CRUZADO'>CRUZADO</option>
+                                            </select>
+
+                                        </div>
+
+                                </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-4 mt-3">

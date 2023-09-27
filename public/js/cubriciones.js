@@ -1,5 +1,3 @@
-const { registerFont } = require('pdfkit')
-const { cubricion } = require('../../controllers/cubriciones')
 
 function llamaCubricion(id) {
     console.log(id);
@@ -23,6 +21,7 @@ function nuevaCubricion(row) {
     console.log(row.sireRegNum)
     $('#sireRegNum').val(row.sireRegNum) //NIN
     $('#tipoCubricion').val(row.tipoCubricion)
+    $('#tipoRegistro').val(row.tipoRegistro)
     console.log(row.tipoCubricion)
     $('#resCubricion').val(row.resCubricion)
     console.log(row.resCubricion)
@@ -61,6 +60,7 @@ function cubricionBtnNueva(id){
   $('#sireRegNum').val('') //NIN
   $('#resCubricion').val('none')
   $('#tipoCubricion').val('none')
+  $('#tipoRegistro').val('none')
   $('#desc').val('')
   $('#ultimaMonta').val('')
   $('#fecEst').text('')

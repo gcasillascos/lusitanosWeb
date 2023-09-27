@@ -19,13 +19,14 @@
             data-toolbar="toolbarPre"
             data-page-list="[10, 25, 50, 100, all]"
             data-id-field="_id" 
-            data-multiple-select-row="true" 
+            data-multiple-select-row="true"
+            data-maintain-meta-data="true"
             data-click-to-select="true"
             data-locale="es-MX">
 
                 <thead>
                     <tr class="header-color">
-                        <th data-field="regPre" data-checkbox=true data-sortable=true>Pre Registro</th> 
+                        <th data-field="regPre" data-checkbox=true data-sortable=true data-formatter="stateFormatter">Pre Registro</th> 
                         <th data-field="horseName" data-sortable=true>Nombre</th>
                         <th data-field="foalingDate" data-sortable=true data-formatter="dateFormatter">Fecha Nacimiento
                         </th>
