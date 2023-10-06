@@ -50,12 +50,14 @@
                                             <label>Tipo de Cubrición:</label>
                                             <select class="form-select" aria-label="Tipo de Cubrición"
                                                 id="tipoCubricion" name="tipoCubricion" required>
-                                                <option value="none" selected>Seleccionar...</option>
-                                                <option value="Monta Natural">MONTA NATURAL</option>
-                                                <option value="Inseminacion">INSEMINACIÓN</option>
-                                                <option value="Trans. Embrionaria">TRANS. EMBRIONARIA</option>
+
+                                                <option value=none selected>Seleccionar...</option>
+                                                <option value='Monta Natural'>Monta Natural</option>
+                                                <option value='Inseminacion'>Inseminación</option>
+                                                <option value='Transferencia Embrionaria'>Transferencia Embrionaria</option>
                                             </select>
                                             <script defer>
+                                                <% console.log('cubri', data.tipoCubricion) %>
                                                 jQuery('#tipoCubricion').val("<%= data.tipoCubricion %>")
                                             </script>
                                         </div>
@@ -499,7 +501,10 @@
                                     <label>Nacido en Pais:</label>
                                     <div class="form-group floating-label-form-group controls">
                                         <label for="country">Pais:</label>
-                                        <input type="text" list="country" class="form-control" placeholder="Pais" id="imported" value="<%= (data.imported).toUpperCase() %>">
+                                        <input type="text" list="country" class="form-control" placeholder="Pais" id="imported" value="<%=
+                                        (data.imported=== null || !data.imported ) ? '' : data.imported.slice(0, 10)
+                                        
+                                         %>">
                                         <datalist id= "country">
                                             
                                             <% for ( let i=0;i <=countries.length-1;i++){ %>
@@ -518,15 +523,15 @@
                                 <div class="col-lg-3 form-group floating-label-form-group controls">
                                     <label>Fecha de Registro:</label>
                                     <input type="date" class="form-control" placeholder="yyyy-mm-dd" id="issueDate"
-                                        name="issueDate" required
-                                        value="<%= (data.issueDate=== null) ? '' : data.issueDate.slice(0, 10) %>">
+                                        name="issueDate"
+                                        value="<%= (data.issueDate=== null || !data.issueDate ) ? '' : data.issueDate.slice(0, 10) %>">
 
                                 </div>
                                 <div class="col-lg-3 form-group floating-label-form-group controls">
                                     <label>Fecha de Reg Nuevo:</label>
                                     <input type="date" class="form-control" placeholder="yyyy-mm-dd" id="reIssued"
                                         name="reIssued"
-                                        value="<%= (data.reIssued=== null) ? '' : data.reIssued.slice(0, 10) %>">
+                                        value="<%= (data.reIssued=== null || !data.reIssued) ? '' : data.reIssued.slice(0, 10) %>">
                                 </div>
                             </div>
                             <hr>
@@ -535,7 +540,7 @@
                                     <label for="castrated">Castrado:</label>
                                     <input type="date" class="form-control" placeholder="yyyy-mm-dd" id="castrated"
                                         name="castrated" required
-                                        value="<%= (data.castrated === null) ? '' : data.castrated.slice(0, 10) %>">
+                                        value="<%= (data.castrated === null || !data.castrated) ? '' : data.castrated.slice(0, 10) %>">
                                 </div>
                             </div>
                             <div class="row">
@@ -543,7 +548,7 @@
                                     <label>Fecha de Muerte:</label>
                                     <input type="date" class="form-control" placeholder="yyyy-mm-dd" id="deceased"
                                         name="deceased"
-                                        value="<%= (data.deceased=== null) ? '' : data.deceased.slice(0, 10) %>">
+                                        value="<%= (data.deceased=== null || !data.deceased) ? '' : data.deceased.slice(0, 10) %>">
                                 </div>
                                 <div class=" form-group floating-label-form-group controls">
                                     <label>Notas sobre la muerte:</label>

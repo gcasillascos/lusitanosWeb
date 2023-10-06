@@ -3,6 +3,7 @@ const path = require('path')
 const flash = require('connect-flash')
 const asyncHandler = require('../middleware/async')
 const axios = require('axios')
+const { response } = require('express')
 
 // @desc     Get horse
 // @route     GET /horses/horse
@@ -164,40 +165,81 @@ exports.horsemodal = asyncHandler(async (req, res) => {
 // @route     GET /horse/horsenew
 // @access    Public
 exports.horsesNew = asyncHandler(async (req, res) => {
-  const newHorse = req.body
-  let id = newHorse._id
-  let salute = newHorse.salutation
-  newHorse._id = id.toUpperCase()
-  newHorse.salutation = `${salute[0].toUpperCase()}${salute.slice(1)}`
-  req.flash('nuevo', newHorse)
-  const errors = null
-  const success = null
+const newHorse = req.body
+const owner = newHorse.ownerId
+const s = newHorse.sireRegNum
+const d = newHorse.damRegNum
+const id = newHorse._id
 
-  const config = {
-    method: 'POST',
-    url: `${baseurl}/api/v1/horses`,
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${req.session.token}`,
-    },
-    data: newHorse,
-  }
 
-  await axios(config)
-    .then((response) => {
-      const data = response.data
-      data.msg = `Registro ${data.data._id}, creado correctamente`
-      console.log(data)
-      const id = '0'
-      res.json(data)
+
+let config = {
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${req.session.token}`,
+  },
+}
+
+const borra = { deleted:true}
+
+let sire = `${baseurl}/api/v1/horses/${s}`
+let dam = `${baseurl}/api/v1/horses/${d}`
+let horse = `${baseurl}/api/v1/owners/${owner}/horses`
+let pedigree = `${baseurl}/api/v1/pedigrees`
+let borrar = `${baseurl}/api/v1/preregistros/${id}`
+
+
+let resSire = null
+let resDam = null
+let resHorse = null
+let resPedigree = null
+let resBorrar = null
+
+await axios
+  .get(sire, config)
+  .then((response) => {
+    resSire = response.data.data
+    return axios.get(dam, config)
+  })
+    .then((response) =>{
+      resDam = response.data.data
+
+      if(id !=null){
+
+        registro = mapeoRegistroNuevo(newHorse) //viene desde la cubrición
+      } else {
+        registro = mapeoRegistroWeb(newHorse) //inicia en el boton nuevo
+      }
+
+
+      return axios.post(horse, registro, config)
     })
-    .catch((err) => {
-      console.log(err.response.data)
-      const id = '0'
-      valError = err.response.data.error
-      res.json(err.response.data)
+    .then((response) =>{
+      resHorse = response.data.data
+
+      if(id !=null){
+      regPed = mapeoPedigreeNuevo(resHorse, resSire, resDam)
+      } else {
+        regPed = mapeoPedigreeWeb(resHorse, resSire, resdam)
+      }
+
+
+      return axios.post(pedigree, regPed, config)
     })
-})
+    .then ((response)=>{
+      resPedigree = response.data.data
+      return axios.put(borrar, borra, config)
+    })
+    .then ((response) => {
+      resBorrar = response.data.data
+    })
+    .catch((error)=>{
+      console.log(error, response)
+    })
+  })
+
+
+
 
 // @desc      Registrando un nuevo Ganadero
 // @route     GET /horse/register
@@ -830,3 +872,43 @@ exports.horsesValoracionDelete = asyncHandler(async (req, res) => {
     res.json(err.response.data);
   });
 });
+
+
+function mapeoRegistroNuevo(data) {
+  return {
+     horseName: data.horseName,
+      foalingDate: data.foalingDate,
+      sex: data.sex,
+      tipoCubricion: data.tipoCubricion,
+      brandCode: data.breederId,
+      breederId: data.breederId,
+      ownerId: data.ownerId,
+      tipoReg: data.tipoRegistro,
+      deleted: "false",
+      tomo: "C"
+    }  
+  }
+
+  function mapeoPedigreeNuevo(horse, sire, dam) {
+
+    return {
+      regRef : horse._id,
+      regNum : horse._id,
+      horseName : horse.horseName,
+      breeder : horse.breederId,
+      sireRegNum : sire.pslNum,
+      sireRefNum : sire._id,
+      sire : sire.horseName,
+      sireBreeder : sire.breederId,
+      damRegNum : dam.pslNum,
+      damRefNum : dam._id,
+      dam : dam.horseName,
+      damBreeder : dam.breederId,
+      sex : (horse.sex == 'Macho') ? 'M': 'H',
+      ownerId : horse.ownerId,
+      deleted : false
+    }
+
+  }
+    
+  

@@ -28,20 +28,22 @@
                         <div class="col-lg-12 col-md-12 mx-auto">
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
 
-                                <button type="submit" class="btn btn-primary text-center" id="sendNuevo"
-                                    style="width:95px" onclick="nuevoCaballo('0', '0', '0')">Registro</button>
+                                <button type="submit" class="btn btn-primary text-center" id="sendNuevo"  onClick="generaRegistro()"
+                                    style="width:95px" >Registro</button>
                             </div>
                             <br>
-                            <table id="table" 
+                            <table id="preRegs" 
                             data-search="true" 
                             data-pagination="true" 
                             data-page-list="[10, 25, 50, 100, all]"
                             data-id-field="_id" 
-                            data-multiple-select-row="true" 
+                            data-multiple-select-row="true"
+                            data-maintain-meta-data="true" 
                             data-click-to-select="true"
                             data-locale="es-Mx">
                                 <thead>
                                     <tr class="header-color">
+                                        <th data-checkbox=true data-sortable=true >Seleccionar</th> 
                                         <th data-field="horseName" data-sortable=true >Nombre</th>
                                         <th data-field="foalingDate"data-formatter="dateFormatter" data-sortable=true>Fecha Nac.</th>
                                         <th data-field="sex" data-sortable=true>Sexo</th>
@@ -60,7 +62,7 @@
 
                     let data = <%- data %>;
                     console.log(data)
-                    var $table = $('#table')
+                    var $table = $('#preRegs')
 
                     function buildTable($el)
                     {

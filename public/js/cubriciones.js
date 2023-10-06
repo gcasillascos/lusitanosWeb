@@ -167,6 +167,7 @@ function cubData(data) {
       sireRegNum: data.sireRegNum,
       ultimaMonta: data.ultimaMonta,
       tipoCubricion: data.tipoCubricion,
+      tipoRegistro: data.tipoRegistro,
       deliveryDate: data.deliveryDate,
       horseData: [{horseName:'-'}]
   }
